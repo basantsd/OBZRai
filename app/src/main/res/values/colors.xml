@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Muted blue ring palette from PRD; not neon. -->
+    <color name="observer_ring_blue">#FF4A7AB5</color>
+    <color name="observer_ring_blue_muted">#FF6B8FB8</color>
+    <color name="ic_launcher_background">#FF1A2332</color>
+</resources>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Local-only by default; no automatic cloud backup of captured media. -->
+    <exclude domain="file" path="observer/" />
+</full-backup-content>
