@@ -1,4 +1,4 @@
-# AI Observer (OBZRAi)
+# OBZRAi
 
 On-device Android companion that observes an **authorized** screen session, matches your topics, and saves full frames (plus audio/transcript **when permitted**) into a local, searchable library.
 
@@ -70,7 +70,7 @@ sdk.dir=/path/to/Android/Sdk
 
 Open the project in Android Studio → Run **app**.
 
-Package id: `com.obzrai.observer` · App name: **AI Observer**
+Package id: `com.obzrai.observer` · App name: **OBZRAi** (formerly AI Observer)
 
 ## What this scaffold does
 

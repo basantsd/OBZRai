@@ -20,5 +20,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AIObserver"
+rootProject.name = "OBZRAi"
 include(":app")

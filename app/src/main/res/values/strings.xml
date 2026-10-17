@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AI Observer</string>
+    <string name="app_name">OBZRAi</string>
     <string name="product_promise">Watch anything. Remember what matters.</string>
     <string name="nav_home">Home</string>
     <string name="nav_library">Library</string>
@@ -10,9 +10,9 @@
     <string name="observe_paused">Paused</string>
     <string name="observe_stopped">Stopped</string>
     <string name="observe_needs_permission">Permission required</string>
-    <string name="library_empty">No saved items yet. Start observing or share content into AI Observer.</string>
+    <string name="library_empty">No saved items yet. Start observing or share content into OBZRAi.</string>
     <string name="settings">Settings</string>
-    <string name="capture_notification_title">AI Observer is observing</string>
+    <string name="capture_notification_title">OBZRAi is observing</string>
     <string name="capture_notification_text">Screen capture is active for this authorized session.</string>
-    <string name="overlay_content_description">AI Observer floating ring</string>
+    <string name="overlay_content_description">OBZRAi floating ring</string>
 </resources>
