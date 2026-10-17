@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Overlay: display-over-other-apps (SYSTEM_ALERT_WINDOW). Separate Settings grant. -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-
-    <!-- Foreground service for authorized MediaProjection sessions. -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
-
-    <!-- Notifications (Android 13+); OS capture indicator remains mandatory. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
-    <!-- S4 AudioPlaybackCapture of permitted USAGE_MEDIA/GAME streams. -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
-    <!-- No AccessibilityService in default MVP (PRD locked decision). -->
 
     <application
         android:name=".ObserverApplication"
@@ -38,13 +29,29 @@
             </intent-filter>
         </activity>
 
-        <!-- Placeholder: MediaProjection foreground session. Wire in capture spike. -->
+        <!-- S1 Sharesheet interim + FR-015 exact URL / image import -->
+        <activity
+            android:name=".feature.share.ShareImportActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".feature.capture.ObservationCaptureService"
             android:exported="false"
             android:foregroundServiceType="mediaProjection" />
 
-        <!-- Placeholder: floating overlay window controller. -->
         <service
             android:name=".feature.overlay.OverlayService"
             android:exported="false" />

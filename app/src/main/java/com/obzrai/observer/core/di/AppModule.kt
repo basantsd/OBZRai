@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.obzrai.observer.core.storage.ObserverDatabase
 import com.obzrai.observer.core.storage.dao.InterestTopicDao
+import com.obzrai.observer.core.storage.dao.MediaAssetDao
 import com.obzrai.observer.core.storage.dao.SavedItemDao
 import com.obzrai.observer.feature.capture.DefaultMediaProjectionGateway
 import com.obzrai.observer.feature.capture.MediaProjectionGateway
@@ -37,6 +38,9 @@ object DatabaseModule {
 
     @Provides
     fun provideInterestTopicDao(db: ObserverDatabase): InterestTopicDao = db.interestTopicDao()
+
+    @Provides
+    fun provideMediaAssetDao(db: ObserverDatabase): MediaAssetDao = db.mediaAssetDao()
 }
 
 @Module
