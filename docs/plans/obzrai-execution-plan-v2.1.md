@@ -1,9 +1,31 @@
-# OBZRAi — Execution Plan v2.1
+# OBZRAi — Execution Plan v2.1 r2
 
-**Status:** Planning only — awaiting Basant approval before Phase 0 / MVP / extension implementation.  
-**Source of truth:** [`docs/prd/OBZRAi_PRD_v2.1.md`](../prd/OBZRAi_PRD_v2.1.md) (supersedes v1.0 / “AI Observer”).  
-**Date:** 17 October 2026  
-**Owner locks (Basant):** D7 = **Option B**; D1–D6 = PRD §9 recommendations; Phase order **0 → 1 → 2**; no GitHub Actions; §26 Unverified does **not** block build.
+**Status:** Planning only — **still awaiting Basant approval before Phase 0 build.** No MVP / extension implementation this turn.  
+**Source of truth:** [`docs/prd/OBZRAi_PRD_v2.1.md`](../prd/OBZRAi_PRD_v2.1.md) — **PRD v2.1 r2** (canonical; supersedes v2.1 / v2.1 r1 check-in and v1.0).  
+**Date:** 17 October 2026 (plan revision for r2)  
+**Owner locks:** D7 = **Option B DECIDED**; D1–D6 = PRD §9 recommendations; Phase order **0 → 1 → 2**; no GitHub Actions; §26 Unverified does **not** block build.
+
+---
+
+## Tasks changed vs prior plan (v2.1 → v2.1 r2)
+
+Prior plan: first check-in against PRD v2.1 (pre-r2). This revision aligns to **PRD v2.1 r2**.
+
+| Change | Prior plan | Now (r2) |
+|---|---|---|
+| **PRD pin** | v2.1 | **v2.1 r2** exact copy in repo |
+| **D7 language** | Owner-locked B; PRD still said “pending” in places | PRD marks **D7 DECIDED — Option B**; plan assumes B |
+| **Transport order** | Drive `appDataFolder` first; WebDAV “optional later adapter” | **Drive appData then WebDAV** both in Phase 2 path (WebDAV next / FOSS; open Q whether same cut or fast-follow inside Phase 2) |
+| **FR-047 / 048 / 054 / 064** | Treated as Phase 4 (full) only; thin work mostly under FR-103 | **Thin-payload slices of FR-047 / 048 / 054 / 064 + FR-103 are Phase 2 exit**; full-res of FR-047 / 064 remains Phase 4 (D1) |
+| **FR-104** | Phase 2 bonus | Unchanged — **P2 bonus** (D7-C); not a Phase 2 exit gate |
+| **Spikes** | S22 required for D7-B; S24 not listed | **S22 + S24** are Phase 2 gates (S24 = Drive OAuth `drive.appdata` non-sensitive + **brand verification**) |
+| **Phase 2 exit AC** | Sync opt-in, thin payload, ciphertext | **Plus:** Android ↔ extension Hub appear within **target p95 ≤ 60 s** on healthy network; ciphertext only on store; **sync off by default** |
+| **Risks** | Generic D7/quota notes | Explicit **R31** (brand verification; app verification not mandatory for non-sensitive-only) and **R32** (quota / consent friction; never promise free unlimited sync) |
+| **Doc / claim fixes** | N/A | Plan notes r2 claim/price/source tidy-ups (Screenpipe monthly/annual, KR fee unknown, UNVERIFIED tags) — **no product-scope change** beyond D7 markers |
+| **Rename baseline** | “Still AI Observer on PR #1” | Rename draft **[#3](https://github.com/basantsd/OBZRai/pull/3)** exists (R1–R5); still no MVP |
+| **Phase 0** | Unchanged | **Still not authorized** until Basant approves this plan |
+
+**Unchanged from prior plan:** Phase 0 S1–S4 gates; Phase 1 slices 1a–1e / 40–55 eng-days / FR-097; no `.github/workflows`; §26 non-blocking; no MVP/extension build until approval.
 
 ---
 
@@ -11,24 +33,23 @@
 
 | Rule | Detail |
 |---|---|
-| No invented product facts | Scope, AC, FRs, spikes, and estimates come only from PRD v2.1. |
-| Approval gate | **Show this plan first.** Do not start full Phase 0 engineering, Android MVP, or extension until Basant approves. |
-| Phase order after approval | Phase 0 (S1–S4) → Phase 1 Android MVP → Phase 2 browser extension (+ D7-B). |
-| CI/CD | **No** `.github/workflows`. Builds/tests run on the worker VM / local only (owner constraint; Actions minutes exhausted). PRD §15.2 / §20.4 CI mentions are deferred — verify locally. |
-| §26 Unverified | Do not block spikes or MVP. Treat as “confirm when touching that surface,” not as a gate. |
-| Effort labels | From PRD (eng-days / ~weeks). Not calendar commitments. |
+| No invented product facts | Scope, AC, FRs, spikes, estimates from PRD **v2.1 r2** only. |
+| Approval gate | Do **not** start Phase 0 engineering, Android MVP, or extension until Basant approves. |
+| Phase order after approval | Phase 0 (S1–S4) → Phase 1 Android MVP → Phase 2 browser extension **+ D7-B thin E2E**. |
+| CI/CD | **No** `.github/workflows`. Local/worker builds only. |
+| §26 Unverified | Do not block spikes or MVP. Confirm when that surface ships. |
 
 ### Locked decisions applied here
 
 | ID | Decision (locked) | Plan impact |
 |---|---|---|
-| **D1** | Optional full-res E2E sync, off by default, **Phase 4** | Full frames/voice audio stay out of Phase 2 |
-| **D2** | Cloud AI opt-in per feature + BYO key first | No default cloud upload in Phases 0–2 |
-| **D3** | PTT spoken ideas = **P0**; assistant P1; wake word P2 | Phase 1 includes FR-040; no wake word |
-| **D4** | Optional redaction, off by default | Not a Phase 1 gate (S15 later) |
-| **D5** | Today / tags / provenance / PTT in P0; collections P1; MVP **40–55 eng-days** | Phase 1 slices 1a–1e |
-| **D6** | Accounting per-app opt-in; banking/password excluded | Phase 1 exclusions; accounting opt-in can wait for P1 polish |
-| **D7-B** | **DECIDED:** Phase 2 minimal E2E sync, opt-in, Drive `appDataFolder` first; items + thumbs + transcripts; **no** full-res; ~3 eng-weeks (S22) | Phase 2 exit includes FR-103 |
+| **D1** | Optional **full-res** E2E, off by default, **Phase 4** | Full frames / voice audio / hosted relay stay out of Phase 2 |
+| **D2** | Cloud AI opt-in + BYO key first | No default cloud upload in Phases 0–2 |
+| **D3** | PTT = P0; assistant P1; wake word P2 | Phase 1 includes FR-040 |
+| **D4** | Redaction opt-in, off by default | Not a Phase 1 gate |
+| **D5** | Today / tags / provenance / PTT in P0; collections P1; **40–55 eng-days** | Phase 1 slices 1a–1e |
+| **D6** | Accounting per-app opt-in; banking/password excluded | Phase 1 default exclusions |
+| **D7-B** | **DECIDED:** Phase 2 thin E2E; opt-in; Drive `appDataFolder` **then** WebDAV; items + thumbs + transcripts; no full-res; ~3+ eng-weeks (Unverified #40) | Phase 2 exit = extension **+** FR-103 + thin FR-047/048/054/064 + S22 + S24 |
 
 ---
 
@@ -36,229 +57,168 @@
 
 | Asset | State |
 |---|---|
-| Repo | `basantsd/OBZRai` — `main` has README only |
-| Scaffold | Draft [PR #1](https://github.com/basantsd/OBZRai/pull/1) — `cursor/scaffold-android-app-bed7` — Kotlin/Compose shell, package `com.obzrai.observer`, **display name still “AI Observer”** |
-| PRD | v2.1 checked into `docs/prd/OBZRAi_PRD_v2.1.md` (this planning PR) |
-| Overlay asset | `assets/approved_overlay_reference.png` still missing → Compose placeholder until provided |
+| Repo | `basantsd/OBZRai` |
+| Scaffold | Draft [#1](https://github.com/basantsd/OBZRai/pull/1); rename [#3](https://github.com/basantsd/OBZRai/pull/3) → OBZRAi strings |
+| PRD / plan | Draft [#2](https://github.com/basantsd/OBZRai/pull/2) — this branch; **updating to r2** |
+| Overlay PNG | Still missing → Compose placeholder |
 
 ---
 
-## 2. Immediate pre-Phase-0 work — Scaffold PR #1 rename
+## 2. Pre-Phase-0 — Scaffold rename (R1–R5)
 
-**Goal:** Align scaffold identity with OBZRAi without building MVP features. Small rename PR / commit on the scaffold branch is enough.
+Unchanged intent. Prefer merging [#3](https://github.com/basantsd/OBZRai/pull/3) into [#1](https://github.com/basantsd/OBZRai/pull/1).
 
-| Task ID | Task | Acceptance | FR / notes |
-|---|---|---|---|
-| **R1** | Rename user-visible product strings from “AI Observer” → **OBZRAi** | `strings.xml` `app_name`, notification title, library empty, overlay content description use OBZRAi; consumer copy may still say “observer” as common noun for the ring | §2 Identity |
-| **R2** | README + `settings.gradle.kts` `rootProject.name` | README title **OBZRAi**; root project name `OBZRAi` (or `obzrai`); remove leading “AI Observer” branding | §20.4 / §27 |
-| **R3** | Keep package `com.obzrai.observer` | No package rename in this pass (collision avoidance already done); document former name in README history only | §20.4 |
-| **R4** | Confirm **no** `.github/workflows` on PR #1 | If any workflow appears, delete it before merge | Owner CI lock |
-| **R5** | Local verify only | `./gradlew :app:assembleDebug` and `:app:testDebugUnitTest` on worker/local | No Actions |
-
-**Out of rename scope:** capture pipeline, OCR, ASR, Hub polish, AccessibilityService, sync.
+| Task ID | Task | Acceptance |
+|---|---|---|
+| **R1** | Display strings → **OBZRAi** | app_name, notification, empty library, overlay a11y |
+| **R2** | README + `rootProject.name` | OBZRAi; former name in history only |
+| **R3** | Keep `com.obzrai.observer` | No package rename |
+| **R4** | No `.github/workflows` | Delete if any appear |
+| **R5** | Local verify | `assembleDebug` + unit tests on worker only |
 
 ---
 
 ## 3. Phase 0 — Android feasibility (S1–S4)
 
-**Estimate:** 5–8 eng-days (PRD §19.1).  
-**Gate:** No full-product UI rollout before S1–S4 pass or an approved fallback is recorded.  
-**Hard gates:** S1 and S2. S3 fallback allowed. S4 third-party audio failure is **expected** and not a V1 no-go.
+**Estimate:** 5–8 eng-days (§19.1). **Hard gates:** S1, S2. S3 fallback OK. S4 third-party audio fail ≠ V1 no-go.  
+**Not started until plan approval.**
 
-### Milestone M0 — Spike pack complete
-
-| Task ID | Spike | Deliverable | Pass (go) | Fail / fallback | Primary FRs |
-|---|---|---|---|---|---|
-| **P0-S1** | Projection | Authorized session; repeated full-res frames on Reel/Short **and** website | Portrait bounds preserved; no new prompt per frame; correct stop including **chip + lock** on 15 QPR1+ | Unstable projection → stop product or Sharesheet-only (owner decision) | FR-001, FR-006, FR-016, FR-020, FR-056 |
-| **P0-S2** | Overlay | 28 dp edge-clipped ring, 10–12 dp glyph, drag/snap | Matches reference on 3 densities; no pipe; host remains tappable; sideload restricted-settings path documented | Overlay unusable after education → Play-only overlay or Sharesheet fallback | FR-002, FR-003, FR-004, FR-005, FR-057 |
-| **P0-S3** | Clean frame | Overlay exclusion / hide-and-settle | Exclusion works **or** OEM limit documented | Always capture the ring → ship documented hide-and-settle even if 1-frame gap | FR-007 |
-| **P0-S4** | Audio | Controlled test app + Instagram + YouTube on selected devices | Positive on controlled app; third-party results **logged honestly** | Third-party blocked → **do not block V1**; ship screenshot+OCR+Sharesheet | FR-011, FR-012 |
-
-### Phase 0 exit checklist
-
-- [ ] S1 go recorded (or owner fallback written).
-- [ ] S2 go recorded (or owner fallback written).
-- [ ] S3 pass or documented fallback.
-- [ ] S4 matrix logged; copy uses “when permitted,” not universal audio claims.
-- [ ] Spike notes in repo docs (no marketing claims from §26).
-- [ ] Local builds only; no workflows added.
-
-**Alpha path (optional after S1–S4):** screen/OCR-only alpha to testers in ~10–15 additional days without PTT/Hub polish (PRD §19.3).
+| Task ID | Spike | Pass | Fail / fallback | FRs |
+|---|---|---|---|---|
+| **P0-S1** | Projection | Stable full-res frames; chip+lock stop on 15 QPR1+ | Sharesheet-only / stop (owner) | FR-001, 006, 016, 020, 056 |
+| **P0-S2** | Overlay | Reference match; no pipe; restricted-settings path | Play-only / Sharesheet | FR-002–005, 057 |
+| **P0-S3** | Clean frame | Exclusion or documented OEM limit | Hide-and-settle with gap | FR-007 |
+| **P0-S4** | Audio | Controlled app + honest third-party log | Ship visual+OCR+Sharesheet | FR-011, 012 |
 
 ---
 
-## 4. Phase 1 — Android MVP
+## 4. Phase 1 — Android MVP (unchanged structure)
 
-**Estimate:** 40–55 eng-days after Phase 0 (D5 / §19.3).  
-**Depends on:** Phase 0 go (or approved fallback).  
-**Exit:** All P0 FRs on device matrix (§20.1); S1–S4, S7, S16, S18 done; privacy checklist; no placeholder UI; README limitations honest; FR-097 round-trip; quality bar §4.5.
+**Estimate:** 40–55 eng-days after Phase 0. **Exit:** P0 FRs; S1–S4, S7, S16, S18; FR-097; quality bar §4.5.
 
-### Milestone M1a — Foundation & visual (6–8 d)
-
-| Task ID | Work | Acceptance | FRs |
+| Milestone | Days | Deliverable | Key FRs |
 |---|---|---|---|
-| **P1-1a-01** | Compose Home + Library shell (from scaffold) | Navigation works; Observe start/stop UI wired to session SM | FR-001, FR-049 |
-| **P1-1a-02** | Approved ring overlay (PNG when available; else continue placeholder with gap noted) | Geometry/states match §11; Save/Skip/Settings; drag/snap persist | FR-002–005, FR-018 |
-| **P1-1a-03** | Persistence foundation (Room entities → real writes for sessions/items stubs) | Accepted items survive restart | FR-013 |
-| **P1-1a-04** | Overlay non-drag alternative + dark mode strings baseline | Non-drag path for Save/Skip; EN strings; Hindi strings started | FR-074, FR-075, FR-076 |
+| **M1a** Foundation & visual | 6–8 | Home/Library, ring, persistence | FR-001–005, 013, 018, 074–076 |
+| **M1b** Capture & matching | 10–14 | Session, frames, OCR, topics, DRM label | FR-006–010, 015, 026, 052, 055, 056 |
+| **M1c** Audio, PTT, storage | 10–14 | Permitted audio, ASR, PTT ideas | FR-011, 012, 040, 053 |
+| **M1d** Hub & quality | 8–12 | Today, tags, search, export, **FR-097**, FR-106 local, marketing stub | FR-014, 019, 035, 036, 038, 063, 072, 073, 078, 094, 097, 106 |
+| **M1e** Buffer & release | 6–7 | S7/S18, signed beta, matrix | FR-016, 020, 052, 055, 057 |
 
-### Milestone M1b — Capture & matching (10–14 d)
-
-| Task ID | Work | Acceptance | FRs |
-|---|---|---|---|
-| **P1-1b-01** | MediaProjection session + FGS (`mediaProjection`) | Fresh consent per session; FGS + chip never hidden | FR-001, FR-016, FR-020, FR-056 |
-| **P1-1b-02** | Full-frame capture + clean-frame path | Stored original uncropped; overlay exclusion or documented settle | FR-006, FR-007 |
-| **P1-1b-03** | On-device OCR + topic classifier | Indexed text; ≥80% precision target on 200-item set (target); manual Save/Skip | FR-008, FR-009, FR-010, FR-026 |
-| **P1-1b-04** | DRM / FLAG_SECURE labeling | `capture_blocked`; no green check for blank frame; no bypass | FR-052, FR-055 |
-| **P1-1b-05** | Source integrity + share import | Exact URL only when known; never fabricate | FR-015 |
-
-### Milestone M1c — Audio, PTT, storage (10–14 d)
-
-| Task ID | Work | Acceptance | FRs |
-|---|---|---|---|
-| **P1-1c-01** | Playback audio adapter | Permitted path works; Unsupported/Unavailable/Blocked honest | FR-011 |
-| **P1-1c-02** | On-device ASR (`whisper.cpp` path per stack) | Timestamped transcript; never invent for blocked audio | FR-012 |
-| **P1-1c-03** | PTT spoken idea notes (S16 gate) | Separate mic opt-in; hold-to-talk; audio+transcript linked; visible mic | FR-040, FR-053 |
-| **P1-1c-04** | Item detail + media layout | Resource, time, provenance fields, voice idea linkage | FR-038, FR-053 |
-| **P1-1c-05** | Banking/password exclusion defaults | Default exclusion list; no workplace-monitor mode | FR-034 (subset), FR-050 (defaults) |
-
-### Milestone M1d — Hub & quality (8–12 d)
-
-| Task ID | Work | Acceptance | FRs |
-|---|---|---|---|
-| **P1-1d-01** | Today view | Today + earlier day selectable; badges for voice/audio/blocked | FR-035 |
-| **P1-1d-02** | Tags + search (FTS) | Add/remove/rename tags; p95 ≤ 500 ms on 1,000-item fixture | FR-014, FR-036 |
-| **P1-1d-03** | Provenance narrative | Omits unknowns; never guesses | FR-038 |
-| **P1-1d-04** | Export/delete + **encrypted export/import** | Single/all delete; passphrase archive round-trip on fresh install | FR-019, **FR-097** |
-| **P1-1d-05** | Continuity status UI (local-only) | Hub shows library-on-this-device / last backup or never | **FR-106** |
-| **P1-1d-06** | Privacy copy, trust center in Settings, team-free | No account wall; delete-all; team-free | FR-017, FR-063, FR-078 |
-| **P1-1d-07** | Marketing origin stub (home, privacy, download CTAs, changelog) | Public `/privacy` before any store listing | FR-094 (Phase 1 subset per §19.8) |
-| **P1-1d-08** | Onboarding ≤ 3 screens + empty states | Skippable; no account wall; every empty view has one primary action | FR-072, FR-073 |
-| **P1-1d-09** | Observer core contract (Kotlin-first) | Shared fixtures for topics/scoring/schema ready for S9 | FR-027 |
-
-### Milestone M1e — Buffer & release (6–7 d)
-
-| Task ID | Work | Acceptance | FRs / spikes |
-|---|---|---|---|
-| **P1-1e-01** | S7 stop/privacy matrix | Chip, notification, lock, revoke, kill → buffers gone | FR-016, FR-020 |
-| **P1-1e-02** | S18 protected content | DRM labelled; no false Saved | FR-052, FR-055 |
-| **P1-1e-03** | OEM / restricted-settings education | Sideload path documented | FR-057 |
-| **P1-1e-04** | Signed beta APK + README honesty | Limitations: audio/DRM/URL; “not a universal recorder” | §20.4–20.5 |
-| **P1-1e-05** | S8 distribution packet (docs only if not submitting) | Play vs FOSS decision documented | S8 |
-| **P1-1e-06** | Device matrix pass | Android 10/13/14/15/16 + OEM samples per §20.1 | §20.1 |
-
-### Phase 1 P0 FR checklist (must pass)
-
-FR-001–020, 026, 027, 035, 036, 038, 040, 049, 052, 053, 055, 056, 057, 063, **097**, plus Phase-1 subsets of FR-072–076, 078, 094, **106** as listed above.
-
-**Explicitly out of Phase 1:** collections (FR-037), assistant (FR-041), imagination (FR-044), full E2E (FR-047), AccessibilityService, wake word, browser extension, D7-B.
+**Out of Phase 1:** collections, assistant, imagination, thin or full sync, extension, AccessibilityService, wake word.
 
 ---
 
-## 5. Phase 2 — Browser extension + D7-B
+## 5. Phase 2 — Browser extension + D7-B (r2)
 
-**Depends on:** Phase 1 learnings; spikes **S9** (core parity) then **S10** (extension).  
-**Estimate:** not calendar-dated until Phase 1 (PRD §19.4). **D7-B add-on:** ~3+ eng-weeks (PRD §9 / §26 item 40 = relative effort only).  
-**Owner lock:** D7-B **in** Phase 2 (opt-in minimal E2E; Drive `appDataFolder` first).
+**Depends on:** Phase 1 learnings; **S9 → S10**; then **S22 + S24**.  
+**Gates (r2):** S1–S4 + S9 + S10 + **S22 + S24**.
 
-### Milestone M2a — Shared core extraction (S9)
-
-| Task ID | Work | Acceptance | FRs |
-|---|---|---|---|
-| **P2-S9** | Extract Observer core + fixtures | Same fixture → same topic match and item fields on Android + extension target | FR-027, FR-033 |
-
-### Milestone M2b — Chromium MV3 extension (S10 + Hub)
+### Milestone M2a — Shared core (S9)
 
 | Task ID | Work | Acceptance | FRs |
 |---|---|---|---|
-| **P2-01** | Active-tab observe session | User-started; exact URL `source_url_origin = browser_tab`; ≤ 2 `captureVisibleTab`/sec | FR-028 |
-| **P2-02** | Page text / highlight-clip | Visible text + selection; no other-tab read; restricted pages reported | FR-029, FR-067 |
-| **P2-03** | DRM / EME labelling | Black frames → `capture_blocked`; no false Saved | FR-052 (web) |
-| **P2-04** | Side-panel Hub (option **c**) | Offline IndexedDB/OPFS; Today/search/browse; no account required | FR-058–061, FR-065, FR-095 |
-| **P2-05** | Extension UX | ≤ 4 shortcuts; voice note contract; onboarding; CWS least privilege + single purpose | FR-066, FR-069–072, FR-070, FR-071 |
-| **P2-06** | YouTube timestamp (when known) | Store `t=` only if known; never download video | FR-068 |
-| **P2-07** | Export paths | MD/PDF/archive from Hub; encrypted export still works | FR-062, FR-097 |
-| **P2-08** | S19 CWS packet | Privacy tab, listing video, permissions justified | S19 / FR-070–071 |
-| **P2-09** | S20 Hub CWV | LCP/INP/CLS targets; side-panel first paint target | FR-077 |
+| **P2-S9** | Observer core + fixtures | Same fixture → same match/fields on Android + extension | FR-027, 033 |
 
-### Milestone M2c — D7-B minimal E2E sync (LOCKED)
+### Milestone M2b — Chromium MV3 + side-panel Hub (S10)
+
+| Task ID | Work | Acceptance | FRs |
+|---|---|---|---|
+| **P2-01** | Active-tab observe | Exact URL; ≤ 2 `captureVisibleTab`/sec | FR-028 |
+| **P2-02** | Page text / highlight | No other-tab read | FR-029, 067 |
+| **P2-03** | DRM / EME label | `capture_blocked`; no false Saved | FR-052 |
+| **P2-04** | Side-panel Hub (option c) | Offline IndexedDB/OPFS; Today/search/browse | FR-058–061, 065, 095 |
+| **P2-05** | Extension UX + CWS | Shortcuts, PTT contract, least privilege, single purpose | FR-066, 069–072 |
+| **P2-06** | YouTube timestamp | Store `t=` only if known | FR-068 |
+| **P2-07** | Export | MD/PDF/archive; FR-097 still works | FR-062, 097 |
+| **P2-08** | S19 CWS packet | Privacy tab + listing | S19 |
+| **P2-09** | S20 Hub CWV | LCP/INP/CLS + side-panel paint targets | FR-077 |
+
+### Milestone M2c — D7-B thin E2E (**DECIDED**, r2 exit)
 
 | Task ID | Work | Acceptance | FRs / spikes |
 |---|---|---|---|
-| **P2-D7-01** | **S22** protocol + schema | Thin payload: items, tags, collections, provenance, OCR/page text, transcripts, voice-idea **text**, thumbnails ≤ documented cap (e.g. ≤ 200 KB JPEG). **No** full-res frames, **no** voice audio blobs, **no** imagination originals | **FR-103** |
-| **P2-D7-02** | Transport #1: Google Drive `appDataFolder` | Ciphertext only; `drive.appdata`; opt-in; off by default; device-only collections excluded | §24.5 |
-| **P2-D7-03** | Android sync client | Opt-in settings; encrypt before upload; conflict rule = no silent data loss (§16.5.3) | FR-103, FR-048 (thin) |
-| **P2-D7-04** | Extension sync client | Same protocol; Hub shows continuity status | FR-103, **FR-106** |
-| **P2-D7-05** | Continuity UX copy | “Thin sync ≠ full-res backup”; lost key = lost remote copy; quota honesty (§26 #36) | §24.6 |
-| **P2-D7-06** | (Optional later adapter) WebDAV | Second adapter = M effort if needed | §24.5 |
-| **P2-D7-07** | **Not in D7-B** | Hosted ciphertext relay, full-res FR-047, account-required sync → **Phase 4 / D1** | D1 |
+| **P2-S22** | Minimal-sync protocol + first user-owned adapter | Thin payload round-trip; ciphertext only; opt-in | S22, **FR-103** |
+| **P2-S24** | Drive `appDataFolder` E2E spike | OAuth **`drive.appdata` only** (non-sensitive); **brand verification** for name/logo (app verification **not** mandatory for non-sensitive-only — **R31**); write/read ciphertext; uninstall deletes folder; quota visible (**R32** / Unverified #36) | S24, R31, R32 |
+| **P2-D7-01** | Thin payload schema | Items, tags, collections, provenance, OCR/page text, transcripts, voice-idea **text**, thumbs ≤ documented cap (rec. ≤ 200 KB JPEG). **No** full-res frames, voice audio blobs, imagination originals | **FR-103** |
+| **P2-D7-02** | Transport #1 Drive appData | Ciphertext; opt-in; off by default; device-only collections out | §24.5 |
+| **P2-D7-03** | Transport #2 WebDAV | FOSS adapter next (same Phase 2 cut **or** fast-follow inside Phase 2 — open Q 32) | §24.5 |
+| **P2-D7-04** | Android + extension clients | Thin **FR-047** (encrypted sync for thin set), **FR-048** conflicts (no silent loss), **FR-054** cross-device appear, **FR-064** ciphertext Hub client for thin path | FR-047†, 048†, 054†, 064†, 103 |
+| **P2-D7-05** | Continuity status UI | Last sync / local-only / last writer; no green “synced” without round-trip | **FR-106** |
+| **P2-D7-06** | Latency AC | Save on Android appears in extension Hub **and vice versa** within **target p95 ≤ 60 s** on healthy network | §19.4 exit |
+| **P2-D7-07** | Defaults & honesty | Sync **off by default**; copy: thin ≠ full-res backup; lost key = lost remote; never “free unlimited sync” | R32, §24.6 |
+| **P2-D7-08** | Explicitly **not** Phase 2 | Full-res media, voice audio blobs, hosted ciphertext relay, account-required sync | D1 / Phase 4 |
 
-### Milestone M2d — Phase 2 bonuses (not gates)
+† Phase 2 = **thin-payload** acceptance only. Full-res FR-047 / FR-064 remain Phase 4.
+
+### Milestone M2d — Bonuses (not exit gates)
 
 | Task ID | Work | Priority | FRs |
 |---|---|---|---|
-| **P2-BONUS-C** | D7-C LAN/QR pairing | P2 bonus | FR-104 |
-| **P2-PROP** | Strength proposals only after Hub schema | PROPOSAL | FR-098, FR-100–102, etc. |
+| **P2-BONUS-C** | LAN/QR pairing (D7-C) | **P2 bonus** | **FR-104** |
+| **P2-PROP** | Strength proposals after Hub schema | PROPOSAL | FR-098, 100–102, … |
 
-### Phase 2 exit checklist
+### Phase 2 exit checklist (r2)
 
-- [ ] S9 + S10 pass.
-- [ ] CWS privacy / single-purpose / 2-per-sec / no other-tab access.
-- [ ] Side-panel Hub offline-capable.
-- [ ] **D7-B:** opt-in thin E2E Android ↔ extension via Drive appDataFolder; FR-103 AC met; FR-106 accurate.
-- [ ] Full-res media still local-only (D1 unchanged).
-- [ ] No GitHub Actions workflows introduced.
-
----
-
-## 6. Explicitly deferred (do not start this turn / before gates)
-
-| Item | Earliest | Notes |
-|---|---|---|
-| Phase 3 Desktop | After S11 | macOS → Windows → Linux |
-| Phase 4 full E2E + PWA + RN + iOS discovery | D1 / S12 / S14 | Full-res FR-047, FR-064 |
-| Wake word | P2 | FR-042 |
-| AccessibilityService | Never in MVP | §2 / FR guardrail |
-| GitHub Actions / `.github/workflows` | Owner forbid | Local Gradle / manual only |
-| Marketing claims from §26 | N/A | Confirm when that surface ships |
+- [ ] S9 + S10 pass; CWS privacy; 2/sec; no other-tab; DRM labelled.
+- [ ] **S22 + S24** pass (protocol + Drive brand-verify path).
+- [ ] Thin E2E: FR-103 + thin FR-047/048/054/064; FR-106 accurate.
+- [ ] Android ↔ extension Hub: **p95 ≤ 60 s** target on healthy network.
+- [ ] Store sees **ciphertext only**; sync **opt-in / off by default**; device-only honored.
+- [ ] Drive then WebDAV path documented; no full-res in sync.
+- [ ] No GitHub Actions workflows.
 
 ---
 
-## 7. Dependency graph (approval → ship)
+## 6. Deferred (unchanged gates)
+
+| Item | Earliest |
+|---|---|
+| Phase 3 Desktop | After S11 |
+| Phase 4 full-res E2E + PWA + RN + iOS discovery | D1 / S12 / S14 |
+| Wake word / AccessibilityService in MVP | Never / P2 |
+| `.github/workflows` | Owner forbid |
+| Marketing claims from §26 | Confirm at ship |
+
+---
+
+## 7. Dependency graph
 
 ```text
-[Basant approves this plan]
+[Basant approves this r2 plan]
         │
         ▼
-[R1–R5 rename on PR #1] ── parallel OK with planning docs
+[R1–R5 / merge rename #3 into #1]
         │
         ▼
-[Phase 0: S1–S4] ── hard: S1,S2 ── soft: S3 fallback, S4 honesty
+[Phase 0: S1–S4] ── hard S1,S2
         │
         ▼
-[Phase 1: M1a→M1e Android MVP + FR-097]
+[Phase 1: M1a→M1e + FR-097]
         │
         ▼
-[S9 core] → [Phase 2 extension M2b] → [M2c D7-B / S22]
+[S9] → [M2b extension] → [S22+S24] → [M2c D7-B thin E2E]
         │
         ▼
-[Phase 3 / 4 later — out of this plan’s build authorization]
+[Phase 3 / 4 later — not authorized by this plan]
 ```
 
 ---
 
-## 8. Definition of done pointers
+## 8. r2 doc notes (non-build)
 
-- **Android V1 DoD:** PRD §20.5 (checkbox list).  
-- **Quality bar:** PRD §4.5.  
-- **Example acceptance scenarios:** PRD §20.3 (Gherkin).  
-- **This planning turn DoD:** PRD in repo draft PR; this plan in `docs/plans/` + Context store copy; PR URL + 1-page summary for Basant; **no** MVP/extension implementation; **no** workflows.
+Claim/price/source tidy-ups in PRD r2 (Screenpipe Basic/Business monthly+annual, KR Play fee unknown, UNVERIFIED tag hygiene, §9 heading, FR-087/105 restatements) do **not** add Phase 0–1 engineering tasks. They constrain **honesty in copy and GTM** when those surfaces ship.
+
+**R31 / R32** are Phase 2 engineering risks tied to S24 / FR-103 — tracked in M2c above.
 
 ---
 
-## 9. Open questions that do *not* block Phase 0
+## 9. Definition of done — this revision
 
-Tracked in PRD §29 / §26. Phase 0 may start after plan approval even while these remain open (owner: §26 does not block build). Examples: IP India clearance, Instagram/YouTube capture-policy measurement (done *in* S4), Play target-API deadline re-verify at submission, Drive quota wording honesty before promising “free sync.”
+- [x] Repo `docs/prd/OBZRAi_PRD_v2.1.md` = exact PRD **v2.1 r2**
+- [x] Execution plan revised for D7-B, S22+S24, Phase 2 exit AC, FR thin Phase 2 mapping, R31/R32
+- [x] Store plan + summary updated; **tasks changed** section present
+- [x] No `.github/workflows`; no MVP/extension build
+- [ ] **Basant approval** still required before Phase 0
 
 ---
 
@@ -266,7 +226,7 @@ Tracked in PRD §29 / §26. Phase 0 may start after plan approval even while the
 
 | Field | Value |
 |---|---|
-| Plan version | 2.1 |
-| PRD version | 2.1 (17 Oct 2026) |
-| Supersedes | Informal v1.0 “AI Observer” planning / Researchy placeholders |
-| Next action | Basant approval → execute R1–R5 → Phase 0 S1–S4 |
+| Plan version | **2.1 r2** |
+| PRD version | **2.1 r2** (17 Oct 2026) |
+| Supersedes plan | Execution plan v2.1 (first check-in on PR #2) |
+| Next action | Basant approve → R1–R5 → Phase 0 S1–S4 |

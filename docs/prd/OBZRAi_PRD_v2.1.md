@@ -1,11 +1,11 @@
 # OBZRAi — Product Requirements Document
 
-**Version:** 2.1  
+**Version:** 2.1 r2  
 **Date:** 17 October 2026  
-**Status:** Professional-grade PRD for owner review. Android feasibility spikes S1–S4 remain the first engineering gate. D1–D6 carry explicit recommendations in §9; **D7 is a new pending decision** (minimal E2E sync alongside Phase 2 vs keep full sync in Phase 4). Owner sign-off still required before those items leave “recommended.” **v2.1, 17 Oct 2026:** fills web-grade Hub/marketing-site/share, GTM checklists, strength-feature PHASE tags, and a new **§24 Cross-device continuity**. Does not duplicate §§21–23.  
+**Status:** Professional-grade PRD for owner review. Android feasibility spikes S1–S4 remain the first engineering gate. D1–D6 carry explicit recommendations in §9; **D7 is DECIDED — Option B (Basant, 17 Oct 2026)** (minimal opt-in E2E sync in Phase 2: items + thumbnails + transcripts, no full-res media; user-owned storage first — Drive `appDataFolder`, then WebDAV; ciphertext relay later). Owner sign-off still required before D1–D6 leave “recommended.” **v2.1 r2, 17 Oct 2026:** reviewer fixes (R31 brand verification, Screenpipe monthly/annual, KR fee, D7 markers in §2/§19, tag tidy-ups). **v2.1 r1, 17 Oct 2026:** claim-verification delta from v2.0 r3; D7 decided (B). **v2.1, 17 Oct 2026:** fills web-grade Hub/marketing-site/share, GTM checklists, strength-feature PHASE tags, and a new **§24 Cross-device continuity**. Does not duplicate §§21–23.  
 **Owner:** Basant Singh (India)  
 **Product name:** **OBZRAi** (formerly “AI Observer”)  
-**File:** this document is self-contained. It supersedes `/workspace/prd/AI_Observer_PRD_v1.2.md` as the working PRD. v1.2 and v2.0 are not modified.
+**File:** this document is self-contained. It supersedes `/workspace/prd/AI_Observer_PRD_v1.2.md` as the working PRD. v1.2 is not modified. v2.0 received only the D7 status update (v2.0 r4).
 
 **Platforms:** One product around one shared **Observer core**. Android mobile app first (current Cursor scaffold: Kotlin + Jetpack Compose). Then Chromium Manifest V3 browser extension, desktop (macOS / Windows / Linux), React Native, with optional end-to-end encrypted cross-device sync. iOS is a later discovery, not an Android MVP promise. Non-Android clients start only after Android spikes S1–S4 pass or an approved fallback is recorded.
 
@@ -25,8 +25,8 @@
 |---|---|
 | Product | OBZRAi |
 | Former name | AI Observer |
-| PRD version | **2.1, 17 Oct 2026** |
-| Previous | v2.0 (v2.0 addendum, 17 October 2026); v1.2, 17 October 2026 (`AI_Observer_PRD_v1.2.md`) |
+| PRD version | **2.1 r2, 17 Oct 2026** |
+| Previous | v2.1 r1, 17 Oct 2026; v2.0 (v2.0 r3 claim verification pass + v2.0 r4 D7-B, 17 October 2026); v1.2, 17 October 2026 (`AI_Observer_PRD_v1.2.md`) |
 | Author role | Senior product manager and platform-research analyst |
 | Audience | Owner (Basant Singh), engineering, design, legal/privacy review |
 | Companion research | `/workspace/AI_Observer_Marketing_Research.md` (dated sources; not modified) |
@@ -43,6 +43,8 @@
 | **2.0** | **17 October 2026** | Rename to OBZRAi. Live-validated platform constraints (correcting v1.2). Competitive landscape, pricing, legal (DPDP Rules 2025, Play, ToS), naming/trademark, D1–D6 recommendations, tightened FRs/NFRs/metrics, phased roadmap with exit criteria. See §25. |
 | **2.0 addendum** | **17 October 2026** | Web-grade product experience, go-to-market strategy, proposed features for strength and defensibility. FR-058–FR-093. New §§21–23; former §§21–27 renumbered 24–30. |
 | **2.1** | **17 October 2026** | Fill gaps in §§21–23 (marketing site, E2E collection share with key-in-fragment, GTM step-by-step checklists, ASO, OSS contributors, missing strength proposals with PHASE). New **§24 Cross-device continuity** and pending **D7**. FR-094–FR-106. Former §§24–30 become 25–31. See §25. |
+| **v2.1 r1** | **17 October 2026** | v2.1 r1 — 17 Oct 2026 — claim-verification delta from v2.0 r3; D7 decided (B). |
+| **v2.1 r2** | **17 October 2026** | v2.1 r2 — 17 Oct 2026 — reviewer fixes (R31 brand verification, Screenpipe monthly/annual, KR fee, D7 markers in §2/§19, tag tidy-ups). Declares that r1 also changed the Owner-direction block, the §23 intro, and §25 (items 10 and 32–33), which were outside r1’s stated sections. |
 
 ### Owner direction (kept from v1.1 / v1.2)
 
@@ -55,7 +57,7 @@
 > “इसके लिए पीआरडी प्रॉपर रेडी करो, प्रोफेशनल लेवल की प्रोडक्ट बनाना है”  
 > *(Get the PRD properly ready; we have to build a professional-level product.)*
 
-Addendum direction (17 October 2026): add new ideas, make it a professional **web-grade** product, check how it can be run in the market, and add features/ideas that make it stronger. See §§21–23. **v2.1** fills remaining web/GTM/proposal gaps and adds how a save on one device shows up on another (§24).
+Addendum direction (17 October 2026): add new ideas, make it a professional **web-grade** product, check how it can be run in the market, and add features/ideas that make it stronger. See §§21–23. **v2.1** fills remaining web/GTM/proposal gaps and adds how a save on one device shows up on another (§24). **v2.1 r1** ports the v2.0 r3 claim-verification pass and records **D7 = Option B**.
 
 ---
 
@@ -69,7 +71,7 @@ Addendum direction (17 October 2026): add new ideas, make it a professional **we
 6. Platform API and constraint validation  
 7. Competitive landscape  
 8. Pricing and business model  
-9. Recommendations on pending decisions D1–D7  
+9. Decisions D1–D7 (D1–D6 recommended; D7 decided)  
 10. End-to-end user flows  
 11. Visual and interaction requirements  
 12. Unified Library / Research Hub  
@@ -115,7 +117,7 @@ OBZRAi is **one piece of software that observes any screen content the user choo
 
 **Recommended D1–D6:** optional E2E sync off by default (D1); cloud AI opt-in per feature + BYO key (D2); push-to-talk in P0, assistant P1, wake word P2 (D3); optional redaction off by default (D4); Today/tags/provenance/voice notes in P0, collections P1, re-estimate ~40–55 eng-days (D5); accounting per-app opt-in, banking/password excluded (D6). Rationale in §9.
 
-**Pending D7 (v2.1):** whether to pull a **minimal** E2E sync (items + thumbnails + transcripts, no full-res media) into Phase 2 when the extension ships, so a save on the phone appears in the browser Hub. Default recommendation remains D1: full-res sync stays Phase 4, off by default. D7-B is the owner’s call if phone↔browser continuity is required at extension launch. Full options, effort, cost, DPDP and a recommendation are in §9 D7 and §24.
+**D7 DECIDED — Option B (Basant, 17 Oct 2026):** pull **minimal opt-in E2E sync** (items + thumbnails + transcripts, **no** full-res media) into **Phase 2** alongside the browser extension, so a save on the phone appears in the extension Hub and vice versa. **User-owned storage first** (Google Drive `appDataFolder`, then WebDAV); a hosted ciphertext relay is a later fallback. Full-res media sync stays **Phase 4 (D1)**. Option C (LAN/QR pairing) remains a **P2 bonus**. Options, effort, cost, DPDP and the decision record are in §9 D7 and §24.
 
 **v2.0 addendum:** web-grade Hub (side panel in Phase 2, PWA in Phase 4, team-free V1), GTM, and strength proposals are in §§21–23. **v2.1** fills remaining gaps in those sections (marketing site, E2E collection share with key-in-fragment, GTM step-by-step checklists, missing strength proposals with PHASE) and adds **§24 Cross-device continuity**. New FRs FR-058–FR-106.
 
@@ -143,7 +145,7 @@ These decisions are locked from the design discussion unless the owner explicitl
 | Screenshot | Save the **entire captured display frame** at native orientation and available resolution. **Never automatically crop the stored original** to a creator face, central text, or landscape preview. |
 | Audio/transcript | Save permitted source-app playback audio and create a timestamped transcript **when the OS and source app allow access**. Otherwise save visual information and an explicit audio-unavailable state. |
 | Main app | Compact **Home + Library** navigation. Search within Library; Topics, Capture options and Privacy are secondary screens in Settings. |
-| Data | **Local-first** on-device storage; account and cloud **not required** to use the product. User can stop observation and delete all captured data. Optional account + E2E sync in a follow-up phase (D1). Phase 1 continuity is encrypted export/import (FR-097). Pulling a thin E2E payload into Phase 2 is pending **D7**. See §24. |
+| Data | **Local-first** on-device storage; account and cloud **not required** to use the product. User can stop observation and delete all captured data. Optional account + E2E sync in a follow-up phase (D1). Phase 1 continuity is encrypted export/import (FR-097). **D7 DECIDED — Option B (Basant, 17 Oct 2026):** a thin E2E payload is Phase 2 scope. See §24. |
 | Source link | Keep the exact URL when shared or genuinely available; **do not fabricate** URLs from guessed metadata. |
 | Rejected visual styles | Multicolored/neon-heavy UI, triangular replacement logo, extra dark connector block, oversize status buttons, unrelated product/app mockups. |
 | AccessibilityService | **Not used in MVP.** A later narrow use needs separate disclosure, Play declaration and an architectural decision. Never market OBZRAi as an accessibility tool unless it is one. |
@@ -312,7 +314,7 @@ Every release on every platform must meet this bar before it is called done:
 - Collections/folders; research export (archive, Markdown/HTML, CSV).
 - Conversational assistant (voice + text intents); “find what I saw.”
 - Imagination images; AI agents (summarise, tag, cluster, Q&A) on-device default, cloud opt-in.
-- Optional account; E2E encrypted sync; conflict handling; cross-device availability.
+- Optional **minimal** E2E sync (D7-B decided): items + thumbnails + transcripts, opt-in, Drive `appDataFolder` then WebDAV; conflict handling for that payload; cross-device availability of the thin payload. Full-res media and hosted relay remain Phase 4 (D1).
 - Optional redaction for opted-in business apps.
 
 ### 5.3 P2 — optional research
@@ -328,9 +330,9 @@ Every release on every platform must meet this bar before it is called done:
 |---|---|---|
 | Phase 0 | Android feasibility S1–S4 | Go/no-go (see §19) |
 | Phase 1 | Android MVP (P0) | P0 AC + quality bar |
-| Phase 2 | Chromium MV3 browser extension | S1–S4 + S9 + S10 |
+| Phase 2 | Chromium MV3 browser extension **and** minimal opt-in E2E (D7-B: items + thumbnails + transcripts; Drive `appDataFolder` then WebDAV) | S1–S4 + S9 + S10 + S22 + S24 |
 | Phase 3 | Desktop (macOS, then Windows; Linux if S11 passes) | S1–S4 + S9 + S11 |
-| Phase 4 | Optional E2E sync, React Native, iOS discovery | S12, S14; D1 confirmed |
+| Phase 4 | Full-res E2E sync, React Native, iOS discovery | S12, S14; D1 confirmed |
 
 Order of Phases 2–4 may change with owner priority. Phase 5 in v1.2 terms (core extraction / S9) is a **prerequisite** of Phases 2–4, not a user-facing release.
 
@@ -354,18 +356,18 @@ v1.2 §8 was directionally right and incomplete. This section corrects it with l
 
 | v1.2 statement / gap | v2.0 correction | Source |
 |---|---|---|
-| Single-app vs entire-screen framed as a generic “may offer” without version | **App screen sharing / single-app picker is Android 14** (API 34). Pixel shipped it in **Android 14 QPR2** (Mar 2024). It is not an Android 15-only feature. | [Android media projection docs](https://developer.android.google.cn/media/grow/media-projection?authuser=0) (page live at research); [9to5Google, 15 Nov 2023](https://9to5google.com/2023/11/15/android-14-qpr2-single-app-recording/); [Forasoft, 1 Aug 2026](https://www.forasoft.com/blog/article/screen-sharing-android-1644) |
+| Single-app vs entire-screen framed as a generic “may offer” without version | **App screen sharing / single-app picker is Android 14** (API 34). Pixel shipped it in **Android 14 QPR2** (Mar 2024). It is not an Android 15-only feature. | [Android media projection docs](https://developer.android.com/media/grow/media-projection) (last updated 24 Jan 2025 UTC; retrieved 17 Oct 2026); [9to5Google, 15 Nov 2023](https://9to5google.com/2023/11/15/android-14-qpr2-single-app-recording/) |
 | Status-bar capture indicator underspecified | **Android 15 QPR1+**: large status-bar **chip** for projection/cast/record; tap to stop; **projection stops when the device is locked**. Apps must implement `MediaProjection.Callback.onStop()`. | [Android media projection — status bar chip](https://developer.android.com/about/versions/12/12L/features/media-projection-large-screens); [Android Authority, 11 Oct 2024](https://www.androidauthority.com/android-15-qpr1-stop-screen-shares-3489652/); [9to5Google, 12 Sep 2024](https://9to5google.com/2024/09/12/android-15-screen-recording-cast-chip/) |
-| Chrome capture rate limit not stated | `chrome.tabs.MAX_CAPTURE_VISIBLE_TAB_CALLS_PER_SECOND` = **2** (Chrome 92+) | [Chrome `tabs` API](https://developer.chrome.com/docs/extensions/mv2/reference/tabs) (docs last seen 28 Sep 2026) |
+| Chrome capture rate limit not stated | `chrome.tabs.MAX_CAPTURE_VISIBLE_TAB_CALLS_PER_SECOND` = **2** (Chrome 92+) | [Chrome `tabs` API](https://developer.chrome.com/docs/extensions/reference/api/tabs) (last updated **24 Sep 2026** UTC, live 17 Oct 2026); Chromium source [`tabs.json`](https://raw.githubusercontent.com/chromium/chromium/main/chrome/common/extensions/api/tabs.json) `value: 2` (retrieved 17 Oct 2026) |
 | macOS “Screen Recording permission” only | Sequoia (macOS 15)+ **recurring prompts** if the app bypasses the system picker. Use **`SCContentSharingPicker`**. Audio via ScreenCaptureKit `capturesAudio`. | [9to5Mac, 14 Aug 2024](https://9to5mac.com/2024/08/14/macos-sequoia-screen-recording-prompt-monthly/); [Apple `SCContentSharingPicker`](https://developer.apple.com/documentation/screencapturekit/sccontentsharingpicker) (docs 7 Oct 2026) |
 | Windows “border/indicator on supported versions” | Graphics Capture draws a **yellow border**. `IsBorderRequired` (Windows 10 2104 / build 20348+) can hide it only after `GraphicsCaptureAccessKind.Borderless` consent and `graphicsCaptureWithoutBorder`. DRM / `WDA_MONITOR` / protected media path → black. | [Microsoft Learn, Screen capture](https://learn.microsoft.com/en-us/windows/apps/develop/media-authoring-processing/screen-capture) (27 Aug 2026); [IsBorderRequired](https://learn.microsoft.com/en-us/uwp/api/windows.graphics.capture.graphicscapturesession.isborderrequired?view=winrt-28000) (5 Aug 2026) |
 | RN/iOS: “no system-wide overlay” only | iOS **Broadcast Upload Extension ~50 MB memory hard cap** (`EXC_RESOURCE` / jetsam). No Android-style `SYSTEM_ALERT_WINDOW`. RN has **no first-class screen-capture API**. | [Apple Forums thread 651367](https://developer.apple.com/forums/thread/651367); [Twilio ReplayKit README](https://github.com/twilio/video-quickstart-ios/blob/master/ReplayKitExample/README.md); [Forasoft iOS screen sharing, 10 Oct 2026](https://www.forasoft.com/blog/article/how-to-implement-screen-sharing-in-ios-1193) |
-| Play target SDK not stated | New apps/updates: **target API 36 (Android 16) as of 31 Aug 2026** (extension to 1 Nov 2026 cited by Forasoft). Re-verify at submission. | [Forasoft, 1 Aug 2026](https://www.forasoft.com/blog/article/screen-sharing-android-1644) |
+| Play target SDK not stated | New apps and app updates: **target Android 16 (API 36)** starting **31 Aug 2026**; developers may request an extension to **1 Nov 2026**. Existing apps must target Android 15 (API 35) to remain available to new users on newer OS versions. Re-verify at submission. | [Play Console Help — Target API level requirements](https://support.google.com/googleplay/android-developer/answer/11926878) (retrieved 17 Oct 2026) |
 | Developer verification absent | Protections began **30 Sep 2026** in **Brazil, Indonesia, Singapore, Thailand** on certified Android 7+ via seven participating stores; **global expansion planned 2027**. Advanced sideload flow: Developer options + reboot + **24-hour wait**. | [Android developer verification](https://developer.android.com/developer-verification) (30 Sep 2026); [Android Authority, 1 Oct 2026](https://www.androidauthority.com/android-sideloading-developer-verification-first-wave-rollout-3717921/); [Ars Technica, 19 Mar 2026](https://arstechnica.com/gadgets/2026/03/google-details-new-24-hour-process-to-sideload-unverified-android-apps/) |
 
 ### 6.1 Android — MediaProjection, FGS, overlay, audio, FLAG_SECURE
 
-**Consent and token.** Apps targeting Android 14+ must request user consent **before each media projection session**. A session is a single `createVirtualDisplay()` call. A `MediaProjection` token must be used only once. Reusing a cached intent throws `SecurityException` on Android 14+ ([Android media projection docs](https://developer.android.google.cn/media/grow/media-projection?authuser=0); [Android 14 behavior changes](https://developer.android.com/about/versions/14/behavior-changes-14)). Forasoft (1 Aug 2026) reports Android 16 additionally blocks caching the token across app restarts. **Product rule:** never silently reopen projection; always run the OS picker.
+**Consent and token.** Apps targeting Android 14+ must request user consent **before each media projection session**. A session is a single `createVirtualDisplay()` call. A `MediaProjection` token must be used only once. Reusing a cached intent throws `SecurityException` on Android 14+ ([Android media projection docs](https://developer.android.com/media/grow/media-projection), last updated 24 Jan 2025 UTC; [Android 14 behavior changes](https://developer.android.com/about/versions/14/behavior-changes-14), last updated 16 Oct 2026 UTC). Forasoft (1 Aug 2026) reports Android 16 additionally blocks caching the token across app restarts; **official Android 16 behavior-changes pages (all-apps and targeting-16, last updated 16 Oct 2026 UTC) contain no MediaProjection section**, so that extra across-restart rule stays **Unverified** as an Android 16 platform change. The Android 14 one-shot / per-session rule is the product constraint. **Product rule:** never silently reopen projection; always run the OS picker.
 
 **Single-app vs entire screen.** Android 14 introduces **app screen sharing**: the consent UI lets the user share a **single app window** or the **entire display**. Single-app capture excludes status bar, navigation bar and notifications. Apps can force entire-display via `MediaProjectionConfig.createConfigForDefaultDisplay()`, which is the wrong default for a privacy-first observer. **Product rule:** prefer **single-app** as the guided default (matches Play review and user trust); allow entire-screen when the user chooses it in the OS dialog. Handle pause when the user switches away from a single-app share (task-switcher strings exist in Android 15; treat as capability to detect in S1).
 
@@ -383,7 +385,7 @@ v1.2 §8 was directionally right and incomplete. This section corrects it with l
 
 **Developer verification 2026–27.** From **30 September 2026**, apps installed from participating stores (Google Play, HONOR, OPPO, Galaxy Store, Palm Store, V-Appstore, GetApps) on certified Android 7+ in **Brazil, Indonesia, Singapore, Thailand** must be registered to a verified developer. Global expansion is planned for **2027**. Unregistered apps can still be sideloaded via ADB or the advanced flow (Developer options + reboot + 24-hour wait) ([developer.android.com/developer-verification](https://developer.android.com/developer-verification), 30 Sep 2026; [The Verge, 2 Oct 2026](https://www.theverge.com/tech/1003920/androids-developer-verification-rules-just-took-effect-for-the-first-time)). **India is not in the first wave**; 2027 is the planning horizon for Indian sideload UX. Register the developer identity before Play and before relying on GitHub APKs on certified devices in 2027.
 
-**Min SDK proposal:** Android 10 / API 29 (playback-audio path). **Test matrix:** Android 10, 13, 14, 15, 16 and recent OEM skins. **Target SDK:** current Play requirement at publication (API 36 cited as of 31 Aug 2026 — re-verify).
+**Min SDK proposal:** Android 10 / API 29 (playback-audio path). **Test matrix:** Android 10, 13, 14, 15, 16 and recent OEM skins. **Target SDK:** current Play requirement at publication (**API 36 / Android 16** for new apps and updates as of **31 Aug 2026**, extension to **1 Nov 2026** — [Play Help 11926878](https://support.google.com/googleplay/android-developer/answer/11926878), retrieved 17 Oct 2026).
 
 **Policy:** no AccessibilityService in MVP.
 
@@ -399,7 +401,7 @@ v1.2 §8 was directionally right and incomplete. This section corrects it with l
 | DRM / EME | Protected video frames commonly capture **black** | Label `capture_blocked`; keep title/URL |
 | Exact URL | Active tab URL/title with permission | `source_url_origin = browser_tab`; never read other tabs or history |
 
-Sources: [Chrome tabs API](https://developer.chrome.com/docs/extensions/reference/api/tabs) / [MV2 tabs reference](https://developer.chrome.com/docs/extensions/mv2/reference/tabs) (28 Sep 2026); [tabCapture](https://developer.chrome.com/docs/extensions/reference/api/tabCapture) (11 Sep 2026); [Offscreen documents](https://developer.chrome.com/blog/Offscreen-Documents-in-Manifest-v3) (25 Jan 2023).
+Sources: [Chrome tabs API](https://developer.chrome.com/docs/extensions/reference/api/tabs) (last updated **24 Sep 2026** UTC, live 17 Oct 2026); Chromium [`tabs.json`](https://raw.githubusercontent.com/chromium/chromium/main/chrome/common/extensions/api/tabs.json) `MAX_CAPTURE_VISIBLE_TAB_CALLS_PER_SECOND` **value: 2** (retrieved 17 Oct 2026); [tabCapture](https://developer.chrome.com/docs/extensions/reference/api/tabCapture) (last updated 11 Sep 2026); [Offscreen documents](https://developer.chrome.com/blog/Offscreen-Documents-in-Manifest-v3) (25 Jan 2023); [sidePanel API](https://developer.chrome.com/docs/extensions/reference/api/sidePanel) (last updated **11 Sep 2026** UTC; `close()` tab-vs-global fallback changed in **Chrome 145**).
 
 ### 6.3 macOS — ScreenCaptureKit
 
@@ -445,8 +447,8 @@ Legend: **Verified** = tied to a named source below. **Partial** = documented bu
 
 | Constraint | Platform | Product implication | Status | Source | Date |
 |---|---|---|---|---|---|
-| Per-session MediaProjection consent; one-shot token | Android 14+ | Fresh OS picker every session; no token cache | Verified | [Android media projection](https://developer.android.google.cn/media/grow/media-projection?authuser=0); [A14 behavior](https://developer.android.com/about/versions/14/behavior-changes-14) | Docs live 17 Oct 2026 |
-| Single-app vs entire-screen picker | Android 14; Pixel 14 QPR2 | Guide single-app default; save selected region only | Verified | [Android docs](https://developer.android.google.cn/media/grow/media-projection?authuser=0); [9to5Google](https://9to5google.com/2023/11/15/android-14-qpr2-single-app-recording/) | 15 Nov 2023 / docs live |
+| Per-session MediaProjection consent; one-shot token | Android 14+ | Fresh OS picker every session; no token cache. Extra “no cache across app restarts” as an Android **16** rule is Unverified (official A16 behavior-changes pages have no MediaProjection section; last updated 16 Oct 2026). | Verified (A14); Unverified (extra A16) | [Android media projection](https://developer.android.com/media/grow/media-projection) (last updated 24 Jan 2025); [A14 behavior](https://developer.android.com/about/versions/14/behavior-changes-14) (last updated 16 Oct 2026); [A16 all-apps](https://developer.android.com/about/versions/16/behavior-changes-all) (last updated 16 Oct 2026) | 17 Oct 2026 |
+| Single-app vs entire-screen picker | Android 14; Pixel 14 QPR2 | Guide single-app default; save selected region only | Verified | [Android docs](https://developer.android.com/media/grow/media-projection); [9to5Google](https://9to5google.com/2023/11/15/android-14-qpr2-single-app-recording/) | 15 Nov 2023 / docs retrieved 17 Oct 2026 |
 | FGS type `mediaProjection` + permission | Android 14+ target | Manifest + `startForeground` type; else `SecurityException` | Verified | [FGS types](https://developer.android.com/develop/background-work/services/fgs/service-types) | Docs live |
 | Play FGS declaration + **demo video** | Google Play | Console form; video of user-triggered capture | Verified | [Play Help](https://support.google.com/googleplay/android-developer/answer/16965181) | Docs live |
 | Status-bar chip; stop on lock | Android 15 QPR1+ | `onStop()` must release all resources | Verified | [Android docs chip](https://developer.android.com/about/versions/12/12L/features/media-projection-large-screens); [AA 11 Oct 2024](https://www.androidauthority.com/android-15-qpr1-stop-screen-shares-3489652/) | 11 Oct 2024 / docs |
@@ -454,8 +456,8 @@ Legend: **Verified** = tied to a named source below. **Partial** = documented bu
 | FLAG_SECURE / Play no-bypass | Android + Play | Black frame; `capture_blocked` | Verified | [Play 16559646](https://support.google.com/googleplay/android-developer/answer/16559646) | Docs live |
 | Overlay restricted on sideload | Android 15+ | In-app instructions for restricted settings | Verified | [AA 12 Sep 2024](https://www.androidauthority.com/android-15-sideloaded-apps-restrictions-3481098/) | 12 Sep 2024 |
 | Developer verification first wave | BR, ID, SG, TH from 30 Sep 2026; global 2027 | Register developer; India sideload UX changes in 2027 | Verified | [developer-verification](https://developer.android.com/developer-verification) | 30 Sep 2026 |
-| Play target API 36 | Play | Target Android 16 at submission | Partial | [Forasoft 1 Aug 2026](https://www.forasoft.com/blog/article/screen-sharing-android-1644) | 1 Aug 2026 |
-| `captureVisibleTab` 2/sec | Chrome 92+ | Sampling ≤ 2 fps | Verified | [Chrome tabs API](https://developer.chrome.com/docs/extensions/mv2/reference/tabs) | 28 Sep 2026 |
+| Play target API 36 | Play | New apps/updates target Android 16 (API 36) from 31 Aug 2026; extension to 1 Nov 2026 | Verified | [Play Help 11926878](https://support.google.com/googleplay/android-developer/answer/11926878) | Retrieved 17 Oct 2026 |
+| `captureVisibleTab` 2/sec | Chrome 92+ | Sampling ≤ 2 fps | Verified | [Chrome tabs API](https://developer.chrome.com/docs/extensions/reference/api/tabs) (last updated 24 Sep 2026); Chromium `tabs.json` value 2 | 17 Oct 2026 |
 | tabCapture + offscreen document | Chrome MV3 | User gesture; offscreen for MediaStream | Verified | [tabCapture](https://developer.chrome.com/docs/extensions/reference/api/tabCapture) | 11 Sep 2026 |
 | DRM/EME black frames | Chrome, Android, desktop | Honest label | Verified | Platform docs + Samsung 5 Oct 2026 | Mixed |
 | Sequoia recurring screen-recording prompt | macOS 15+ | Use `SCContentSharingPicker` | Verified | [9to5Mac 14 Aug 2024](https://9to5mac.com/2024/08/14/macos-sequoia-screen-recording-prompt-monthly/) | 14 Aug 2024 |
@@ -491,17 +493,17 @@ Research date: **17 October 2026**. Live web + X. Star counts and prices move; t
 
 ### 7.2 Competitor sheets
 
-**Observer AI (Roy3838)** — GitHub [Roy3838/Observer](https://github.com/Roy3838/Observer); site [observer-ai.com](https://app.observer-ai.com/). Local LLM micro-agents watch screen/camera/audio. Plus **$5/mo**. GitHub listing ~**1.7k stars / 142 forks** at marketing-research time (date not shown on the GitHub UI scrape). **Highest naming and “AI is watching my screen” collision.** Different job (agents vs library).
+**Observer AI (Roy3838)** — GitHub [Roy3838/Observer](https://github.com/Roy3838/Observer); site [observer-ai.com](https://app.observer-ai.com/). Local LLM micro-agents watch screen/camera/audio. Plus **$5/mo**. GitHub API **1,652 stars / 142 forks** (retrieved **17 Oct 2026**; `pushed_at` 15 Oct 2026, `updated_at` 17 Oct 2026). **Highest naming and “AI is watching my screen” collision.** Different job (agents vs library).
 
 **Pixel Screenshots** — Pixel-only screenshot library with OCR and NL search ([Google Pixel Help](https://support.google.com/pixelphone/answer/15312581)). June 2026: **no longer on-device only** — cloud / Private AI Compute ([9to5Google, 17 Jun 2026](https://9to5google.com/2026/06/17/pixel-screenshots-cloud-ai/); [Android Authority, 18 Jun 2026](https://www.androidauthority.com/pixel-screenshots-cloud-processing-3678819/)). Backlash: “Google just ruined my favorite Pixel feature” ([Android Authority, 24 Jun 2026](https://www.androidauthority.com/google-made-me-turn-off-pixel-screenshots-3680197/)). Closest **on-device screenshot memory**; not a live overlay; Pixel-only.
 
 **Circle to Search / Google Lens** — Search what’s on screen; does not keep a personal library by default. Can fail in FLAG_SECURE / DRM apps ([Samsung US, 5 Oct 2026](https://www.samsung.com/us/support/answer/ANS10000753/)).
 
-**ReciMe** — Share Reel/TikTok/web → recipe. Play **1M+**, ~4.7★ / ~108k ratings ([Play, updated 1 Oct 2026](https://play.google.com/store/apps/details?id=com.recime.app)). iOS 4.8 / ~313k ratings. Free tier cited as 5 imports/week in 2026 roundups; Plus/Premium App Store **$9.99–$59.99**, US annual **$39.99** in one 2026 writeup (verify at App Store at launch). Proves “save Reels for later” converts. Cloud, account, one vertical.
+**ReciMe** — Share Reel/TikTok/web → recipe. Play **1M+**, **4.67★ / 110,590 ratings**, listing updated **1 Oct 2026** ([Play](https://play.google.com/store/apps/details?id=com.recime.app), retrieved 17 Oct 2026). iOS **4.8★ / 314,015 reviews**. Official help: free plan **5 imports every 7 days** (reset from account-created weekday; failed imports do not count) ([ReciMe help, last updated 6 May 2026](https://recime.app/help/en/articles/14999602-how-your-5-free-weekly-imports-work)). Official help US yearly **$39.99** ([ReciMe help, last updated 9 Aug 2026](https://recime.app/help/en/articles/11630592-how-much-does-the-recime-subscription-cost)). App Store US lists **ReciMe Plus** IAPs at **$29.99 / $39.99 / $59.99** (7-day free trial mentioned; periods not named on the public listing). Cloud, account, one vertical. Proves “save Reels for later” converts.
 
 **BhaiFinder** (BharatAI, Bareilly) — [bhaifinder.com](https://bhaifinder.com/). India Hinglish AI memory via share sheet. Free **20 saves/mo**; Pro **₹99/mo**; Pro Max **₹199/mo** ([Stork, 30 Sep 2026](https://www.stork.ai/en/bhaifinder)). Play **100+** downloads (early). Same pain line; not overlay; cloud.
 
-**Recall.it** — [recall.it](https://www.recall.it/about). Save YT/articles/PDFs/podcasts → AI cards. Free 10 AI summaries/mo; Plus **$10/mo** yearly; Max **$38/mo** yearly ([recall.it/pricing](https://www.recall.it/pricing)). Claims **700,000+** users (about page, Oct 2026). Links, not live overlay.
+**Recall.it** — [recall.it](https://www.recall.it/about). Save YT/articles/PDFs/podcasts → AI cards. Free 10 AI summaries/mo; Plus **$10/mo** yearly; Max **$38/mo** yearly ([recall.it/pricing](https://www.recall.it/pricing)). Claims **700,000+** users (about page, Oct 2026; vendor claim, Unverified #5). Links, not live overlay.
 
 **Readwise Reader** — Full **$9.99/mo** yearly / **$12.99** monthly; Lite **$5.59/mo** yearly ([Marqly, checked 6 Oct 2026](https://www.marqly.com/blog/readwise-reader-review-2026)). Play **100k+** ([Play, 7 Oct 2026](https://play.google.com/store/apps/details?id=com.readermobile)). Power readers; YouTube via share/extension.
 
@@ -517,7 +519,7 @@ Research date: **17 October 2026**. Live web + X. Star counts and prices move; t
 
 **Rewind → Limitless** — Meta acquired Limitless **5 Dec 2025**; Rewind capture disabled **19 Dec 2025** ([TechCrunch, 5 Dec 2025](https://techcrunch.com/2025/12/05/meta-acquires-ai-device-startup-limitless/); [9to5Mac, 5 Dec 2025](https://9to5mac.com/2025/12/05/rewind-limitless-meta-acquisition/)). Category existed; **exited**. `rewind.ai` is now unrelated.
 
-**Screenpipe** — Desktop continuous screen+audio memory, local. GitHub **~22k stars**, **~2.2k forks**, updated 17 Oct 2026 ([github.com/screenpipe/screenpipe](https://github.com/screenpipe/screenpipe)). License moved from MIT to **Screenpipe Commercial License** (source-available; personal/non-commercial free; commercial use paid) ([Screenpipe blog, 9 Jun 2026](https://screenpipe.com/blog/screenpipe-license-update)). App pricing aggregators reading screenpipe.com on **1 Oct 2026**: Free; **Basic $21/mo** ($250/yr); **Business $42/mo** ($500/seat/yr); Enterprise on request ([Position Is Everything, 16 Oct 2026](https://www.positioniseverything.net/tools/screenpipe/pricing/)). Older writeups still say **$25 / $50**. **Unverified at screenpipe.com/pricing itself** (aggregator). Closest *desktop always-on* analogue; opposite of OBZRAi’s session model.
+**Screenpipe** — Desktop continuous screen+audio memory, local. GitHub API **21,960 stars / 2,248 forks** (retrieved **17 Oct 2026**; `pushed_at` 17 Oct 2026) ([github.com/screenpipe/screenpipe](https://github.com/screenpipe/screenpipe)). License moved from MIT to **Screenpipe Commercial License** (source-available; personal/non-commercial free; commercial use paid) ([Screenpipe blog, 9 Jun 2026](https://screenpipe.com/blog/screenpipe-license-update)). Official pricing (nav **Pricing** → [screenpipe.com/onboarding](https://screenpipe.com/onboarding), retrieved **17 Oct 2026**; `/pricing` redirects here): **Free $0**; **Basic $25/mo or $250/yr** (~$21/mo billed annually); **Business $50/seat/mo or $500/seat/yr** (~$42/seat/mo billed annually); annual billed as “2 months free”; Max/Ultra capacity add-ons. Closest *desktop always-on* analogue; opposite of OBZRAi’s session model.
 
 **Microsoft Recall** — See §6.4. Privacy case study: always-on screen memory is toxic unless opt-in, local, filterable, hardware-gated.
 
@@ -581,20 +583,31 @@ Live **translucent overlay** on whatever is on screen, **user-started MediaProje
 | BhaiFinder Pro / Pro Max | ₹99 / ₹199 per month | [Stork](https://www.stork.ai/en/bhaifinder) | 30 Sep 2026 |
 | Raindrop Pro | $3/mo or $28/yr | [ContextBolt](https://contextbolt.com/blog/raindrop-pricing/) | 10 Sep 2026 |
 | Readwise Reader | $9.99/mo yearly | [Marqly](https://www.marqly.com/blog/readwise-reader-review-2026) | 6 Oct 2026 |
-| ReciMe Premium (one writeup) | ~$39.99/yr US | Marketing research compilation | 2026 |
+| ReciMe (US yearly, official help) | **$39.99/yr** | [ReciMe help](https://recime.app/help/en/articles/11630592-how-much-does-the-recime-subscription-cost) (last updated 9 Aug 2026) | Retrieved 17 Oct 2026 |
 | Recall.it Plus / Max | $10 / $38 per month yearly | recall.it/pricing | Live Oct 2026 |
 | mymind Bookmarker / Mastermind | $4.99 / $12.99 per month | mymind.com/pricing | Live Oct 2026 |
 | Glasp Pro | $12.50/mo yearly | [Glasp blog](https://blog.glasp.co/price-update-2026-05-01/) | 27 Mar 2026 |
-| Screenpipe Basic / Business | $21 / $42 per month (annual) | [PIE aggregator](https://www.positioniseverything.net/tools/screenpipe/pricing/) citing screenpipe.com | 1 Oct 2026 |
+| Screenpipe Basic / Business | **$25/mo** or **$250/yr** (~$21/mo billed annually) / **$50/seat/mo** or **$500/seat/yr** (~$42/seat/mo billed annually) | [screenpipe.com/onboarding](https://screenpipe.com/onboarding) (official Pricing page) | 17 Oct 2026 |
 | Notion Plus | $10/member/mo yearly | notion.com/pricing via Marqly | Oct 2026 |
 
 ### 8.3 Google Play fees (India vs global)
 
-**Current (until Rest-of-World cutover):** Google’s long-standing structure is **15% on the first $1M** of developer earnings per year and **30% above**, with 99% of developers said to qualify for 15% or less ([Play India alternative billing Help](https://support.google.com/googleplay/android-developer/answer/13306652)). India already allows **alternative billing alongside Play**; if the user pays through the alternative system, the Play service fee is **reduced by 4%**.
+**Official service-fee pages (retrieved 17 Oct 2026).** [Play Console Help — Service fees](https://support.google.com/googleplay/android-developer/answer/112622) states: **97% of developers distribute at no charge**; of those subject to a fee, **99% are eligible for 15% or less**.
 
-**New split (US/UK/EEA from 30 Jun 2026; Australia 30 Sep 2026; JP/KR 31 Dec 2026; Rest of World including India 30 Sep 2027):** service fee separated from billing fee; first $1M / subscriptions cited at **10%** service in launch markets plus **5%** Play billing fee in US/UK/EEA; alternative billing or web links avoid the billing fee ([The Verge, 24 Jun 2026](https://www.theverge.com/policy/956296/google-play-app-store-alternative-billing-fee-antitrust); [Android Authority, 24 Jun 2026](https://www.androidauthority.com/google-play-billing-changes-3681025/); [ecorpit, 19 Jul 2026](https://ecorpit.com/google-play-service-fee-split-2026-app-economics/)). Exact Rest-of-World billing-fee percentage **not announced** as of this research.
+**Remaining markets until the updated fees roll out globally** (includes **India** until 30 Sep 2027): **15%** on the first **$1M** USD of developer earnings per year and **30%** above; **15%** on auto-renewing subscriptions regardless of revenue ([Play Help 112622](https://support.google.com/googleplay/android-developer/answer/112622)). India already allows **alternative billing alongside Play**; if the user pays through the alternative system, the Play service fee is **reduced by 4%** ([Play Help 13306652](https://support.google.com/googleplay/android-developer/answer/13306652)).
 
-**Implication for an Indian owner:** for Indian users on Play, budget **15% (or 11% with alternative billing)** until **30 September 2027**, then re-model. Selling to US/UK/EEA users is already on the new card as of 30 Jun 2026.
+**Updated split + billing fee** ([Play Help — Lower service fees and expanded billing choice](https://support.google.com/googleplay/android-developer/answer/16954621); [Play Help 112622](https://support.google.com/googleplay/android-developer/answer/112622)):
+
+| Rollout date | Regions | Service + billing (Play Billing) |
+|---|---|---|
+| **30 Jun 2026** | EEA, UK, US | First $1M and auto-renewing subscriptions **10% + 5% billing**; other new-install transactions **20% + 5%**; existing-install **25% + 5%** (or lower with Apps Experience / Games Level Up) |
+| **30 Sep 2026** | Australia, Japan | Same 10%+5% table |
+| **31 Dec 2026** | South Korea | New service-fee structure rolls out; **Google does not state the billing fee for KR** (official 5% billing fee applies to AU/EEA/JP/UK/US only) |
+| **30 Sep 2027** | Rest of World (including India) | Cutover date announced; **“Billing fee details for other regions are forthcoming”** |
+
+In AU / EEA / JP / UK / US the billing fee is **5%** when the user pays through Play Billing. **RoW billing-fee percentage is still not announced** (official wording, retrieved 17 Oct 2026).
+
+**Implication for an Indian owner:** for Indian users on Play, budget **15% (or 11% with alternative billing)** until **30 September 2027**, then re-model. Selling to US/UK/EEA users is already on the new card as of 30 Jun 2026; AU/JP as of 30 Sep 2026; KR service-fee structure rolls out 31 Dec 2026 (**Google does not state the billing fee for KR**).
 
 ### 8.4 Recommended model
 
@@ -604,7 +617,7 @@ Live **translucent overlay** on whatever is on screen, **user-started MediaProje
 |---|---|---|
 | **Free / FOSS** | ₹0 / $0 forever | Session observe, overlay, full-frame saves, on-device OCR, on-device ASR (user-downloaded model), Today/Library/tags, export, no account |
 | **BYO key** | ₹0 platform fee | User’s own cloud LLM / image API for assistant, summarise, imagination. Keys stored in OS keystore. Disclosure of what is sent. |
-| **Pro (hosted)** | **India: ₹149/mo or ₹1,499/yr** · **Global: $4.99/mo or $39/yr** | Optional account, **hosted E2E ciphertext relay** (full-res in Phase 4 / D1; thin payload in Phase 2 only if D7-B uses a relay), optional hosted AI quota, priority support. Local app remains fully usable if Pro lapses (library stays on device). **User-owned storage** for D7-B (Drive appData / WebDAV) stays on the Free tier — the user pays Google/their NAS, not OBZRAi. |
+| **Pro (hosted)** | **India: ₹149/mo or ₹1,499/yr** · **Global: $4.99/mo or $39/yr** | Optional account, **hosted E2E ciphertext relay** (full-res in Phase 4 / D1; thin payload in Phase 2 uses user-owned storage — Drive `appDataFolder` then WebDAV; relay is a later Pro fallback), optional hosted AI quota, priority support. Local app remains fully usable if Pro lapses (library stays on device). **User-owned storage** for D7-B (Drive appData / WebDAV) stays on the Free tier — the user pays Google/their NAS, not OBZRAi. |
 
 Rationale: ReciMe/BhaiFinder prove willingness to pay for *rescue of saves*, but the ICP is FOSS-sensitive. Charging for local capture would collide with Pixel-cloud backlash and with Graphene/F-Droid reviewers. Hosted sync is the first real COGS. INR list should sit near BhaiFinder Pro (₹99–199) without undercutting into dump-price. USD list should sit near Raindrop/Readwise Lite, far below Screenpipe’s always-on desktop pricing.
 
@@ -614,9 +627,9 @@ Rationale: ReciMe/BhaiFinder prove willingness to pay for *rescue of saves*, but
 
 ---
 
-## 9. Recommendations on pending decisions D1–D7
+## 9. Decisions D1–D7 (D1–D6 recommended; D7 decided)
 
-These were “pending Basant’s confirmation” in v1.2. v2.0 records a **clear recommendation** for each. Owner may override.
+These were “pending Basant’s confirmation” in v1.2. v2.0 records a **clear recommendation** for each of D1–D6. **D7 is DECIDED — Option B (Basant, 17 Oct 2026).** Owner may override D1–D6.
 
 ### D1 — Account and E2E sync
 
@@ -624,7 +637,7 @@ These were “pending Basant’s confirmation” in v1.2. v2.0 records a **clear
 |---|---|
 | **v1.0/v1.1** | On-device storage; account and cloud not required; no mandatory sign-in; multi-device sync was P2. |
 | **v1.2 proposal** | Local-first default; optional account + E2E sync in a follow-up phase. |
-| **v2.0 recommendation** | **Adopt v1.2: optional, off by default, E2E encrypted, Phase 4.** Android MVP ships with **no account**. Local export/import (encrypted archive) is the V1 multi-device path. **v2.1 keeps this as the default for full-resolution media.** See D7 for a pending option to pull a *minimal* payload earlier. Continuity per phase is in §24. |
+| **v2.0 recommendation** | **Adopt v1.2: optional, off by default, E2E encrypted, Phase 4.** Android MVP ships with **no account**. Local export/import (encrypted archive) is the V1 multi-device path. **v2.1 keeps this as the default for full-resolution media.** **D7 (DECIDED B, 17 Oct 2026)** pulls a *minimal* payload (items, thumbnails, transcripts) into Phase 2 via user-owned storage. Continuity per phase is in §24. |
 | **Rationale** | Owner wants browser ↔ mobile. That needs a sync service. Making it default would reverse the privacy promise and the Pixel-cloud lesson. E2E keeps the server as a ciphertext relay. |
 | **Risks** | Key-recovery UX is hard (lose all devices → lose ciphertext). Hosting cost. DPDP “data fiduciary” duties once an account exists. Mitigation: recovery-key printout; self-hostable relay as a later option; device-only flag for sensitive collections. |
 
@@ -678,16 +691,18 @@ These were “pending Basant’s confirmation” in v1.2. v2.0 records a **clear
 | **Rationale** | Owner use case is real; financial data is DPDP-sensitive; OBZRAi must never look like employee monitoring. |
 | **Risks** | Package-name lists go stale; Excel used for personal finance. Mitigation: user-editable list; keyword pause; redaction opt-in (D4). |
 
-### D7 — Pull minimal E2E sync earlier, alongside Phase 2 (pending Basant)
+### D7 — Pull minimal E2E sync earlier, alongside Phase 2 — **DECIDED — Option B (Basant, 17 Oct 2026)**
 
-**Question for the owner.** D1 keeps **full** E2E sync (including full-resolution frames and voice audio) optional, off by default, in **Phase 4**. When the Chromium extension ships in Phase 2, a save on the phone is still a separate library unless the user carries an encrypted export. D7 asks: pull a **minimal** E2E continuity path forward so “what I observed in the browser shows up on mobile, and vice versa” (JTBD 11 / FR-054) is true at extension launch.
+**Status:** **DECIDED — Option B (Basant, 17 Oct 2026).** Minimal **opt-in** E2E sync ships in **Phase 2 alongside the browser extension**. Payload: **items + thumbnails + transcripts** (no full-res media). **User-owned storage first:** Google Drive `appDataFolder`, then WebDAV. A hosted **ciphertext relay is a later fallback** (Pro / Phase 4). **Full-res media sync stays Phase 4 (D1).** Option **C** (LAN/QR pairing) remains a **P2 bonus**.
 
-v2.1 **does not change D1.** Full-res media, conflict UX, recovery keys, and a hosted ciphertext relay remain Phase 4. D7 is only about a thinner payload and an earlier date.
+**Record of the question.** D1 keeps **full** E2E sync (including full-resolution frames and voice audio) optional, off by default, in **Phase 4**. When the Chromium extension ships in Phase 2, a save on the phone is still a separate library unless the user carries an encrypted export. D7 asked: pull a **minimal** E2E continuity path forward so “what I observed in the browser shows up on mobile, and vice versa” (JTBD 11 / FR-054) is true at extension launch.
+
+v2.1 **does not change D1 for full-resolution media.** Full-res frames, voice audio, conflict UX for full-res, recovery keys, and a hosted ciphertext relay remain Phase 4. D7 is only about a thinner payload and an earlier date. Options A/B/C below are kept as a record of the decision.
 
 | Option | Scope | Effort (labelled) | Cost | Privacy / DPDP | Risks |
 |---|---|---|---|---|---|
 | **A — Keep Phase 4** | No new sync in Phase 2. Continuity = encrypted export/import (FR-097) in Phase 1; side-panel Hub is local to the browser (option **c** in §21.7). Full E2E (FR-047, FR-064) in Phase 4, off by default. | **S** extra in Phase 2 (zero sync work). Full sync remains **L** in Phase 4. | ₹0 / $0 until Phase 4 relay. | Matches the local-first promise. No account, no fiduciary duties until Phase 4. | Phone and browser libraries diverge. Users who live on both devices will treat the product as two apps. |
-| **B — Minimal sync in Phase 2** | Opt-in. E2E. Payload: item metadata, tags, collections, provenance, OCR/page text, transcripts, voice-idea text, **thumbnails** (bounded, e.g. ≤ 200 KB JPEG). **No** full-res frames, **no** voice audio blobs, **no** imagination originals. Transport, in order of preference: (1) **user-owned storage** — Google Drive `appDataFolder` ([Drive API, last updated 3 Sep 2026](https://developers.google.com/workspace/drive/api/guides/appdata)), WebDAV, iCloud (Apple later), (2) Syncthing-style P2P, (3) a small **ciphertext relay** as a later Pro SKU. | **L** (~3+ eng-weeks: protocol + Android client + extension client + one storage adapter). A second adapter is **M**. | User-owned storage: user’s quota (Drive appData counts against the user’s Google storage — community confirmation 19 Apr 2026, [r/developersIndia](https://www.reddit.com/r/developersIndia/comments/1spzhw5/google_has_free_peruser_storage_built_in_and/); official docs do not publish a separate free bucket). Ciphertext relay: hosting + support; price inside Pro ₹149 / $4.99 (§8). | Ciphertext only on any third-party store. Drive `drive.appdata` is a non-sensitive scope; folder is hidden, unshareable, deleted on uninstall. If OBZRAi operates a relay, DPDP fiduciary duties begin (account, notices, deletion). Device-only collections stay out. | Protocol bugs; quota exhaustion if thumbs grow; users confuse “synced library” with “full-res backup”; Google/Apple ToS on appData; key-recovery still hard. |
+| **B — Minimal sync in Phase 2** | Opt-in. E2E. Payload: item metadata, tags, collections, provenance, OCR/page text, transcripts, voice-idea text, **thumbnails** (bounded, e.g. ≤ 200 KB JPEG). **No** full-res frames, **no** voice audio blobs, **no** imagination originals. Transport, in order of preference: (1) **user-owned storage** — Google Drive `appDataFolder` ([Drive API, last updated 3 Sep 2026](https://developers.google.com/workspace/drive/api/guides/appdata)), WebDAV, iCloud (Apple later), (2) Syncthing-style P2P, (3) a small **ciphertext relay** as a later Pro SKU. | **L** (~3+ eng-weeks: protocol + Android client + extension client + one storage adapter; estimate, Unverified #40; no velocity data). A second adapter is **M**. | User-owned storage: user’s quota (Drive appData counts against the user’s Google storage — community confirmation 19 Apr 2026, [r/developersIndia](https://www.reddit.com/r/developersIndia/comments/1spzhw5/google_has_free_peruser_storage_built_in_and/); official docs do not publish a separate free bucket). Ciphertext relay: hosting + support; price inside Pro ₹149 / $4.99 (§8). | Ciphertext only on any third-party store. Drive `drive.appdata` is a **non-sensitive** scope ([Drive appdata guide](https://developers.google.com/workspace/drive/api/guides/appdata) and [Choose Google Drive API scopes](https://developers.google.com/workspace/drive/api/guides/api-specific-auth), both last updated **3 Sep 2026** UTC, retrieved 17 Oct 2026); folder is hidden, unshareable, deleted on uninstall. If OBZRAi operates a relay, DPDP fiduciary duties begin (account, notices, deletion). Device-only collections stay out. | Protocol bugs; quota exhaustion if thumbs grow; users confuse “synced library” with “full-res backup”; Google/Apple ToS on appData; key-recovery still hard. |
 | **C — Device pairing, no server** | Same-LAN or QR/WebRTC pairing. Each device serves its local store (extension native-messaging host or desktop localhost; Android nearby). No cloud copy. | **M–L** (pairing UX + NAT traversal + auth). Native messaging is a documented Chrome API ([native messaging, last updated 16 Sep 2026](https://developer.chrome.com/docs/extensions/develop/concepts/native-messaging)). | ₹0 hosting. Support cost for “devices cannot see each other.” | Strongest privacy: bytes stay on the LAN or a user-initiated P2P channel. No fiduciary. | Devices must be co-located or reachable; flaky NAT; CWS justification for `nativeMessaging`; does not help a phone in India and a laptop on another network. |
 
 **Precedents (live, 17 Oct 2026):**
@@ -701,15 +716,11 @@ v2.1 **does not change D1.** Full-res media, conflict UX, recovery keys, and a h
 | **Excalidraw share links** | AES-GCM; encryption key in the **URL fragment** (`#key=…` / `#room=id,key`); server stores ciphertext. Fragment is client-side (RFC 3986); HTTP does not send `#` to the server. | [Excalidraw blog, 21 Mar 2020](https://plus.excalidraw.com/blog/end-to-end-encryption); collaboration docs (seen 2026, [Mintlify mirror](https://www.mintlify.com/excalidraw/excalidraw/concepts/collaboration)). RFC 3986 generic URI syntax: [rfc-editor.org/rfc/rfc3986](https://www.rfc-editor.org/rfc/rfc3986). | 21 Mar 2020 / RFC 2005 / docs 2026 |
 | **Proton Drive** | E2E share links with optional password, expiry, and revoke (“stop sharing”). Search-under-E2E is an ongoing hard problem. | [proton.me/support/password-protect-files-proton-drive](https://proton.me/ca/support/password-protect-files-proton-drive); mobile share guide updated **16 Oct 2026** ([proton.me/support/proton-drive-mobile-share-files-folders](https://proton.me/support/proton-drive-mobile-share-files-folders)). @ProtonDrive on search-under-E2E ([X, 15 Oct 2026](https://x.com/ProtonDrive/status/2110734481804099638)). | 16 Oct 2026 / 15 Oct 2026 |
 | **Ente** | E2E photos; **10 GB free forever**; paid from **$2.49/mo** Starter (50 GB). Official help confirms 10 GB free ([ente.io/help](https://ente.io/help/photos/faq/storage-and-plans)). Paid SKUs from aggregators citing ente.com on **15 Oct 2026** ([MacMyths](https://macmyths.com/apps/ente-photos/pricing/), [The Geeks Club, 17 Oct 2026](https://www.thegeeksclub.com/platforms/ente-photos/pricing/)) — **Unverified** at ente.com checkout (SPA not fetched). | Help page live; aggregators 15–17 Oct 2026 | 17 Oct 2026 |
-| **Google Drive appDataFolder** | Hidden per-app folder; `drive.appdata` scope; only the creating app can read; cannot share via Drive UI; deleted when the user uninstalls the app. Counts against the user’s quota. | [developers.google.com workspace Drive appdata](https://developers.google.com/workspace/drive/api/guides/appdata), last updated **3 Sep 2026**. | 3 Sep 2026 |
+| **Google Drive appDataFolder** | Hidden per-app folder; `drive.appdata` is a **non-sensitive** scope ([appdata guide](https://developers.google.com/workspace/drive/api/guides/appdata) and [Choose Google Drive API scopes](https://developers.google.com/workspace/drive/api/guides/api-specific-auth), both last updated **3 Sep 2026** UTC, retrieved 17 Oct 2026); only the creating app can read; cannot share via Drive UI; deleted when the user uninstalls the app. Quota-counts-against-user is community-reported (Unverified #36). | Drive appdata guide + Choose scopes | 3 Sep 2026 / retrieved 17 Oct 2026 |
 
-**Recommendation.**
+**Original recommendation (kept as a record).** A as planning default; B as Phase 2 fast-follow if continuity was required at extension launch; C as pairing bonus.
 
-1. **Keep option A as the default** (D1 unchanged): full-resolution E2E sync stays Phase 4, off by default, Pro-priced.
-2. **Offer option B as a Phase 2 fast-follow** if Basant wants phone↔browser continuity on the day the extension ships. Payload stays thin (FR-103). **User-owned storage first** (Drive appDataFolder and/or WebDAV); a hosted ciphertext relay waits for Pro / Phase 4. Off by default; per-collection device-only still wins.
-3. **Ship option C as a Phase 2 bonus** for co-located pairing (QR + same-LAN), useful for a first-run “link this browser to this phone” without creating an account (FR-104). It does not replace B for travel/remote.
-
-If B is accepted, Phase 2 exit grows by the L estimate above; S1–S4 and the Android overlay freeze are untouched. Record the choice in the Phase 2 kickoff; until then engineering assumes **A**.
+**Decision applied (Basant, 17 Oct 2026): Option B.** Engineering now **assumes B**. Phase 2 exit grows by the L estimate in the table (estimate, Unverified #40; no velocity data); S1–S4 and the Android overlay freeze are untouched. FR-103 is Phase 2 scope. User-owned storage first (Drive `appDataFolder`, then WebDAV); ciphertext relay later. Option C (FR-104) stays a P2 bonus. Full-res FR-047 / FR-064 stay Phase 4.
 
 ---
 
@@ -860,7 +871,7 @@ The Library is the user’s **Research Hub**. Primary nav stays Home · Library.
 
 **Export (P0 single/all delete+basic; P1 rich):** portable archive (media + `metadata.json`), Markdown/HTML, CSV. Redacted items export redacted. Copyright caution.
 
-**Account:** without an account the Hub is that device’s library. With optional account it is the user’s encrypted base across devices. **Web-grade Hub** (side panel, PWA, boards, browse, read-only E2E share, marketing site) is specified in **§21**. **Cross-device continuity** (export in Phase 1, optional thin E2E in Phase 2 via D7, full E2E in Phase 4) is specified in **§24**. Strength proposals (digest, collection summaries, learning-path, snippets, MCP, templates, etc.) are in **§23**.
+**Account:** without an account the Hub is that device’s library. With optional account it is the user’s encrypted base across devices. **Web-grade Hub** (side panel, PWA, boards, browse, read-only E2E share, marketing site) is specified in **§21**. **Cross-device continuity** (export in Phase 1, thin E2E in Phase 2 via **D7-B, decided**, full E2E in Phase 4) is specified in **§24**. Strength proposals (digest, collection summaries, learning-path, snippets, MCP, templates, etc.) are in **§23**.
 
 ---
 
@@ -916,14 +927,14 @@ Priorities: **P0** Android MVP, **P1** after stable Android / with later platfor
 | FR-044 | P1 | Imagination image | On request, via configured opt-in provider; labeled AI-generated; stores prompt/provider/time. |
 | FR-045 | P1 | AI agents | Summarise, auto-tag, cluster, Q&A on-device by default; cloud per-feature opt-in; outputs editable and labeled. |
 | FR-046 | P1 | Optional account | Fully usable without; sign-in/out, device list, device removal; account deletion deletes server-side data. |
-| FR-047 | P1 | Encrypted sync | E2E for items, collections, tags, voice notes, images; per-device and per-collection opt-out. |
-| FR-048 | P1 | Conflict handling | No silent data loss; visible choice when needed (§16.5.3). |
+| FR-047 | P1 | Encrypted sync | E2E for items, collections, tags, voice notes, images; per-device and per-collection opt-out. Full-res: Phase 4 (D1). Thin payload (items, thumbnails, transcripts): Phase 2 (D7-B decided). |
+| FR-048 | P1 | Conflict handling | No silent data loss; visible choice when needed (§16.5.3). Thin payload (Phase 2, D7-B decided); full-res (Phase 4). |
 | FR-049 | P0 | Offline-first | Capture, library, search, export work offline; with sync on, changes queue. |
 | FR-050 | P1 | Sensitive business screens | Accounting apps only after per-app opt-in; manual save default; banking/payment/password excluded by default. |
 | FR-051 | P1 | Redaction | When enabled, mask detected sensitive values before save; bounds preserved; label `redacted`; unredacted frame not kept. |
 | FR-052 | P0 | Protected/DRM screens | Blank/black/blocked detected and labelled `capture_blocked`; no bypass; idea note and time still saveable; **no green check for a screenshot**. |
 | FR-053 | P0 | Capture record completeness | Resource, time seen, source/provenance and (when given) voice idea and imagination as linked records. |
-| FR-054 | P1 | Cross-device availability | Item saved on any opted-in client appears in the Hub on the others after sync. Full-res: Phase 4 (D1). Thin payload: Phase 2 only if D7-B. Until then: FR-097 export. See §24. |
+| FR-054 | P1 | Cross-device availability | Item saved on any opted-in client appears in the Hub on the others after sync. Thin payload (items, thumbnails, transcripts): Phase 2 (D7-B decided). Full-res: Phase 4 (D1). Encrypted export (FR-097) remains the Phase 1 path. See §24. |
 | FR-055 | P0 | No FLAG_SECURE bypass | App does not use private APIs, accessibility tricks or overlays to capture secure surfaces. Play policy test. |
 | FR-056 | P0 | Single-app projection handling | If the user shares one app, only that app’s frames are treated as the capture region; switching away does not silently grab the new foreground app without OS/user involvement. |
 | FR-057 | P0 | Sideload overlay education | First-run detects missing `SYSTEM_ALERT_WINDOW` / restricted setting and shows OEM-accurate steps. |
@@ -933,7 +944,7 @@ Priorities: **P0** Android MVP, **P1** after stable Android / with later platfor
 | FR-061 | P1 | Hub search on web | FR-014 parity; p95 ≤ 500 ms on 1,000-item fixture. |
 | FR-062 | P1 | Export MD / PDF / archive; Notion & Obsidian paths | Obsidian vault folder valid; Notion only with user token; PDF of a day works. |
 | FR-063 | P0 | Team-free V1 | No org, seats, live collab, or ACL UI. |
-| FR-064 | P1 | E2E Hub client | Ciphertext only on relay; matches FR-047. Phase 4. |
+| FR-064 | P1 | E2E Hub client | Ciphertext only on any store; matches FR-047. Full-res Hub: Phase 4 (D1). Thin Hub continuity in Phase 2 via user-owned storage (D7-B decided). |
 | FR-065 | P1 | Side panel Hub | Chrome 114+; `open()` only on user gesture with tabId or windowId. |
 | FR-066 | P1 | Extension keyboard shortcuts | ≤ 4 suggested keys; each includes Ctrl or Alt. |
 | FR-067 | P1 | Highlight / clip | Selection + exact URL on explicit action; no other-tab read. |
@@ -972,7 +983,7 @@ Priorities: **P0** Android MVP, **P1** after stable Android / with later platfor
 | FR-100 | P1 | **PROPOSAL** Ask my library | Productizes FR-043/085: NL questions over the local Hub with citations. Phase 2 after S17. |
 | FR-101 | P1 | **PROPOSAL** YouTube learning-path mode | Playlist/course progress, auto-chapter notes from saved timestamps. Phase 2 with FR-068. |
 | FR-102 | P1 | **PROPOSAL** Accounting snippets library | Tally / Excel formulas, GST/TDS snippets; redaction on by default for this library. Phase 2 after D6. |
-| FR-103 | P1 | Minimal E2E sync payload (D7-B) | If D7-B is accepted: items + thumbs + transcripts only; opt-in; ciphertext; no full-res. Phase 2 fast-follow. |
+| FR-103 | P1 | Minimal E2E sync payload (D7-B decided) | Phase 2: items + thumbs + transcripts only; opt-in; ciphertext; no full-res. Drive `appDataFolder` first, WebDAV next. |
 | FR-104 | P2 | LAN / QR device pairing (D7-C) | Co-located pairing without a server; native messaging or localhost bridge. Phase 2 bonus. |
 | FR-105 | P2 | Share-link revoke and expiry | Read-only collection links: fragment key, default 7-day expiry, one-tap revoke. Pairs with FR-087. |
 | FR-106 | P1 | Continuity status UI | Hub shows which device last wrote, sync/export state, and “this item is local-only.” Phase 1 export; Phase 2+ sync. |
@@ -1241,7 +1252,7 @@ Template-based, facts only. Example:
 
 Unknown fields omitted. AI phrasing optional and must not add facts.
 
-### 16.5 Cross-device sync (Phase 4, D1)
+### 16.5 Cross-device sync (Phase 4, D1; thin payload in Phase 2, D7-B decided)
 
 - Optional account; product fully usable without.
 - Local-first; change-log replication; large media lazy.
@@ -1250,7 +1261,7 @@ Unknown fields omitted. AI phrasing optional and must not add facts.
 - Conflicts: captures append-only; field-level merge; last-writer-wins only for simple scalars with history; delete vs edit → delete wins, short trash, user told; conflicting notes keep both versions.
 - Offline queue; sync status visible.
 - Key recovery documented honestly (lose all devices + recovery key → data gone).
-- Transport options (managed relay, self-host, user-owned storage) remain an engineering decision (open question 16).
+- Transport for the Phase 2 thin payload (D7-B decided): **user-owned storage first** (Drive `appDataFolder`, then WebDAV). A hosted ciphertext relay is a later fallback (open question 12). Full-res media still waits for Phase 4.
 
 ---
 
@@ -1391,7 +1402,9 @@ Durations are **estimates** for one experienced Android engineer with QA/design 
 | S11 Desktop | Display/window capture, ring exclusion, optional system audio, macOS picker, Windows border | OS indicators visible; capability report per OS |
 | S12 RN bridge | Native modules from RN UI on Android | No S1–S3 regression |
 | S13 Content-type benchmark | Web, long-video, article items | Precision reported per type before advertising that type |
-| S14 Sync | Two-device E2E, offline edits, conflicts | No data loss; server ciphertext only; recovery documented |
+| S14 Sync | Two-device **full-res** E2E, offline edits, conflicts (Phase 4) | No data loss; server ciphertext only; recovery documented |
+| **S22** | D7-B minimal-sync protocol + one user-owned storage adapter | Thin payload round-trip; ciphertext only; opt-in |
+| **S24** | Drive `appDataFolder` E2E sync (Phase 2) | OAuth `drive.appdata` (non-sensitive); **brand verification** of name/logo on the consent screen (app verification not mandatory for non-sensitive-only); write/read ciphertext; uninstall deletes folder; quota visible to the user |
 | S15 Redaction | Tally/Excel/ERP-style samples | Detection rate honest; bounds preserved |
 | S16 Voice + assistant | PTT + core intents, EN+HI samples | Intents on labeled set; visible mic |
 | S17 Agents + imagination | On-device vs cloud vs BYO key | Provider/cost/privacy comparison for owner |
@@ -1417,9 +1430,9 @@ Replaces v1.2 Phases 1–4 and absorbs D5 P0 Hub items.
 
 ### 19.4 Phase 2 — Browser extension (estimate after S9+S10; **not dated until Phase 1 learnings**)
 
-Chromium MV3: active-tab observe, page text, exact URL, side panel Library, export, local store. **Exit:** S10 pass; store privacy disclosure; 2/sec cap; DRM labelled; no other-tab access.
+**D7 DECIDED — Option B (Basant, 17 Oct 2026).** Chromium MV3: active-tab observe, page text, exact URL, side panel Library, export, local store, **and** minimal opt-in E2E (D7-B). **Exit:** S10 pass; store privacy disclosure; 2/sec cap; DRM labelled; no other-tab access; **S22 + S24 pass**; a save made on Android appears in the extension side panel **and vice versa** within a **target p95 ≤ 60 s** on a healthy network; payload is items + thumbnails + transcripts only; E2E verified (Drive `appDataFolder` sees ciphertext); **opt-in / off by default**; per-collection device-only honored.
 
-Planning order: **core extraction (S9) then extension**, because the owner wants connected devices — but Phase 2 may ship **without** full sync (local extension library + FR-097 export). **Full-res sync stays Phase 4 (D1).** Minimal continuity in Phase 2 is **D7**, pending owner sign-off.
+Planning order: **core extraction (S9) then extension**, because the owner wants connected devices. Phase 2 ships with **thin** continuity (FR-103) via Drive `appDataFolder` then WebDAV. **Full-res sync stays Phase 4 (D1).** Option C (FR-104) remains a P2 bonus.
 
 ### 19.5 Phase 3 — Desktop (estimate after S11; OS-by-OS release allowed)
 
@@ -1429,7 +1442,7 @@ macOS first (ScreenCaptureKit + `SCContentSharingPicker`), then Windows (WGC, ke
 
 | Work | Gate | Exit |
 |---|---|---|
-| Optional account + E2E sync | D1 confirmed; S14; DPDP notice review | No data loss; ciphertext only; device revoke; account delete |
+| Optional account + **full-res** E2E sync | D1 confirmed; S14; DPDP notice review | No data loss; ciphertext only; device revoke; account delete. Thin payload already shipped in Phase 2. |
 | React Native UI | S12 | No Android P0 regression |
 | iOS discovery | S25 (new): ReplayKit BUE memory/overlay reality | Written decision: companion share-extension vs postpone |
 
@@ -1448,18 +1461,18 @@ macOS first (ScreenCaptureKit + `SCContentSharingPicker`), then Windows (WGC, ke
 
 ### 19.8 Mapping web-grade work onto phases (v2.0 addendum + v2.1)
 
-Web-grade FRs do **not** start before S1–S4. They attach to existing phases. **v2.1** adds marketing-site, continuity, and D7 rows.
+Web-grade FRs do **not** start before S1–S4. They attach to existing phases. **v2.1** adds marketing-site, continuity, and D7 rows. **D7 DECIDED — Option B (Basant, 17 Oct 2026).**
 
 | Phase | Web-grade / GTM / proposals / continuity |
 |---|---|
 | 0 Feasibility | Unchanged. No Hub web work. Marketing-site **copy draft** allowed; no public waitlist until privacy page exists (FR-094). |
 | 1 Android MVP | FR-063 team-free; FR-072 onboarding; FR-073 empty states; FR-074 overlay non-drag alternative; FR-075 dark mode; FR-076 EN+Hindi strings; FR-078 trust page in Settings; FR-081 OCR URL confirm; FR-092 voice language tag with S16; **FR-097 encrypted export/import**; **FR-106** local-only status; **FR-094** public marketing origin (home, privacy, download CTAs, changelog stub) |
-| 2 Browser extension | FR-058 side-panel Hub (**option c**, §21.7); FR-059–061; **FR-095 browse**; FR-062 MD/PDF/archive; FR-065–071; FR-077; FR-088 templates; FR-091 timestamps; **FR-096** web onboarding; CWS listing; **optional D7-B FR-103** and **D7-C FR-104** if owner accepts; **FR-098/100/101/102** as proposals after Hub schema |
+| 2 Browser extension | FR-058 side-panel Hub (**option c**, §21.7); FR-059–061; **FR-095 browse**; FR-062 MD/PDF/archive; FR-065–071; FR-077; FR-088 templates; FR-091 timestamps; **FR-096** web onboarding; CWS listing; **D7-B FR-103** (in scope) + **FR-047/048/054/064/106** for the thin payload; **D7-C FR-104** remains a P2 bonus; **FR-098/100/101/102** as proposals after Hub schema |
 | 3 Desktop | Same Hub UI if the desktop shell embeds it; native-messaging host for option **b** local bridge; no new GTM store |
 | 4 Sync / PWA | FR-064 E2E Hub client (**option a**, §21.7); standalone PWA; Notion token path; FR-086 MCP; FR-087 + **FR-105** read-only E2E share; full-res FR-047 if D1 proceeds |
 | GTM | §22 calendar + **§22.9 step-by-step checklists**. GitHub/Obtainium/Izzy/Show HN before Play; PH only when tryable; no Featured-badge campaign |
 
-New spikes (do not start before S1–S4): **S19** CWS packet (permissions, single-purpose copy, listing video of a docs page); **S20** Hub CWV + side-panel first paint; **S21** MCP stdio threat model (prompt injection); **S22** (v2.1) D7-B minimal-sync protocol + one user-owned storage adapter (Drive appData or WebDAV); **S23** (v2.1) fragment-key share threat model (key leakage via Referer, screenshots of URLs, revoke semantics).
+New spikes (do not start before S1–S4): **S19** CWS packet (permissions, single-purpose copy, listing video of a docs page); **S20** Hub CWV + side-panel first paint; **S21** MCP stdio threat model (prompt injection); **S22** D7-B minimal-sync protocol + one user-owned storage adapter (Drive appData then WebDAV); **S23** fragment-key share threat model (key leakage via Referer, screenshots of URLs, revoke semantics); **S24** Drive `appDataFolder` E2E spike (OAuth `drive.appdata` non-sensitive scope, **brand verification** of name/logo, ciphertext round-trip, quota, uninstall-deletes-folder).
 
 ---
 
@@ -1584,7 +1597,7 @@ The Hub is the same Library specified in §12, rendered as a **local-first web s
 
 | Capability | Spec | Phase | FR |
 |---|---|---|---|
-| Local-first web app / PWA | IndexedDB (or OPFS) holds items, tags, collections, voice notes. The Hub works offline after first load. A web app manifest + service worker make it installable. No account required (FR-046, FR-049). W3C TAG draft *Installing Websites Must Be Easy* (16 Oct 2026) is a direction, not a shipping dependency ([W3C TAG](https://www.w3.org/blog/2026/installing-websites-must-be-easy/), 16 Oct 2026 — **Unverified** as a Recommendation; it is a draft). | Phase 2: side-panel origin. Phase 4: standalone PWA | FR-058 |
+| Local-first web app / PWA | IndexedDB (or OPFS) holds items, tags, collections, voice notes. The Hub works offline after first load. A web app manifest + service worker make it installable. No account required (FR-046, FR-049). W3C TAG draft *Installing Websites Must Be Easy* (**Draft Finding of the TAG, 16 October 2026**) is a direction, not a shipping dependency ([w3ctag.github.io/install-finding](https://w3ctag.github.io/install-finding/), retrieved 17 Oct 2026). It is explicitly a draft finding, not a W3C Recommendation. The earlier `www.w3.org/blog/2026/installing-websites-must-be-easy/` URL returned **404** on 17 Oct 2026. | Phase 2: side-panel origin. Phase 4: standalone PWA | FR-058 |
 | Browse | **All** view: reverse-chronological list and a compact grid of thumbnails. Filters (date, device, platform, content type, source, collection, has-voice, has-audio, capture-blocked). Sort: newest, oldest, by collection. Keyboard: j/k move, enter opens, `/` focuses search. Same entities as Android Library. | Phase 2 | FR-095 |
 | Today / timeline | Same Today view as Android (FR-035): today’s items newest first, time-block grouping, calendar for earlier days, badges for voice / imagination / audio / blocked. Web adds keyboard j/k, a date chip, and a “jump to now” control. | Phase 2 | FR-059 |
 | Boards / collections | Web name for **Collections** (FR-037). Kanban-style columns are optional visual sugar over the same collection entity; they are not a second data model. An item may sit on several boards. Live co-edit stays out of V1 (FR-063). Read-only share is the share primitive (next row). | Phase 2 (list/grid); Phase 4 (optional board layout) | FR-060 |
@@ -1605,7 +1618,7 @@ Phase 2 is a **Chromium Manifest V3** extension. Firefox is a later port (open q
 #### Side panel (FR-065)
 
 - `sidePanel` permission; `side_panel.default_path` for a **global** Hub panel.
-- API available **Chrome 114+**; `chrome.sidePanel.open()` from **Chrome 116+** and **requires a user gesture** plus **`tabId` or `windowId`** ([sidePanel API](https://developer.chrome.com/docs/extensions/reference/api/sidePanel), last updated **11 Sep 2026**).
+- API available **Chrome 114+**; `chrome.sidePanel.open()` from **Chrome 116+** and **requires a user gesture** plus **`tabId` or `windowId`** ([sidePanel API](https://developer.chrome.com/docs/extensions/reference/api/sidePanel), last updated **11 Sep 2026** UTC, live 17 Oct 2026). `sidePanel.close()`: if only the global panel is open, the promise rejects; **this behavior changed in Chrome 145**, with prior versions falling back to closing the global panel (same page, retrieved 17 Oct 2026).
 - Open on toolbar click via `setPanelBehavior({ openPanelOnActionClick: true })`.
 - Panel contents: Today, search, last-saved item, Save/Skip for the active tab during a session, voice-note button.
 - Do not hijack search or the new-tab page (Quality Guidelines: side panels that hijack browsing are a listed violation — [Quality guidelines](https://developer.chrome.com/docs/webstore/program-policies/quality-guidelines), last updated **10 Jul 2024**).
@@ -1648,18 +1661,27 @@ These are **shipping constraints**, not optional polish.
 | Topic | Reality (sourced) | OBZRAi rule |
 |---|---|---|
 | MV3 only | CWS accepts Manifest V3 | `manifest_version: 3` |
-| Registration | One-time registration fee; **India is a supported country** ([Register](https://developer.chrome.com/docs/webstore/register), last updated **13 Feb 2024**). The official register page does **not** state the dollar amount. Secondary 2026 write-ups and checklists still quote **US$5 one-time** ([ExtensionBooster, 22 Jun 2026](https://extensionbooster.net/blog/chrome-web-store-developer-registration-fee-2026-guide/); [Extension Radar, 16 Feb 2026](https://www.extensionradar.com/blog/chrome-web-store-developer-fee-2026)). Treat **$5 as widely reported, official amount not on the register page**. | Budget $5; confirm at checkout |
+| Registration | One-time registration fee; **India is a supported country** ([Register](https://developer.chrome.com/docs/webstore/register), last updated **13 Feb 2024** UTC, live 17 Oct 2026). That page still omits the dollar amount. Official Chromium Blog **12 Mar 2020**: “The Chrome Web Store charges a **$5.00** fee to register as a Chrome Web Store developer.” ([blog.chromium.org](https://blog.chromium.org/2020/03/new-developer-dashboard-and.html)). CWS Developer Agreement: amount at Google’s sole discretion. No later official page found changing the figure. | Budget **US$5** one-time; confirm at checkout |
 | 2-Step Verification | Required to publish or update ([Program Policies — 2-Step Verification](https://developer.chrome.com/docs/webstore/program-policies/two-step-verification), last updated **1 Nov 2022**; restated in [CWS API docs](https://developer.chrome.com/docs/webstore/using-api), **8 Oct 2026**) | Enable 2SV on the publisher Google account before first upload |
 | Extension slots | Default **two** extension slots per publisher as of **20 Aug 2026**; existing extras grandfathered; increase via dashboard ([Chrome blog](https://developer.chrome.com/blog/cws-review-updates-2026), 20 Aug 2026) | Ship **one** item (the observer). Do not split Hub into a second extension in V1 |
 | Single purpose | “An extension must have a single purpose that is narrow and easy to understand” ([Quality guidelines](https://developer.chrome.com/docs/webstore/program-policies/quality-guidelines), 10 Jul 2024; [FAQ](https://developer.chrome.com/docs/webstore/program-policies/quality-guidelines-faq), 10 Jul 2024). Excessive permissions count as extra purposes. Limited Use (enforced **1 Aug 2026**): collected data must be strictly necessary to the disclosed single purpose ([policy update blog](https://developer.chrome.com/blog/cws-policy-updates-2026), 1 Jul 2026) | Single purpose copy: **“Save useful moments from the page you are looking at into a private local research library.”** Capture, clip, timestamp, voice note, and Hub search all serve that job. Do not add a new-tab page, ad blocking, or generic screenshot-to-cloud |
 | Least privilege | Request the narrowest permission; do not future-proof ([Use of Permissions](https://developer.chrome.com/docs/webstore/program-policies/permissions), 1 Nov 2022) | Prefer `activeTab`, `sidePanel`, `storage`, `offscreen`, `commands`, `scripting`. `tabCapture` only if S10 proves tab audio needs it. Justify every permission in the dashboard Privacy tab (FR-070) |
 | Host permissions | `<all_urls>` / broad hosts invite in-depth review | Default: **no** broad host_permissions. Content scripts on YouTube watch URLs only if timestamp capture needs them, listed explicitly |
 | Remote hosted code | MV3 forbids executing remote script | Bundle all JS; no CDN eval |
-| Featured badge | Sunsetting **later in 2026**; self-nominations closed **20 Aug 2026** ([Chrome blog](https://developer.chrome.com/blog/cws-review-updates-2026), 20 Aug 2026). Third-party snapshot 20 Jul 2026: Featured was **7.8%** of MV3 listings and **48.3%** of displayed users ([Chrome-Stats](https://chrome-stats.com/blog/2026/07/20/featured-badge-maintenance-signal), 20 Jul 2026) — **Unverified** as Google’s own metric | Do not plan a Featured campaign. Compete on listing quality, ratings, and editorial home merchandising (editors curate; you cannot pay — [CWS discovery](https://developer.chrome.com/docs/webstore/discovery), 21 Mar 2022) |
+| Featured badge | Official Chrome blog **20 Aug 2026**: sunsetting the Featured badge program **“later this year”**; self-nominations closed that day ([Chrome blog](https://developer.chrome.com/blog/cws-review-updates-2026), last updated 20 Aug 2026 UTC). **Exact calendar sunset day is not stated.** CWS discovery docs still describe Featured (last updated **21 Mar 2022**). Third-party snapshot 20 Jul 2026: Featured was **7.8%** of MV3 listings and **48.3%** of displayed users ([Chrome-Stats](https://chrome-stats.com/blog/2026/07/20/featured-badge-maintenance-signal), 20 Jul 2026) — **not a Google metric**; chrome-stats.com returned **HTTP 403** on 17 Oct 2026 | Do not plan a Featured campaign. Compete on listing quality, ratings, and editorial home merchandising (editors curate; you cannot pay — [CWS discovery](https://developer.chrome.com/docs/webstore/discovery), 21 Mar 2022) |
 | Payments | Google is **not** the seller. Developer must identify that they, not Google, sell the product ([Accepting Payment](https://developer.chrome.com/docs/webstore/program-policies/accepting-payment), 1 Nov 2022). Declare **Contains in-app purchases** in Distribution ([dashboard distribution](https://developer.chrome.com/docs/webstore/cws-dashboard-distribution), date not shown). Native CWS payments are deprecated ([payments deprecation doc](https://developer.chrome.com/docs/webstore/cws-payments-deprecation), date not shown / listed on [CWS docs index](https://developer.chrome.com/docs/webstore/), updated **28 Apr 2026**) | Pro on the extension: **Stripe** (or ExtensionPay wrapping Stripe). Never tell users “pay Google.” Keep local capture free |
 | YouTube download | Facilitating YouTube video download is a stated rejection reason ([Troubleshooting](https://developer.chrome.com/docs/webstore/troubleshooting), seen 17 Oct 2026) | Moments + timestamped URL only. No MP4, no youtube-dl, no “download this video” copy |
 
 **Listing craft (Phase 2 exit):** one-sentence purpose, privacy policy URL, screenshots of side panel + Today, a 30s video of Save on a documentation page (not Instagram), permission justifications, “Contains in-app purchases” if Pro is wired, trader/non-trader declaration. Full CWS checklist: §22.9.
+
+Official CWS image sizes ([Supplying images](https://developer.chrome.com/docs/webstore/images), last updated **11 Jun 2018** UTC, live **17 Oct 2026**):
+
+| Asset | Size | Notes |
+|---|---|---|
+| Store icon | **128×128** | Artwork **96×96** with 16 px transparent padding per side |
+| Small promo | **440×280** | **Required** |
+| Marquee | **1400×560** | Optional |
+| Screenshots | **1280×800** preferred or **640×400** | At least **1**, preferably **5** (maximum) |
 
 #### Extension UX polish (v2.1, still FR-065–FR-071)
 
@@ -1672,7 +1694,7 @@ These are Phase 2 **exit** details, not a second product:
 - Side panel empty state matches FR-073; loading skeleton ≤ 300 ms first paint target (FR-077).
 - Errors: DRM/black frame shows `capture_blocked` in the panel with the same honesty copy as Android.
 - Uninstall: CWS listing and in-panel Settings both link to export (FR-097) before the user loses the IndexedDB library.
-- `nativeMessaging` is requested **only** if D7-C / option **b** ships; justify it as “talk to the OBZRAi app on this computer.”
+- `nativeMessaging` is requested **only** if D7-C / option **b** ships (P2 bonus); justify it as “talk to the OBZRAi app on this computer.” Phase 2 D7-B uses Drive `appDataFolder` / WebDAV, not native messaging.
 
 ### 21.3 Design system and polish
 
@@ -1700,7 +1722,7 @@ Applies to Android (already in §4.5 / §11), the extension, and the Hub. New FR
 | FR-061 | P1 | 2 | Hub search on web | FR-014 parity; p95 ≤ 500 ms / 1,000 items |
 | FR-062 | P1 | 2 / 4 | Export Markdown, PDF, archive; Notion/Obsidian paths | Obsidian vault folder valid; Notion pages only with user token; PDF print of a day works |
 | FR-063 | P0 | all | Team-free V1 | No org/seat/ACL UI shipped |
-| FR-064 | P1 | 4 | E2E Hub client | Ciphertext only on relay; matches FR-047 |
+| FR-064 | P1 | 4 (thin in 2) | E2E Hub client | Full-res: Phase 4. Thin Hub continuity Phase 2 via user-owned storage (D7-B). Ciphertext only. |
 | FR-065 | P1 | 2 | Side panel Hub | Chrome 114+; open() only on gesture with tabId/windowId |
 | FR-066 | P1 | 2 | Keyboard shortcuts | ≤ 4 suggested keys; Ctrl/Alt required; documented |
 | FR-067 | P1 | 2 | Highlight / clip | Selection + URL on explicit action; no other-tab read |
@@ -1718,7 +1740,7 @@ Applies to Android (already in §4.5 / §11), the extension, and the Hub. New FR
 | FR-094 | P1 | 1 | Marketing site | Pages in §21.6 live; privacy URL used by Play/CWS |
 | FR-095 | P1 | 2 | Hub browse | All list/grid + filters; keyboard |
 | FR-096 | P1 | 1–2 | Web onboarding | CTA → install → ≤ 3 screens; no account wall |
-| FR-105 | P2 | 4 (2 if D7-B store exists) | Share revoke / expiry | Fragment key; 7-day default; one-tap revoke |
+| FR-105 | P2 | Phase 4 by default; Phase 2 optional once the FR-103 store ships | Share revoke / expiry | Fragment key; 7-day default; one-tap revoke |
 
 ### 21.5 Out of scope for web-grade V1
 
@@ -1755,12 +1777,12 @@ Three architectures can put a Hub in a browser. OBZRAi may use more than one, **
 |---|---|---|---|---|
 | **(c) Extension side panel as the Hub** | The Hub UI runs in the extension origin (`chrome-extension://…/sidepanel.html`). IndexedDB is the local store. Capture and library share a process. No extra origin, no account. | **Phase 2 default** (already FR-058/065) | Strong. Bytes stay in the profile unless the user exports. | **Ship this first.** |
 | **(b) Local bridge** | The Android app, desktop app, or a native-messaging host **serves the local store** to a page on `localhost` or a WebRTC pairing (QR). Chrome native messaging: [docs, 16 Sep 2026](https://developer.chrome.com/docs/extensions/develop/concepts/native-messaging). | **Phase 2 optional**, tied to D7-C (FR-104). Desktop Phase 3 can host the same bridge. | Strong if bound to loopback / paired device. `nativeMessaging` needs a CWS justification. | **Add when pairing is wanted** without an account. Useful for “open Hub in a full tab on this machine.” |
-| **(a) Synced E2E web client** | A standalone origin (`app.obzrai` / PWA) downloads **ciphertext**, decrypts **in-browser** with a key from the platform authenticator or recovery key. Same model as Standard Notes’ web client and Obsidian’s published E2E claim. | **Phase 4**, gated on D1 + S14 + FR-064. If D7-B is accepted, a thinner client (metadata + thumbs) may appear as a Phase 2 fast-follow against user-owned storage, still decrypting in-browser. | Server (or Drive appData, WebDAV) sees ciphertext. Lost key = lost remote copy (Obsidian’s stated failure mode, WorkifyLab 31 Aug 2026). | **This is the only standalone web Hub.** It waits for keys. |
+| **(a) Synced E2E web client** | A standalone origin (`app.obzrai` / PWA) downloads **ciphertext**, decrypts **in-browser** with a key from the platform authenticator or recovery key. Same model as Standard Notes’ web client and Obsidian’s published E2E claim. | **Phase 4** for full-res, gated on D1 + S14 + FR-064. **D7-B decided:** a thinner client (metadata + thumbs) ships in Phase 2 against user-owned storage, still decrypting in-browser. | Server (or Drive appData, WebDAV) sees ciphertext. Lost key = lost remote copy (Obsidian’s stated failure mode, WorkifyLab 31 Aug 2026). | **This is the only standalone web Hub.** Full-res waits for keys in Phase 4. |
 
 **Per-phase recommendation (locked for planning):**
 
 - **Phase 1:** Android Hub only. Continuity = FR-097 encrypted export/import. Marketing site is public; it is not a Hub.
-- **Phase 2:** **(c)** side panel is the web Hub. **(b)** local bridge only if D7-C is accepted. Encrypted export remains the remote-device path unless D7-B is accepted, in which case a thin E2E payload (FR-103) may use user-owned storage, still decrypted on device.
+- **Phase 2:** **(c)** side panel is the web Hub. **D7-B decided:** thin E2E payload (FR-103) via Drive `appDataFolder` then WebDAV, still decrypted on device. **(b)** local bridge only if D7-C (P2 bonus) ships. Encrypted export remains the offline path.
 - **Phase 3:** Desktop embeds the same Hub; may expose the **(b)** bridge for a full-tab view.
 - **Phase 4:** **(a)** E2E web client / PWA. Full-res optional sync (D1). Read-only fragment-key shares (FR-087/105).
 
@@ -1821,7 +1843,7 @@ Sequence (aligned with marketing research §6): **GitHub Releases + Obtainium �
 
 Official prep: schedule for **12:01am PST** so the listing gets the full 24-hour Pacific cycle; self-hunt is allowed and **paying a hunter is discouraged**; company accounts are the wrong vehicle ([Prepare for your launch](https://www.producthunt.com/launch/preparing-for-launch), page seen **17 Oct 2026**). Launch Guide: free to launch; **cannot ask for upvotes**; live products only ([producthunt.com/launch](https://www.producthunt.com/launch)).
 
-Featuring is **editorial**. Criteria: useful, novel, high craft, creative. **Waitlisted products are not featured** (unless immediate access is provided); also excluded: directories, templates, boilerplates, courses, services ([Featuring guidelines](https://help.producthunt.com/en/articles/9883485-product-hunt-featuring-guidelines), date not shown; help-center “updated over 5 months ago” at research time — **Unverified** as a last-updated stamp). Relaunch: **six months** plus a significant update; pricing/UI tweaks do not count ([AgentLaunch citing PH help updated 7 Jul 2026](https://www.agentlaun.ch/blogs/product-hunt-relaunch-rules), 5 Oct 2026).
+Featuring is **editorial**. Criteria: useful, novel, high craft, creative. **Waitlisted products are not featured** (unless immediate access is provided); also excluded: directories, templates, boilerplates, courses, services. Official article written by **Jake Crump**, **10 March 2026** ([Featuring guidelines](https://help.producthunt.com/en/articles/9883485-product-hunt-featuring-guidelines), retrieved 17 Oct 2026). Relaunch: **six months** plus a significant update; pricing/UI tweaks do not count ([AgentLaunch citing PH help updated 7 Jul 2026](https://www.agentlaun.ch/blogs/product-hunt-relaunch-rules), 5 Oct 2026).
 
 Nicheloom (14 Oct 2026) reported **28,255 launches / 35 days** and ~**3.8% featured** — treat as third-party. ReciMe later won **RevenueCat Shippies “Best onboarding”** (announced on X around **14 Oct 2025** — qualitative, not a PH mechanic).
 
@@ -1833,17 +1855,17 @@ Editors curate home merchandising; **publishers cannot pay** for placement ([CWS
 
 #### Google Play
 
-Publication after S8, FGS demo video, Data safety, permission justifications (§17.8, §20.4). **No paid featuring.** 13 Oct 2026 Play surface notes (Ask Play comparisons, Game Finder, Gemini discovery) reward **store-listing quality**; they are not a paid slot. India alternative billing: Play fee **reduced by 4%** when the user pays the alternative system ([Play Help 13306652](https://support.google.com/googleplay/android-developer/answer/13306652)). Fee split for US/UK/EEA from **30 Jun 2026**: **10%** service on first $1M and on auto-renewing subscriptions, plus **5%** billing fee if using Play Billing ([Android Developers Blog](https://android-developers.googleblog.com/2026/06/play-expanded-billing.html), seen 16 Oct 2026). **Rest of World including India: 30 Sep 2027**; RoW billing-fee % **not announced** (existing Unverified #9). Play’s own figure that **97% of developers distribute at no charge** appears in secondary 2026 fee explainers ([ecorpit, 19 Jul 2026](https://ecorpit.com/google-play-service-fee-split-2026-app-economics/)) — treat as Google-stated via secondary.
+Publication after S8, FGS demo video, Data safety, permission justifications (§17.8, §20.4). **No paid featuring.** 13 Oct 2026 Play surface notes (Ask Play comparisons, Game Finder, Gemini discovery) reward **store-listing quality**; they are not a paid slot. India alternative billing: Play fee **reduced by 4%** when the user pays the alternative system ([Play Help 13306652](https://support.google.com/googleplay/android-developer/answer/13306652)). Fee split for EEA/UK/US from **30 Jun 2026**: **10%** service on first $1M and on auto-renewing subscriptions, plus **5%** billing fee if using Play Billing ([Play Help 112622](https://support.google.com/googleplay/android-developer/answer/112622); [Play Help 16954621](https://support.google.com/googleplay/android-developer/answer/16954621); [Android Developers Blog](https://android-developers.googleblog.com/2026/06/play-expanded-billing.html), retrieved 17 Oct 2026). AU/JP **30 Sep 2026**; KR **31 Dec 2026**; **Rest of World including India: 30 Sep 2027**. RoW billing-fee % **not announced** (official: “forthcoming”). Play’s own figure that **97% of developers distribute at no charge** is on the official service-fees page (retrieved 17 Oct 2026).
 
 #### F-Droid, IzzyOnDroid, Obtainium
 
 - **IzzyOnDroid:** **2,149,476** downloads in Sep 2026 ([monthly report](https://codeberg.org/IzzyOnDroid/iod-monthly-report/src/branch/main/reports/monthly_report_2026-09.md), generated 8 Oct 2026). Inclusion via Codeberg issue; APKs from **tagged GitHub/Codeberg releases**, typically ~24h. Faster than f-droid.org for this ICP.
 - **F-Droid:** client **2.0** announced **24 Sep 2026** ([blog](https://f-droid.org/2026/09/24/f-droid-2.0-a-new-chapter-for-android-freedom.html)). Inclusion Policy: entire app **FLOSS**, no Play Services / Firebase / Crashlytics, FLOSS toolchain ([Inclusion Policy](https://f-droid.org/docs/Inclusion_Policy/), seen 16 Oct 2026). TWIF **16 Oct 2026**: **299** apps added in ~4 weeks and “review process is long” ([TWIF](https://fdroid.gitlab.io/fdroid-website/2026/10/16/twif.html)). File an RFP/MR **in parallel**; do not wait for it to launch.
-- **Obtainium:** GitHub updater. Star counts in the wild: **~20,370** (hysenlabs, 12 Oct 2026) / ~20.5k GitHub topics (16 Oct 2026). A **35-star** bar for config inclusion was claimed on X by @arferrari (**10 Oct 2026**) — **Unverified** as Obtainium project policy. Ship an Obtainium JSON from day 0 regardless.
+- **Obtainium:** GitHub updater. GitHub API **20,480 stars / 630 forks** for [ImranR98/Obtainium](https://github.com/ImranR98/Obtainium) (retrieved **17 Oct 2026**). Crowdsourced-config inclusion policy **does** require ≥**35** GitHub/GitLab/Codeberg stars where the host publishes a star count ([APP_CRITERIA.md](https://github.com/ImranR98/apps.obtainium.imranr.dev/blob/main/APP_CRITERIA.md) item 5; same rule in CONTRIBUTING.md; retrieved 17 Oct 2026). That bar is **not** Obtainium-the-app’s own star count. @arferrari (10 Oct 2026) matches this policy. Ship an Obtainium JSON from day 0 regardless.
 
 #### Show HN
 
-Official guidelines: something people can **play with**; **no** blog posts, sign-up pages, newsletters, lists; make it easy to try, **ideally without signups or emails**; personally worked on; no landing-page-only; upgrades generally not enough ([showhn.html](https://news.ycombinator.com/showhn.html), date not shown). Dang restated waitlists are against the rules (secondary: [swanbase, 25 Sep 2026](https://swanbase.co/en/blog/launch-product-us-hacker-news-product-hunt-reddit/) citing 27 Jul 2026). **Do not ask for upvotes.** Title shape: `Show HN: OBZRAi – local-first overlay that files screen moments into a research hub`. Link the APK + source. Honest limitations in the first paragraph.
+Official guidelines: something people can **play with**; **no** blog posts, sign-up pages, newsletters, lists; make it easy to try, **ideally without signups or emails**; personally worked on; no landing-page-only; upgrades generally not enough ([showhn.html](https://news.ycombinator.com/showhn.html), retrieved 17 Oct 2026). HN guidelines: **“Please don't put generated text in HN posts”** and **“Don't post generated text or AI-edited text”** ([newsguidelines.html](https://news.ycombinator.com/newsguidelines.html), retrieved 17 Oct 2026). **No new-account restriction is stated** on those official pages. Dang restated waitlists are against the rules (secondary: [swanbase, 25 Sep 2026](https://swanbase.co/en/blog/launch-product-us-hacker-news-product-hunt-reddit/) citing 27 Jul 2026). **Do not ask for upvotes.** Title shape: `Show HN: OBZRAi – local-first overlay that files screen moments into a research hub`. Link the APK + source. Honest limitations in the first paragraph. Write the post yourself; no generated/AI-edited text.
 
 #### Reddit / Lemmy
 
@@ -1855,9 +1877,22 @@ Owner account (after IP India clearance of the name). Cadence: weekly build note
 
 #### Indian and global tech creators
 
-- **Hitesh Choudhary** (@Hiteshdotcom): X bio self-reports **2 YT channels (1M & 800k)** (bio seen on posts **20–21 Sep 2026**, e.g. [status/2101983978194653589](https://x.com/Hiteshdotcom/status/2101983978194653589)). Seeding here is a **reach option**, not a booked deal.
-- **Sanskar Tiwari** (@IndianAppGuy): Chrome/Notion tutorial history; YouTube count in older listings — treat current subscriber count as **Unverified** unless re-scraped at outreach.
-- **Suhas Sumukh** (localhost India) and similar indie-dev podcasts: good ICP overlap.
+Live subscriber/follower counts, retrieved **17 October 2026** (YouTube `/about` pages + X profiles). Counts move; re-scrape at outreach.
+
+| Creator | Surface | Count (17 Oct 2026) | Source |
+|---|---|---|---|
+| **Hitesh Choudhary** — English | YouTube [@HiteshCodeLab](https://www.youtube.com/@HiteshCodeLab/about) `UCXgGY0wkgOzynnHvSEVmE3A` | **945 thousand** subscribers; **80,736,879** views; joined 24 Oct 2011 | YouTube about page, 17 Oct 2026 |
+| **Hitesh Choudhary** — Hindi *Chai aur Code* | YouTube [@chaiaurcode](https://www.youtube.com/@chaiaurcode/about) `UCNQ6FEtztATuaVhZKCY28Yw` | **1.04 million** subscribers; **115,659,046** views; joined 8 Nov 2022 | YouTube about page, 17 Oct 2026 |
+| **Hitesh Choudhary** | X [@Hiteshdotcom](https://x.com/Hiteshdotcom) | **79,145** followers, Blue Verified. Bio still says “2 YT channels (1M & 800k)” — **stale** vs live YT (Chai has overtaken English). | X profile, 17 Oct 2026 |
+| **Sanskar Tiwari** | YouTube [@indianappguy](https://www.youtube.com/@indianappguy/about) `UCsPdgUIoOBTBI1UmulW1pdw` | **25.2 thousand** subscribers; **228** videos; **2,078,002** views; joined 8 Oct 2019 | YouTube about page, 17 Oct 2026 |
+| **Sanskar Tiwari** | X [@IndianAppGuy](https://x.com/IndianAppGuy) | **4,535** followers, Blue Verified. Bio “24k+ YouTube subs” is slightly behind live 25.2K. | X profile, 17 Oct 2026 |
+| **Suhas Sumukh** | X [@suhasasumukh](https://x.com/suhasasumukh) | **12,484** followers, Blue Verified. Bio “19, @ 127.0.0.1”. | X profile, 17 Oct 2026 |
+| **Suhas Sumukh** | YouTube [@suhasasumukh](https://www.youtube.com/@suhasasumukh/about) `UCwf5zAj7c9iCpOXjU6DYJCQ` | Channel exists (joined 2 Feb 2022); **no public subscriber count displayed** | YouTube about page, 17 Oct 2026 |
+| **Local Host India** (show, not Suhas’s personal channel) | YouTube [@LocalHostIndia](https://www.youtube.com/@LocalHostIndia/about) `UCuTkfEujYvueimW5QCER2EQ` | **46** subscribers; **3** videos; **218** views; joined 26 Jul 2025 | YouTube about page, 17 Oct 2026 |
+
+- **Hitesh Choudhary:** seeding here is a **reach option**, not a booked deal. Use live YT counts above; do not quote the X bio’s “1M & 800k” as current.
+- **Sanskar Tiwari:** Chrome/Notion tutorial history; **25.2K** YT is the live count for outreach.
+- **Suhas Sumukh:** indie-dev / LocalHost founder-COO guest; good ICP overlap. Treat as an X/podcast seed, not a YouTube-scale creator of his own.
 - **BhaiFinder** Hinglish Shorts ran the right hook at **26–62 views** (marketing research, 17 Oct 2026) — the hook is right, the channel is empty. Room for a **technical** demo.
 
 **Recommendation:** seed **5** Hinglish/English **dev** creators (tools, Claude Code, GitHub, local LLM) with APK + talking points. Mass tech YouTubers only if a 20-second visual works without niche knowledge. Conversion from creator seeding is **Unverified** (no OBZRAi data).
@@ -1873,11 +1908,11 @@ Product model stays **§8.4**: open-core, local-first free forever, BYO key, mod
 | **Pro (hosted)** | **₹149/mo or ₹1,499/yr** | **$4.99/mo or $39/yr** | Optional account, E2E sync relay, hosted AI quota, priority support. Local app remains usable if Pro lapses. | Play IAP (India until 2027 on 15/30% card); Stripe on web/CWS; India alt-billing −4% |
 | **Lifetime / BYO-key forever** | **P2 optional:** ~2–3 years of Pro, target **₹3,999** or **$79–99** | One-time; still FOSS core | Not V1. Willingness to pay a lifetime SKU for OBZRAi is **Unverified** |
 
-**Comparables (do not copy blindly):** BhaiFinder ₹99/₹199 per month ([Stork, 30 Sep 2026](https://www.stork.ai/en/bhaifinder)); Raindrop Pro **$3/mo or $28/yr**, no lifetime in the 2026 roundup ([ContextBolt, 10 Sep 2026](https://contextbolt.com/blog/raindrop-pricing/); savethisone 16 Sep 2026); Readwise **$9.99/mo** yearly ([Marqly, 6 Oct 2026](https://www.marqly.com/blog/readwise-reader-review-2026)); Observer AI Plus **$5/mo**; ReciMe ~$39.99/yr in one writeup (**Unverified** exact SKUs); Screenpipe aggregator **$21/$42** (**Unverified** at checkout).
+**Comparables (do not copy blindly):** BhaiFinder ₹99/₹199 per month ([Stork, 30 Sep 2026](https://www.stork.ai/en/bhaifinder)); Raindrop Pro **$3/mo or $28/yr**, no lifetime in the 2026 roundup ([ContextBolt, 10 Sep 2026](https://contextbolt.com/blog/raindrop-pricing/); savethisone 16 Sep 2026); Readwise **$9.99/mo** yearly ([Marqly, 6 Oct 2026](https://www.marqly.com/blog/readwise-reader-review-2026)); Observer AI Plus **$5/mo**; ReciMe official US yearly **$39.99** (help 9 Aug 2026) and App Store US ReciMe Plus **$29.99 / $39.99 / $59.99**; Screenpipe official **Basic $25/mo or $250/yr** (~$21/mo billed annually); **Business $50/seat/mo or $500/seat/yr** (~$42/seat/mo billed annually) ([onboarding](https://screenpipe.com/onboarding), 17 Oct 2026).
 
 **Play payment reality:** India stays on the legacy 15%/30% structure until **30 Sep 2027**; US/UK/EEA already on 10%+5% from **30 Jun 2026** (§8.3). Digital goods on Play use Play Billing unless alternative billing is declared.
 
-**CWS payment reality:** Google is not the seller; native CWS payments deprecated; declare **Contains in-app purchases**; Stripe/ExtensionPay (~5% + Stripe fees — ExtensionPay’s exact take is vendor-stated, confirm at integration). Never paywall Save.
+**CWS payment reality:** Google is not the seller; native CWS payments deprecated; declare **Contains in-app purchases**; Stripe/ExtensionPay. ExtensionPay homepage (retrieved 17 Oct 2026): **“5% transaction fee at time of charge”**, **“No monthly fees”**, Stripe processing extra; high-volume via glen@extensionpay.com. Confirm Stripe % at integration. Never paywall Save.
 
 **Not V1:** ads, paid APK as the only model, seat-based teams.
 
@@ -1898,7 +1933,7 @@ Product model stays **§8.4**: open-core, local-first free forever, BYO key, mod
 | Referral | P2. FOSS users hate dark referral paywalls. If used: extra hosted-AI quota, not unlock of capture | After Pro exists |
 | Templates | Persona starter boards (developer, student, accountant, designer) — **PROPOSAL FR-088**. PH does not feature “templates” as a launch type; ship them **inside** the app | Phase 2 Hub |
 | Creator seeding | 5 dev creators, APK + 20s talking points, no paid vote rings | Launch week |
-| Open-source contributors | CONTRIBUTING.md, good-first-issues, Apache-2.0 intent, CODE_OF_CONDUCT. **Target:** ≥ 3 external PRs merged in 90 days; ≥ 1 non-owner maintainer triaging issues by Phase 2. FOSS United meetups (Bengaluru last-Saturday pattern, Delhi 14 Nov 2026 — [fossunited.org/c/delhi/nov-26](https://fossunited.org/c/delhi/nov-26); [@fossdot, 13 Oct 2026](https://x.com/fossdot/status/2109935155830022158)) are contributor funnels, not ad buys. IndiaFOSS 2026 already ran **26–27 Sep 2026** at NIMHANS Bengaluru ([fossunited.org/c/indiafoss](https://www.fossunited.org/c/indiafoss), retrospective 5 Oct 2026) — next IndiaFOSS is the 2027 cycle; use city meetups in the meantime. | From public GitHub |
+| Open-source contributors | CONTRIBUTING.md, good-first-issues, Apache-2.0 intent, CODE_OF_CONDUCT. **Target:** ≥ 3 external PRs merged in 90 days; ≥ 1 non-owner maintainer triaging issues by Phase 2. FOSS United meetups (Bengaluru last-Saturday pattern, Unverified #41; Delhi 14 Nov 2026 — [fossunited.org/c/delhi/nov-26](https://fossunited.org/c/delhi/nov-26); [@fossdot, 13 Oct 2026](https://x.com/fossdot/status/2109935155830022158)) are contributor funnels, not ad buys. IndiaFOSS 2026 already ran **26–27 Sep 2026** at NIMHANS Bengaluru ([fossunited.org/c/indiafoss](https://www.fossunited.org/c/indiafoss), retrospective 5 Oct 2026) — next IndiaFOSS is the 2027 cycle; use city meetups in the meantime. | From public GitHub |
 | SEO / AEO | Answer-first pages: “How to save a YouTube timestamp privately”, “Pixel Screenshots alternative that is not Pixel-only”, “local-first research hub”. Allow `OAI-SearchBot` if the owner wants citation in AI answers. YouTube is heavy on Google AI surfaces — the demo video is an AEO asset. Citations are engine-specific; do not promise ChatGPT citations | From public README onward |
 
 ### 22.7 Launch milestones and metrics (**targets**)
@@ -1943,7 +1978,7 @@ Sources: [Preparing for launch](https://www.producthunt.com/launch/preparing-for
 1. Confirm the product is **tryable** (public APK and/or CWS). Waitlists are not featured.
 2. Maker account is a **personal** account; company accounts are the wrong vehicle.
 3. Write **name** (name only, no emoji) and **tagline ≤ 60 characters**. Draft: `Session-only observer that files screen moments into a private research hub` (count before paste).
-4. Gallery: **≥ 2 images at 1270×760**, first image is the social preview. Thumbnail **240×240**. Each image **< 3 MB** (Submitator citing PH, 3 Aug 2026).
+4. Gallery: **≥ 2 images at 1270×760**, first image is the social preview. Thumbnail **240×240**. Each image **< 3 MB** (Submitator citing PH, 3 Aug 2026; Unverified #35, confirm on producthunt.com/launch).
 5. Optional YouTube demo, **public** URL, OS capture chip visible, docs/YouTube — never a downloader.
 6. First-comment draft (how we built it, what is local, what is broken). 70% of Products of the Day/Week/Month had a maker first comment (PH launch guide via Submitator, 3 Aug 2026).
 7. Schedule for **12:01am PST** so the listing gets the full 24-hour Pacific cycle.
@@ -1967,7 +2002,7 @@ Sources: CWS register (13 Feb 2024); [review updates 20 Aug 2026](https://develo
 **T−21**
 
 1. Google account with **2-Step Verification** (required to publish, CWS API docs 8 Oct 2026).
-2. Pay the **one-time registration fee** (India is a supported country). Official page omits the dollar amount; secondaries still quote **US$5** — confirm at checkout (Unverified #18).
+2. Pay the **one-time registration fee** (India is a supported country). Official Chromium Blog **12 Mar 2020** states **US$5.00**; the register page still omits the amount — confirm at checkout.
 3. One extension slot is enough (default two slots as of 20 Aug 2026).
 
 **Listing copy**
@@ -1983,7 +2018,7 @@ Sources: CWS register (13 Feb 2024); [review updates 20 Aug 2026](https://develo
 
 10. Store icon **128×128 PNG** (required). Also 16/48 in the package.
 11. **≥ 1 screenshot** at **1280×800** (preferred) or **640×400**; up to 5. Show side panel Today, Save on a docs page, empty state. Full-bleed, no phone frames ([Versely, 24 Aug 2026](https://www.versely.studio/blog/chrome-web-store-listing-is-the-screenshot-row)).
-12. Small promo tile **440×280** (recommended / required on some surfaces — Kromio Jul 2026). Marquee **1400×560** optional.
+12. Small promo tile **440×280** (**required** — official [Supplying images](https://developer.chrome.com/docs/webstore/images), last updated 11 Jun 2018 UTC). Marquee **1400×560** optional.
 13. 30s listing video: Save on documentation, OS/browser indicator visible.
 
 **Submit**
@@ -1994,7 +2029,7 @@ Sources: CWS register (13 Feb 2024); [review updates 20 Aug 2026](https://develo
 
 #### C. Google Play listing + ASO
 
-Sources: [Best practices for your store listing](https://support.google.com/googleplay/android-developer/answer/13393723) (title 30 / short 80 / full 4000); [Add preview assets](https://support.google.com/googleplay/android-developer/answer/9866151) (min 2 screenshots, up to 8 per device type, 320–3840 px, long side ≤ 2× short); feature graphic 1024×500 and icon 512×512 via Play Console Help as restated by [StoreShot, 20 Sep 2026](https://storeshot.ai/blog/play-store-listing-assets-checklist/) and [Ecranify, 16 Oct 2026](https://ecranify.com/guides/google-play-feature-graphic) (checked against Play Help Oct 2026). Play indexes title, short description, and full description ([AppDrift, 7 Oct 2026 / updated 11 Oct 2026](https://appdrift.co/blog/google-play-seo)).
+Sources: [Best practices for your store listing](https://support.google.com/googleplay/android-developer/answer/13393723) (title 30 / short 80 / full 4000); [Add preview assets](https://support.google.com/googleplay/android-developer/answer/9866151) (retrieved 17 Oct 2026): icon **512×512**; feature graphic **1024×500** (both required); screenshots **minimum of two** across device types, **up to 8** per type; 320–3840 px still listed; large-screen uploads 1,080–7,680 px. Play indexes title, short description, and full description ([AppDrift, 7 Oct 2026 / updated 11 Oct 2026](https://appdrift.co/blog/google-play-seo)).
 
 **Packet (after S8)**
 
@@ -2047,7 +2082,7 @@ Sources: [showhn.html](https://news.ycombinator.com/showhn.html) (date not shown
 
 #### G. Indian dev and creator communities
 
-1. **FOSS United Bengaluru** — meetups last Saturday 2–5 pm ([fossunited.org/c/bengaluru](https://fossunited.org/c/bengaluru)); next listed October meetup **24 Oct 2026**, Samagata Foundation, Church Street ([fossunited.org](https://fossunited.org/), seen 17 Oct 2026).
+1. **FOSS United Bengaluru** — meetups last Saturday 2–5 pm (Unverified #41; [fossunited.org/c/bengaluru](https://fossunited.org/c/bengaluru)); next listed October meetup **24 Oct 2026**, Samagata Foundation, Church Street ([fossunited.org](https://fossunited.org/), seen 17 Oct 2026).
 2. **FOSS United Delhi/NCR** — **14 Nov 2026**, 3:30–6:00 pm, Essentia Sector 62 Noida; CFP until 5 Nov ([fossunited.org/c/delhi/nov-26](https://fossunited.org/c/delhi/nov-26); [@fossdot, 13 Oct 2026](https://x.com/fossdot/status/2109935155830022158)).
 3. Talk proposal: session-only capture, local Hub, Play overlay restricted-settings — a demo with the OS chip on.
 4. Hasgeek / local.city / indie-hackers India Slack or Discord if the owner already has a seat; no cold spam.
@@ -2057,7 +2092,7 @@ Sources: [showhn.html](https://news.ycombinator.com/showhn.html) (date not shown
 
 1. Seed **5** mid-size **dev** creators (tools, Claude Code, GitHub, local LLM). Mass tech YouTubers only if a 20-second visual works without niche knowledge.
 2. Kit: APK + 20s talking points + overlay on a docs page + “this is not a downloader.”
-3. Named reach options, not booked deals: Hitesh Choudhary (@Hiteshdotcom, self-reported 1M & 800k YT in bio, seen 20–21 Sep 2026); Sanskar Tiwari / IndianAppGuy (subscriber count **Unverified** — re-scrape); Suhas Sumukh / localhost India.
+3. Named reach options, not booked deals: Hitesh Choudhary (live 17 Oct 2026: English YT **945K**, Chai aur Code **1.04M**, X **79,145** — bio “1M & 800k” is stale); Sanskar Tiwari / IndianAppGuy (**25.2K** YT); Suhas Sumukh / localhost India (X **12,484**; personal YT has no public sub count).
 4. No paid vote rings. Conversion from seeding is **Unverified** (no OBZRAi data).
 5. Owner-channel demo: OS chip visible; YouTube tutorial + GitHub; Hindi/Hinglish optional on a second cut.
 
@@ -2069,15 +2104,15 @@ All dates inside a phase are **relative**. Android S1–S4 remain the first engi
 |---|---|---|---|
 | **0 Feasibility** | Nothing public except a privacy-stub if needed | IP India search; GitHub private; design partners 8–12 | None |
 | **1 Android MVP** | Signed APK: GitHub Releases, Obtainium, Izzy issue, F-Droid RFP | Marketing site live (FR-094); waitlist **off** the day the APK is public; Show HN + Reddit + X; Play packet after S8 | Encrypted export/import (FR-097). Phone-only Hub. |
-| **2 Browser extension** | CWS unlisted → public; side-panel Hub | CWS checklist §22.9-B; PH when tryable; r/chrome_extensions; creator second wave | Side-panel Hub (option **c**). D7-B/C only if owner accepted. |
+| **2 Browser extension** | CWS unlisted → public; side-panel Hub | CWS checklist §22.9-B; PH when tryable; r/chrome_extensions; creator second wave | Side-panel Hub (option **c**) **plus** D7-B thin E2E (Drive `appDataFolder` then WebDAV). D7-C remains a P2 bonus. |
 | **3 Desktop** | macOS first, then Windows, then Linux | GitHub Releases; no new store required | Same Hub UI; optional local bridge (option **b**) |
 | **4 Sync / PWA** | Optional account, E2E full-res, standalone web client (option **a**), read-only shares | Pro SKU live (Play IAP / Stripe); PH relaunch only if the PWA is a significant update | FR-047 / FR-064 / FR-087 / FR-105 |
 
-Pricing stays **§8.4 / §22.4**: Free local forever, BYO key, Pro ₹149 / $4.99 for hosted E2E relay + hosted AI. If D7-B uses only user-owned storage, Pro is not required for thin sync; the relay remains a Pro feature.
+Pricing stays **§8.4 / §22.4**: Free local forever, BYO key, Pro ₹149 / $4.99 for hosted E2E relay + hosted AI. **D7-B decided:** thin sync uses user-owned storage, so Pro is not required for Phase 2 continuity; the relay remains a later Pro feature.
 
 ## 23. Proposed features for strength and defensibility
 
-Items in this section are **PROPOSAL**. They are not Android MVP scope unless an ID is already P0 in §13. Each item states priority (**P0 / P1 / P2 / Research**), rationale, effort (**S / M / L**), **phase**, risk, and **moat type** (data / network / workflow / trust / integration). v2.0 IDs are **FR-079–FR-093**. v2.1 adds **FR-098–FR-102**. Owner may promote or drop any proposal without revising the locked overlay or Phase 0 gates. Continuity FRs FR-097 / FR-103 / FR-104 / FR-106 are specified in §24 (they are product requirements or D7 options, not strength proposals).
+Items in this section are **PROPOSAL**. They are not Android MVP scope unless an ID is already P0 in §13. Each item states priority (**P0 / P1 / P2 / Research**), rationale, effort (**S / M / L**), **phase**, risk, and **moat type** (data / network / workflow / trust / integration). v2.0 IDs are **FR-079–FR-093**. v2.1 adds **FR-098–FR-102**. Owner may promote or drop any proposal without revising the locked overlay or Phase 0 gates. Continuity FRs FR-097 / FR-103 / FR-104 / FR-106 are specified in §24 (FR-103 is Phase 2 scope under D7-B; FR-104 remains a P2 bonus; they are not strength proposals).
 
 ### 23.1 How to read this section
 
@@ -2182,7 +2217,7 @@ Items in this section are **PROPOSAL**. They are not Android MVP scope unless an
 | **Effort** | M (stdio) / L (remote) |
 | **Risk** | Prompt injection via saved page text; accidental plaintext exposure |
 | **Moat** | Integration + workflow |
-| **Rationale** | MCP spec **2026-07-28** is the current revision: stateless core, no `initialize` handshake, stdio still the local transport ([MCP blog](https://blog.modelcontextprotocol.io/posts/2026-07-28/), 28 Jul 2026). A **local stdio MCP server** that tools `search_items`, `get_item`, `list_today` against the on-device Hub lets Cursor/Claude/other clients query *the user’s* library without a cloud index. Remote MCP is out of V1. Breadth of on-device client support for 2026-07-28 is **Unverified**. |
+| **Rationale** | MCP spec **2026-07-28** is the current revision: stateless core, no `initialize` handshake, stdio still the local transport ([MCP blog](https://blog.modelcontextprotocol.io/posts/2026-07-28/), 28 Jul 2026). A **local stdio MCP server** that tools `search_items`, `get_item`, `list_today` against the on-device Hub lets Cursor/Claude/other clients query *the user’s* library without a cloud index. Remote MCP is out of V1. The 2026-07-28 post describes the spec and Tier 1 SDKs; it is **not** a surveyed census of which assistants already speak stdio + the stateless core. Breadth of on-device client support for 2026-07-28 remains **Unverified**. |
 | **Acceptance sketch** | `obzrai-mcp` stdio; read-only by default; write tools (save/tag) require a config flag; never starts a network listener in V1; README threat model for prompt injection. |
 | **Phase** | After Phase 1 Hub schema is stable |
 
@@ -2196,7 +2231,7 @@ Items in this section are **PROPOSAL**. They are not Android MVP scope unless an
 | **Moat** | Network (weak) + workflow |
 | **Rationale** | V1 is team-free (FR-063). A later **signed, expiring, read-only link** to one board (no accounts for viewers) is the smallest share primitive. Not live collab. |
 | **Acceptance sketch** | User explicitly publishes **one collection**. Ciphertext blob; **key in the URL fragment** (`#k=`, Excalidraw pattern, 21 Mar 2020). Default expiry **7 days**, max **31 days** (Bitwarden Send, 16 Sep 2026). One-tap **revoke** tombstones the blob (Proton Drive stop-sharing, 16 Oct 2026). Optional password. Redacted items stay redacted. `robots noindex`. Viewers need no account. No comments, no presence, no edit. S23 before ship. FR-105 is the revoke/expiry contract. |
-| **Phase** | **P2, Phase 4** by default (needs a ciphertext store). Phase 2 only if D7-B already has user-owned or relay storage. Still team-free. |
+| **Phase** | **P2, Phase 4 by default; Phase 2 optional once the FR-103 store ships.** Still team-free. |
 
 #### FR-088 — Templates by persona — **PROPOSAL**
 
@@ -2240,7 +2275,7 @@ Items in this section are **PROPOSAL**. They are not Android MVP scope unless an
 |---|---|
 | **Priority** | P1 |
 | **Effort** | S |
-| **Risk** | Shorts ignore `t=` (secondary: some 2026 guides say Shorts always start at 0 — **Unverified** as YouTube official) |
+| **Risk** | Shorts may ignore `t=` (secondary 2026 guides). **Unverified** as YouTube official: help timestamp URLs 404’d on 17 Oct 2026; IFrame Player API documents `start=` for **embeds** ([player_parameters](https://developers.google.com/youtube/player_parameters), updated 15 Oct 2026). TeamYouTube (16 Apr 2026) described Share-at-Timestamp on mobile for videos, with Video Clips rolling out to Shorts later in 2026. Store `t=` on watch URLs; measure Shorts deep-links in S10 before claiming them. |
 | **Moat** | Integration + workflow |
 | **Rationale** | “Open source” must jump to the moment. Store canonical `watch?v=&t=` plus `youtu.be?t=`. |
 | **Acceptance sketch** | Open source on a YouTube item launches at stored seconds; missing time opens at 0 and does not lie. |
@@ -2350,7 +2385,7 @@ Items in this section are **PROPOSAL**. They are not Android MVP scope unless an
 | FR-100 | Ask my library | P1 | L | Phase 2 after S17 | Trust / workflow |
 | FR-080 | Semantic visual+voice search | P1 | L | S17 | Data / workflow |
 | FR-085 | Local LLM Q&A with citations | P1 / Research | L | S16–S17 | Trust / workflow |
-| FR-087 | Shareable read-only boards (E2E fragment key) | P2 | M | Phase 4 (Phase 2 if D7-B store) | Network (weak) / trust |
+| FR-087 | Shareable read-only boards (E2E fragment key) | P2 | M | Phase 4 by default; Phase 2 optional once the FR-103 store ships | Network (weak) / trust |
 | FR-083 | Spaced-repetition resurfacing | P2 | M | After digest (FR-079) | Workflow |
 | FR-090 | Code OCR → fenced snippets | P2 | L | Research then P2 | Workflow |
 | FR-093 | Broader integrations | P2 | L | After FR-062 | Integration |
@@ -2359,13 +2394,13 @@ Items in this section are **PROPOSAL**. They are not Android MVP scope unless an
 
 ### 23.4 What this does not change
 
-Android spikes S1–S4, approved overlay, local-first default, no FLAG_SECURE bypass, no YouTube/Instagram downloader, team-free V1, and D1–D6 recommendations remain as in §§2, 8, 9, 11. **D7 is pending** and does not promote any §23 proposal into Phase 1.
+Android spikes S1–S4, approved overlay, local-first default, no FLAG_SECURE bypass, no YouTube/Instagram downloader, team-free V1, and D1–D6 recommendations remain as in §§2, 8, 9, 11. **D7 is DECIDED Option B** and does not promote any §23 proposal into Phase 1.
 
 ## 24. Cross-device continuity
 
-**Job.** A moment observed in the browser appears in the Hub on the phone, and a moment observed on the phone appears in the Hub in the browser — with the same capture record (resource, time, spoken idea, provenance). This is JTBD 11 and FR-054. v2.0 already recommended **optional E2E sync, off by default, Phase 4 (D1)**. v2.1 keeps that recommendation for **full-resolution** media and states **when** a thinner continuity path can arrive.
+**Job.** A moment observed in the browser appears in the Hub on the phone, and a moment observed on the phone appears in the Hub in the browser — with the same capture record (resource, time, spoken idea, provenance). This is JTBD 11 and FR-054. v2.0 already recommended **optional E2E sync, off by default, Phase 4 (D1)** for **full-resolution** media. **D7 is DECIDED — Option B (Basant, 17 Oct 2026):** a thinner continuity path ships in Phase 2.
 
-This section is the product spec for that path. It does not replace §16.5 (sync data model) or §9 D1. **D7** is the pending owner decision on pulling a *minimal* payload into Phase 2.
+This section is the product spec for that path. It does not replace §16.5 (sync data model) or §9 D1.
 
 ### 24.1 What “connected platforms” means
 
@@ -2373,8 +2408,8 @@ This section is the product spec for that path. It does not replace §16.5 (sync
 |---|---|---|
 | Phone → phone (reinstall) | Encrypted archive restores the library | Phase 1 (FR-097) |
 | Phone → laptop, offline | User carries the encrypted archive (USB, Drive as a file, AirDrop) | Phase 1 |
-| Browser → phone, co-located | QR / same-LAN pairing copies the local store | Phase 2 if D7-C (FR-104) |
-| Browser ↔ phone, remote | Opt-in E2E of a **thin** payload (items, tags, transcripts, thumbnails) | Phase 2 if D7-B (FR-103) |
+| Browser → phone, co-located | QR / same-LAN pairing copies the local store | Phase 2 P2 bonus if D7-C (FR-104) |
+| Browser ↔ phone, remote | Opt-in E2E of a **thin** payload (items, tags, transcripts, thumbnails) | **Phase 2 (D7-B decided, FR-103)** |
 | Browser ↔ phone, full-res | Opt-in E2E of frames, voice audio, imagination images | Phase 4 (D1, FR-047) |
 | Friend / public | Read-only collection link, fragment key, revoke, expiry | Phase 4 (FR-087/105); Phase 2 only if a ciphertext store already exists |
 
@@ -2386,19 +2421,19 @@ Default for every phase: **each device is a complete local Hub**. Continuity is 
 |---|---|---|---|
 | **0** | Nothing | — | — |
 | **1 Android MVP** | **Encrypted export / import** (FR-097). Passphrase-wrapped archive of items, metadata, optional media. Round-trip tested on the device matrix. Hub shows “this library is on this phone” (FR-106). | Android only | “Take a backup. Restore it on another device when that device exists.” |
-| **2 Browser extension** | Side-panel Hub is **local to the browser profile** (option **c**). Export/import still works. **If D7-A (default):** stop here. **If D7-C:** QR + LAN pairing (FR-104, option **b**). **If D7-B:** opt-in thin E2E (FR-103) via user-owned storage first. | (c) required; (b)/(thin-a) optional | “Saves in this browser stay in this browser until you export or opt into sync.” |
+| **2 Browser extension** | Side-panel Hub (option **c**) **plus opt-in thin E2E (D7-B, FR-103)** via Drive `appDataFolder` then WebDAV. Export/import still works. **D7-C** QR + LAN pairing (FR-104, option **b**) remains a P2 bonus. | (c) required; thin user-owned storage required (D7-B); (b) optional bonus | “Saves in this browser stay on this device until you opt into sync. Sync is optional, encrypted, and does not move full-res media yet.” |
 | **3 Desktop** | Same Hub UI. Desktop may host the native-messaging / localhost bridge so a full tab can open the local store. | (b) natural on desktop | Same as Phase 2 |
 | **4 Sync / PWA** | Optional account. Full-res E2E (FR-047, FR-064). Standalone web client decrypts in-browser (option **a**). Read-only shares (FR-087/105). Per-collection device-only still wins. | (a) | “Sync is optional, encrypted, off by default. Lost recovery key means lost remote copy.” |
 
-### 24.3 D7 recap and recommendation
+### 24.3 D7 recap and decision
 
 Full options, effort, cost, DPDP and precedents are in **§9 D7**. Short form:
 
-- **A (default):** keep D1. Full sync in Phase 4. Phase 2 is two local libraries plus export.
-- **B (owner call):** minimal E2E in Phase 2 — items + thumbnails + transcripts, no full-res media, opt-in, ciphertext, user-owned storage first (Drive `appDataFolder` / WebDAV / iCloud later / Syncthing-style P2P), hosted relay later as Pro.
-- **C (bonus):** device pairing on the LAN or via QR, no server.
+- **A (not chosen):** keep D1. Full sync in Phase 4. Phase 2 is two local libraries plus export.
+- **B (DECIDED — Basant, 17 Oct 2026):** minimal E2E in Phase 2 — items + thumbnails + transcripts, no full-res media, opt-in, ciphertext, user-owned storage first (Drive `appDataFolder`, then WebDAV; iCloud later / Syncthing-style P2P as extras), hosted relay later as a fallback / Pro.
+- **C (P2 bonus):** device pairing on the LAN or via QR, no server.
 
-**Recommendation recorded here:** A is the planning default. Accept B as a Phase 2 fast-follow if Basant wants phone↔browser on the day the extension ships. Ship C as a pairing bonus. S1–S4 and the overlay freeze do not wait on D7.
+**Decision recorded here:** **B**. Phone↔browser thin continuity is Phase 2 scope. C remains a pairing bonus. S1–S4 and the overlay freeze do not wait on D7.
 
 ### 24.4 New functional requirements (continuity)
 
@@ -2412,13 +2447,13 @@ These continue numbering after FR-093. Marketing-site and Hub-browse IDs in §21
 | **Phase** | 1 |
 | **Acceptance** | User can export an encrypted archive (items + metadata; media optional) with a passphrase. Import on a fresh install restores items, tags, collections, voice-idea text. Wrong passphrase fails closed. Redacted items stay redacted. Archive format documented in the repo so later clients can read Phase 1 files. |
 
-#### FR-103 — Minimal E2E sync payload — D7-B (P1, only if accepted)
+#### FR-103 — Minimal E2E sync payload — D7-B decided (P1, Phase 2)
 
 | | |
 |---|---|
-| **Priority** | P1 **if D7-B is accepted**; otherwise deferred to Phase 4 as a subset of FR-047 |
-| **Phase** | 2 fast-follow |
-| **Acceptance** | Opt-in. Ciphertext only on the store. Payload = item records, tags, collections, provenance, OCR/page text, transcripts, thumbnails ≤ a documented byte cap. Full-res frames and voice audio stay local unless the user later enables Phase 4. Per-collection device-only is honored. Conflict rule matches §16.5.3 (no silent data loss). Off by default. |
+| **Priority** | **P1** (D7-B decided, 17 Oct 2026) |
+| **Phase** | **2** (alongside the extension) |
+| **Acceptance** | Opt-in. Ciphertext only on the store. Payload = item records, tags, collections, provenance, OCR/page text, transcripts, thumbnails ≤ a documented byte cap. Full-res frames and voice audio stay local unless the user later enables Phase 4. Per-collection device-only is honored. Conflict rule matches §16.5.3 (no silent data loss). Off by default. Drive `appDataFolder` is the first adapter; WebDAV next. A save on Android appears in the extension side panel and vice versa within the Phase 2 latency target (§19.4). |
 
 #### FR-104 — LAN / QR device pairing — D7-C (P2)
 
@@ -2436,11 +2471,11 @@ These continue numbering after FR-093. Marketing-site and Hub-browse IDs in §21
 | **Phase** | 1 (local-only chip); 2+ (export/sync state) |
 | **Acceptance** | Every Hub (Android, side panel, later PWA) shows: last backup / last sync time or “never”; “local-only” on device-only items; the device that last wrote an item when known. No green “synced” on a device that has not completed a successful round-trip. |
 
-### 24.5 Transport choices if D7-B is accepted
+### 24.5 Transport choices (D7-B decided)
 
 Preference order (first that the user enables):
 
-1. **Google Drive application data folder** — hidden, unshareable, `drive.appdata` scope, deleted on uninstall ([Drive API, 3 Sep 2026](https://developers.google.com/workspace/drive/api/guides/appdata)). Store **ciphertext**. Counts against the user’s quota.
+1. **Google Drive application data folder** — hidden, unshareable, `drive.appdata` **non-sensitive** scope, deleted on uninstall ([Drive API, last updated 3 Sep 2026 UTC](https://developers.google.com/workspace/drive/api/guides/appdata), retrieved 17 Oct 2026). Store **ciphertext**. Quota-counts-against-user is community-reported (**Unverified #36**); confirm in Drive settings before promising “free sync.”
 2. **WebDAV** (Nextcloud, a NAS, a self-hosted folder) — FOSS-friendly; same ciphertext blobs.
 3. **Syncthing-style P2P** — no cloud copy; untrusted-device encryption is still documented as beta (7 Oct 2026).
 4. **Hosted ciphertext relay** — Pro SKU, India-region option (open question 20), Phase 4 unless the owner pulls it earlier.
@@ -2457,7 +2492,7 @@ iCloud is an Apple-client adapter after desktop/iOS discovery; it is not an Andr
 
 ### 24.7 What this section does not change
 
-D1 remains: full-res E2E optional, off by default, Phase 4. Team-free V1 (FR-063). No plaintext hosted Hub. Android S1–S4 still gate all of this.
+D1 remains: full-res E2E optional, off by default, Phase 4. D7-B is decided for the thin payload in Phase 2. Team-free V1 (FR-063). No plaintext hosted Hub. Android S1–S4 still gate all of this.
 
 ---
 
@@ -2472,7 +2507,7 @@ D1 remains: full-res E2E optional, off by default, Phase 4. Team-free V1 (FR-063
 7. New **§6.8 Platform constraints matrix** (Verified / Source / Date).
 8. New **§7 Competitive landscape** with dated prices/stars and a positioning map (Screenpipe, Meta/Limitless, Pocket, ReciMe, BhaiFinder, Raindrop, Notion Clipper, Observer AI, Pixel, Recall, etc.).
 9. New **§8 Pricing** with INR/USD recommendation, Play 15/30% until 30 Sep 2027 for India, alternative billing −4%, BYO key, open-core.
-10. **D1–D6 each have a recommendation, rationale and risks** (§9), no longer only a pending table.
+10. **D1–D7 each have a recommendation, rationale and risks** (§9), no longer only a pending table. D7 is **DECIDED Option B** as of v2.1 r1.
 11. **FRs tightened** (measurable AC); added FR-055–057; PTT remains P0.
 12. **Metrics** split into north star, input metrics and guardrails; all numbers labelled **targets**.
 13. **Roadmap rephased** to Phase 0–4 matching the brief; Android MVP re-estimated **40–55 days**; no unjustified calendar dates.
@@ -2501,61 +2536,68 @@ D1 remains: full-res E2E optional, off by default, Phase 4. Team-free V1 (FR-063
 30. Functional requirements **FR-094–FR-106** added to §13. §19.8 mapping and spikes **S22–S23** updated. Former §§24–30 become **25–31**.
 31. Unverified list, risk register, open questions, glossary and sources extended for v2.1 facts (store-listing limits, fragment-key share, sync precedents, FOSS United dates). Document control records **v2.1, 17 Oct 2026**.
 
+### v2.1 r1 (17 October 2026)
+
+32. **Claim-verification delta from v2.0 r3** ported in place: §26 items 1–30 marked **VERIFIED** or **STILL UNVERIFIED**; body text updated in §6, §7.2, §8.2, §8.3, §21.1, §21.2, §22.3, §22.4, FR-086, FR-091; Sources rows added. v2.1 items 33, 34, 42 cheap-verified against official CWS/Play pages.
+33. **D7 decided — Option B (Basant, 17 Oct 2026).** Minimal opt-in E2E in Phase 2 (items + thumbnails + transcripts; Drive `appDataFolder` then WebDAV; ciphertext relay later). Full-res stays Phase 4. Option C remains a P2 bonus. §5, §9, §19, §24, FRs, open questions, and risk register updated. Spike **S24** added.
+
+### v2.1 r2 (17 October 2026)
+
+34. **Reviewer fixes (17 Oct 2026).** R31: with only non-sensitive scopes, OAuth app verification is not mandatory; brand verification is needed for name/logo ([help 13463073](https://support.google.com/cloud/answer/13463073)); S24 measures brand verification. Screenpipe: Basic **$25/mo or $250/yr** (~$21/mo billed annually); Business **$50/seat/mo or $500/seat/yr** (~$42/seat/mo billed annually). §8.3 KR row: Google does not state the billing fee for KR. **D7 DECIDED — Option B** markers in §2 and §19.4/§19.8. UNVERIFIED tags on #40/#5/#35/#41; #37/#38 labelled; #36 pointer fixed. §9 heading renamed. FR-087/105, §12, open question 35 restated. **Scope note on r1:** r1 also changed the Owner-direction block, the §23 intro, and §25 (items 10 and 32–33), which were outside r1’s stated sections.
+
 ---
 
 ## 26. Unverified claims
 
-The following were **not confirmed** with a primary source on 17 October 2026. Do not repeat them as facts in marketing.
+Live re-open **17 October 2026** (v2.0 r3 findings ported in v2.1 r1). Each item is **VERIFIED** (source + date) or **STILL UNVERIFIED** (reason). Do not repeat STILL UNVERIFIED items as facts in marketing. v2.1 items 31–42 keep their own statuses unless a cheap `curl` pass in v2.1 r1 resolved them.
 
-1. **IP India trademark search for OBZRAi / OBZRAI / OBZRAI.ai in classes 9 and 42** — official tool is CAPTCHA-gated (`tmsearch.ipindia.gov.in`); not completed.
-2. **Exact Screenpipe consumer prices on screenpipe.com/pricing** — aggregators on 1 Oct 2026 report $21 / $42; older pages $25 / $50. Confirm at checkout.
-3. **Observer AI GitHub star count** — ~1.7k at marketing-research scrape; GitHub UI date not shown; re-check at launch.
-4. **ReciMe free-tier “5 imports/week” and exact Plus SKUs** — from 2026 roundups, not a live App Store receipt.
-5. **Recall.it “700,000+ users”** — vendor about page, Oct 2026; not independently audited.
-6. **iOS 27 ScreenCaptureKit replacing ReplayKit BUE** — Forasoft 10 Oct 2026 secondary article; not confirmed in Apple’s public documentation in this research pass.
-7. **Android 16-specific extra token rules beyond Android 14 one-shot consent** — Forasoft 1 Aug 2026; confirm against Android 16 behavior-changes doc at implementation.
-8. **Play target API 36 deadline 31 Aug 2026 / extension 1 Nov 2026** — Forasoft; re-verify on Play policy deadlines page at submission.
-9. **Rest-of-World Play billing-fee percentage after 30 Sep 2027** — Google had not announced it in the sources found.
-10. **Whether a purely local, no-account Android app is a DPDP “Data Fiduciary” for on-device screenshots** — legal question; not answered by the Gazette text alone.
-11. **USPTO/EUIPO full clearance for OBZRAi** — not filed; only a web/X/Play collision scan was done.
-12. **Instagram/YouTube current app versions’ `allowAudioPlaybackCapture` value** — must be measured in S4; do not generalize.
-13. **Meta acquisition of Limitless terms (price, product roadmap)** — acquisition date verified; commercial terms not verified.
-14. **No X posts for OBZRAi** — true for the query run on 17 Oct 2026; not a trademark clearance.
-15. **developer.android.com direct fetch** — some official Android URLs were blocked as SSRF in this environment (resolved to 198.18.0.1); facts were taken from mirrored docs (`developer.android.google.cn`), Play Help, and secondary engineering posts. Re-open official URLs from a normal network before implementation.
-16. **Obtainium “35 GitHub stars required for config inclusion”** — claimed on X by @arferrari (10 Oct 2026). Not confirmed in Obtainium project docs in this pass.
-17. **Product Hunt Featuring Guidelines last-updated stamp** — help article https://help.producthunt.com/en/articles/9883485-product-hunt-featuring-guidelines was thin in one fetch; content cited from a subsequent search snippet. Re-open before a launch checklist is frozen.
-18. **Chrome Web Store registration fee dollar amount** — official register page (last updated 13 Feb 2024) says “one-time registration fee” and lists India, but does not state US$5. Amount is from 2026 secondary checklists (ExtensionBooster 22 Jun 2026; Extension Radar 16 Feb 2026). Confirm at checkout.
-19. **CWS Featured badge exact sunset date** — official blog 20 Aug 2026 says “later this year”; self-nominations closed that day. End date not a calendar day in the post.
-20. **Chrome-Stats Featured share (7.8% of MV3 listings / 48.3% of displayed users)** — third-party snapshot 20 Jul 2026, before the sunset announcement. Not a Google metric.
-21. **Lifetime-tier willingness to pay for OBZRAi** — no product data. ₹3,999 / $79–99 is a planning envelope only.
-22. **Indian / global creator seeding conversion** — no OBZRAi data. Hitesh Choudhary subscriber counts are **self-reported in X bio** (seen 20–21 Sep 2026).
-23. **MCP 2026-07-28 client support breadth on-device** (which assistants speak stdio + the stateless core) — not surveyed. Ship stdio first and document tested clients.
-24. **YouTube Shorts ignoring `t=` timestamps** — stated in some 2026 secondary guides; not confirmed in YouTube’s own parameter documentation in this pass.
-25. **W3C TAG “Installing Websites Must Be Easy” (16 Oct 2026)** — draft, not a Recommendation. Do not treat as a shipping requirement.
-26. **ExtensionPay / Stripe blended take-rate (~5% + Stripe)** — vendor-stated; confirm at integration. Not a Google figure.
-27. **Nicheloom Product Hunt volume (28,255 launches / 35 days, ~3.8% featured, 14 Oct 2026)** — third-party scraper, not Product Hunt official.
-28. **Sanskar Tiwari / IndianAppGuy current YouTube subscriber count** — older listings; re-scrape before outreach.
-29. **Show HN new-account restriction / AI-text ban dates** — restated by secondary launch blogs (swanbase 25 Sep 2026). Confirm against current news.ycombinator.com/newsguidelines.html before posting.
-30. **developer.chrome.com SSRF** — some official Chrome URLs resolved to 198.18.0.1 in this environment in an earlier pass; later `open_page` fetches of register and sidePanel succeeded. Re-open from a normal network before implementation.
+1. **IP India trademark search for OBZRAi / OBZRAI / OBZRAI.ai in classes 9 and 42** — **STILL UNVERIFIED.** Official tool is CAPTCHA-gated (`tmsearch.ipindia.gov.in`); not completed.
+2. **Screenpipe consumer prices** — **VERIFIED** 17 Oct 2026 on the official Pricing page [screenpipe.com/onboarding](https://screenpipe.com/onboarding) (`/pricing` redirects here): Free $0; Basic **$25/mo or $250/yr** (~$21/mo billed annually); Business **$50/seat/mo or $500/seat/yr** (~$42/seat/mo billed annually). Page defaults to the annual toggle ($21 / $42). Monthly vs annual amounts are the page’s own pricing data (`basic: monthly:25, annual:250`; `business: monthly:50, annual:500`). Body text in §7.2 / §8.2 / §22.4 updated.
+3. **Observer AI GitHub star count** — **VERIFIED** 17 Oct 2026 via GitHub API `https://api.github.com/repos/Roy3838/Observer`: **1,652 stars / 142 forks** (`pushed_at` 15 Oct 2026, `updated_at` 17 Oct 2026). §7.2 updated from ~1.7k.
+4. **ReciMe free-tier “5 imports/week” and Plus SKUs** — **VERIFIED** 17 Oct 2026. Official help (last updated **6 May 2026**): free plan **5 imports every 7 days** ([article 14999602](https://recime.app/help/en/articles/14999602-how-your-5-free-weekly-imports-work)). Official help (last updated **9 Aug 2026**): US yearly **$39.99** ([article 11630592](https://recime.app/help/en/articles/11630592-how-much-does-the-recime-subscription-cost)). App Store US ReciMe Plus IAPs **$29.99 / $39.99 / $59.99** ([listing](https://apps.apple.com/us/app/recime-recipes-meal-planner/id1593779280)). Play **1M+**, **4.67★ / 110,590 ratings**, updated **1 Oct 2026**. iOS **4.8★ / 314,015 reviews**. §7.2 / §8.2 / §22.4 updated.
+5. **Recall.it “700,000+ users”** — **STILL UNVERIFIED.** Vendor about page, Oct 2026; not independently audited.
+6. **iOS 27 ScreenCaptureKit replacing ReplayKit BUE** — **STILL UNVERIFIED.** Forasoft 10 Oct 2026 secondary article; not confirmed in Apple’s public documentation in this pass.
+7. **Android 16-specific extra token rules beyond Android 14 one-shot consent** — **VERIFIED (A14 one-shot)**; **STILL UNVERIFIED (extra A16-across-restart).** Official [A14 behavior changes](https://developer.android.com/about/versions/14/behavior-changes-14) (last updated **16 Oct 2026** UTC): consent per session; reusing a cached Intent throws `SecurityException`. Official [A16 all-apps](https://developer.android.com/about/versions/16/behavior-changes-all) and [A16 targeting](https://developer.android.com/about/versions/16/behavior-changes-16) (last updated **16 Oct 2026** UTC) contain **no MediaProjection section**. Forasoft (1 Aug 2026) cites an extra “no cache across app restarts” rule against that A16 page; the official page does not contain it. Product rule stays the A14 one-shot. §6.1 / §6.8 updated.
+8. **Play target API 36 deadline 31 Aug 2026 / extension 1 Nov 2026** — **VERIFIED** 17 Oct 2026 on official [Play Console Help 11926878](https://support.google.com/googleplay/android-developer/answer/11926878): starting **31 Aug 2026**, new apps and app updates must target **Android 16 (API 36)**; developers may request an extension to **1 Nov 2026**. Existing apps must target Android 15 (API 35) to remain available to new users on newer OS versions. §6 / §6.8 updated; Forasoft is no longer the source.
+9. **Rest-of-World Play billing-fee percentage after 30 Sep 2027** — **STILL UNVERIFIED** as a number. Official [Play Help 112622](https://support.google.com/googleplay/android-developer/answer/112622) and [16954621](https://support.google.com/googleplay/android-developer/answer/16954621) (retrieved 17 Oct 2026): remaining markets until global rollout stay **15% first $1M / 30% above** (subscriptions 15%); billing fee is **5%** in AU/EEA/JP/UK/US; **“Billing fee details for other regions are forthcoming.”** Rollout dates **VERIFIED**: EEA/UK/US **30 Jun 2026**; AU/JP **30 Sep 2026**; KR **31 Dec 2026**; RoW **30 Sep 2027**. 97% of developers distribute at no charge is **VERIFIED** on the official service-fees page. §8.3 / §22.3 updated.
+10. **Whether a purely local, no-account Android app is a DPDP “Data Fiduciary” for on-device screenshots** — **STILL UNVERIFIED.** Legal question; not answered by the Gazette text alone.
+11. **USPTO/EUIPO full clearance for OBZRAi** — **STILL UNVERIFIED.** Not filed; only a web/X/Play collision scan was done.
+12. **Instagram/YouTube current app versions’ `allowAudioPlaybackCapture` value** — **STILL UNVERIFIED.** Must be measured in S4; do not generalize.
+13. **Meta acquisition of Limitless terms (price, product roadmap)** — **STILL UNVERIFIED.** Acquisition date verified; commercial terms not verified.
+14. **No X posts for OBZRAi** — scan-time observation for the query run on 17 Oct 2026; not a trademark clearance. **STILL UNVERIFIED** as clearance.
+15. **developer.android.com direct fetch** — **VERIFIED re-opened 17 Oct 2026** via `curl` (plain `curl/8.5.0` UA; a Chrome browser UA follows an OAuth 302 and fails). Official pages retrieved HTTP 200: A14 behavior-changes (last updated **16 Oct 2026** UTC), A16 all-apps and targeting-16 (last updated **16 Oct 2026** UTC), media-projection (last updated **24 Jan 2025** UTC), developer-verification. Facts in §6 now cite `developer.android.com` directly.
+16. **Obtainium “35 GitHub stars required for config inclusion”** — **VERIFIED** 17 Oct 2026 as **crowdsourced-config inclusion policy**, not Obtainium-the-app’s own star count. Official [APP_CRITERIA.md](https://github.com/ImranR98/apps.obtainium.imranr.dev/blob/main/APP_CRITERIA.md) item 5: where the platform provides a star/favorite count (GitHub, GitLab, Codeberg/Forgejo), the app’s source repository should have at least **35** of them. Same rule in CONTRIBUTING.md. Obtainium itself: GitHub API **20,480 stars** (17 Oct 2026). §22.3 updated.
+17. **Product Hunt Featuring Guidelines last-updated stamp** — **VERIFIED** 17 Oct 2026. Official [Featuring guidelines](https://help.producthunt.com/en/articles/9883485-product-hunt-featuring-guidelines): written by **Jake Crump**, **March 10, 2026**. Waitlisted products excluded unless immediate access; templates/boilerplates/courses/services listed as what they don’t feature. §22.3 updated.
+18. **Chrome Web Store registration fee dollar amount** — **VERIFIED** 17 Oct 2026 as **US$5.00 one-time**, last stated on official Google Chromium Blog **Thursday 12 Mar 2020**: “The Chrome Web Store charges a $5.00 fee to register as a Chrome Web Store developer.” ([blog.chromium.org/2020/03/new-developer-dashboard-and.html](https://blog.chromium.org/2020/03/new-developer-dashboard-and.html)). Official register page (last updated **13 Feb 2024** UTC, live 17 Oct 2026) still says “one-time registration fee”, lists India, and omits the dollar amount. Developer Agreement: amount at Google’s sole discretion. No later official page found changing the figure. Confirm at checkout. §21.2 updated.
+19. **CWS Featured badge exact sunset date** — **STILL UNVERIFIED as a calendar day.** Official Chrome blog **20 Aug 2026** (last updated 20 Aug 2026 UTC): sunsetting the Featured badge program **“later this year”**; self-nominations closed that day. Discovery docs still describe Featured (last updated **21 Mar 2022**). “Later in 2026 / nominations closed 20 Aug 2026” is **VERIFIED**. §21.2 updated.
+20. **Chrome-Stats Featured share (7.8% of MV3 listings / 48.3% of displayed users)** — **STILL UNVERIFIED as Google’s own metric.** Third-party snapshot 20 Jul 2026. chrome-stats.com returned **HTTP 403** on 17 Oct 2026. Keep as a dated third-party snapshot only.
+21. **Lifetime-tier willingness to pay for OBZRAi** — **STILL UNVERIFIED.** No product data. ₹3,999 / $79–99 is a planning envelope only.
+22. **Indian / global creator seeding conversion** — **STILL UNVERIFIED** (no OBZRAi data). **Live subscriber/follower counts VERIFIED 17 Oct 2026** and written into §22.3: Chai aur Code **1.04M**; Hitesh English **945K**; X @Hiteshdotcom **79,145** (bio “1M & 800k” is stale); Sanskar YT **25.2K**; X @IndianAppGuy **4,535**; X @suhasasumukh **12,484**; Suhas YT has **no public subscriber count**; Local Host India **46** subscribers.
+23. **MCP 2026-07-28 client support breadth on-device** — **STILL UNVERIFIED.** Official [MCP blog 28 Jul 2026](https://blog.modelcontextprotocol.io/posts/2026-07-28/) confirms the spec (stateless core, no `initialize`, Tier 1 SDKs) and is not a surveyed client-support census. Ship stdio first and document tested clients.
+24. **YouTube Shorts ignoring `t=` timestamps** — **STILL UNVERIFIED as YouTube official.** support.google.com timestamp help URLs 404’d on 17 Oct 2026. IFrame Player API documents `start=` for embeds ([player_parameters](https://developers.google.com/youtube/player_parameters), updated **15 Oct 2026**). TeamYouTube (16 Apr 2026) described Share-at-Timestamp on mobile for videos, with Video Clips rolling out to Shorts later in 2026. FR-091 updated: store `t=` on watch URLs; do not claim Shorts deep-links until measured.
+25. **W3C TAG “Installing Websites Must Be Easy” (16 Oct 2026)** — **VERIFIED** 17 Oct 2026 as a **Draft Finding of the TAG, 16 October 2026** at [https://w3ctag.github.io/install-finding/](https://w3ctag.github.io/install-finding/). Explicitly a draft, not a W3C Recommendation. The `www.w3.org/blog/2026/installing-websites-must-be-easy/` URL returned **404**. §21.1 URL updated. Do not treat as a shipping requirement.
+26. **ExtensionPay take-rate** — **VERIFIED** vendor-stated 17 Oct 2026 on [extensionpay.com](https://extensionpay.com): **“5% transaction fee at time of charge”**, **“No monthly fees”**, Stripe processing extra. Not a Google figure. Confirm Stripe % at integration. §22.4 updated.
+27. **Nicheloom Product Hunt volume (28,255 launches / 35 days, ~3.8% featured, 14 Oct 2026)** — **STILL UNVERIFIED as Product Hunt official.** Third-party scraper.
+28. **Sanskar Tiwari / IndianAppGuy current YouTube subscriber count** — **VERIFIED** 17 Oct 2026: **25.2 thousand** subscribers on [@indianappguy](https://www.youtube.com/@indianappguy/about) (`UCsPdgUIoOBTBI1UmulW1pdw`), 228 videos, 2,078,002 views. §22.3 updated (was Unverified / older listings ~24.5K).
+29. **Show HN new-account restriction / AI-text ban** — **VERIFIED (AI-text ban)**; **STILL UNVERIFIED (new-account restriction).** [newsguidelines.html](https://news.ycombinator.com/newsguidelines.html) retrieved 17 Oct 2026: “Please don't put generated text in HN posts” and “Don't post generated text or AI-edited text.” [showhn.html](https://news.ycombinator.com/showhn.html): no signup/email barriers preferred; don’t ask friends to upvote; **no new-account restriction stated**. §22.3 updated.
+30. **developer.chrome.com SSRF** — **VERIFIED re-opened 17 Oct 2026** via `curl` (HTTP 200). Last-updated stamps live: tabs **24 Sep 2026** UTC; commands **11 Sep 2026** UTC; sidePanel **11 Sep 2026** UTC; CWS images **11 Jun 2018** UTC; CWS register **13 Feb 2024** UTC; CWS discovery **21 Mar 2022** UTC; CWS review-updates blog **20 Aug 2026** UTC. Chromium source confirms `MAX_CAPTURE_VISIBLE_TAB_CALLS_PER_SECOND` **value: 2**. CWS image sizes folded into §21.2 listing craft. commands ≤4 `suggested_key` restated (last updated 11 Sep 2026).
 
-Existing items 2 (Screenpipe prices), 4 (ReciMe SKUs) and 9 (RoW Play billing-fee %) remain unverified and still apply to §22 pricing.
+Chrome/Android facts the PRD relies on and re-opened this pass (also covered above): MediaProjection A14 one-shot; Play target API 36; captureVisibleTab = 2; CWS image sizes; CWS keyboard-shortcut limit; sidePanel Chrome 114/116 (+ Chrome 145 `close()` note).
 
-**New in v2.1 (17 October 2026):**
+**New in v2.1 (17 October 2026); statuses refreshed in v2.1 r1 where a cheap `curl` closed them:**
 
-31. **Ente paid SKUs ($2.49 Starter / $4.99 Popular / $9.99 Pro / $19.99 Pro+)** — aggregators citing ente.com on 15 Oct 2026 ([MacMyths](https://macmyths.com/apps/ente-photos/pricing/), [The Geeks Club, 17 Oct 2026](https://www.thegeeksclub.com/platforms/ente-photos/pricing/)). Official help confirms **10 GB free forever** ([ente.io/help](https://ente.io/help/photos/faq/storage-and-plans)). Checkout on ente.com was not fetched (SPA). Confirm at checkout.
-32. **Obsidian Sync Cure53 (Oct 2024) and Trail of Bits (Dec 2025) audit PDFs** — cited by WorkifyLab (31 Aug 2026) as published together in May 2026. Primary PDFs were not opened in this pass. E2E AES-256 and unrecoverable-password copy are taken from obsidian.md/sync and kepano’s X posts.
-33. **CWS small promo tile 440×280 “required on some surfaces”** — Kromio submit guide (updated Jul 2026). Official template marks it RECOMMENDED. Treat as recommended unless the dashboard blocks submit.
-34. **Play feature graphic exact 1024×500 / icon 512×512 / screenshot 2–8** — restated from Play Console Help by StoreShot (20 Sep 2026), Nuvex (checked 10 Oct 2026), Ecranify (16 Oct 2026). Re-open [Add preview assets](https://support.google.com/googleplay/android-developer/answer/9866151) and [listing best practices](https://support.google.com/googleplay/android-developer/answer/13393723) from a normal network before freezing the packet (SSRF risk as in item 15).
-35. **Product Hunt gallery 1270×760, thumbnail 240×240, tagline 60, image < 3 MB** — taken from PH launch guide as restated by Submitator (3 Aug 2026). Confirm on producthunt.com/launch the week of launch.
-36. **Drive appDataFolder quota** — official docs state the folder exists and is deleted on uninstall (3 Sep 2026). That it **counts against user quota** is community-confirmed (r/developersIndia, 19 Apr 2026) and widely reported; the official appdata guide does not spell out the quota sentence in the fetch used here. Treat quota-counts-against-user as **widely reported, confirm in Drive settings before promising “free sync.”**
-37. **Syncthing untrusted-device mode still beta** — docs.syncthing.net/users/untrusted.html dated 7 Oct 2026. Do not market P2P as a guaranteed E2E cloud replacement.
-38. **YouTube Data API `playlistItems.list` quota = 1 unit** — official docs last updated 14 Sep 2026. Daily quota remaining for a new GCP project is account-specific; do not claim unlimited playlist imports.
-39. **Fragment keys leaking via Referer, screenshots, or chat unfurls** — known class of issues for Excalidraw-style links; S23 must measure. No OBZRAi measurement yet.
-40. **D7-B engineering calendar (~3+ weeks)** — relative effort label only; no team velocity data.
-41. **FOSS United Bengaluru “every last Saturday”** — chapter page (fossunited.org/c/bengaluru, seen 17 Oct 2026). October 2026 listing showed **24 Oct 2026**; confirm before travelling.
-42. **Official CWS image-size page** — CWS Kit (Apr 2026) and the GoogleChrome CHROMEWEBSTORE.md template agree on 1280×800 / 640×400 / 128×128 / name 75 / summary 132. Re-open developer.chrome.com/docs/webstore/images from a normal network (SSRF as in item 30).
-
----
+31. **Ente paid SKUs ($2.49 Starter / $4.99 Popular / $9.99 Pro / $19.99 Pro+)** — **STILL UNVERIFIED** at ente.com checkout (SPA). Aggregators citing ente.com on 15 Oct 2026 ([MacMyths](https://macmyths.com/apps/ente-photos/pricing/), [The Geeks Club, 17 Oct 2026](https://www.thegeeksclub.com/platforms/ente-photos/pricing/)). Official help confirms **10 GB free forever** ([ente.io/help](https://ente.io/help/photos/faq/storage-and-plans)). Confirm at checkout.
+32. **Obsidian Sync Cure53 (Oct 2024) and Trail of Bits (Dec 2025) audit PDFs** — **STILL UNVERIFIED** as primary PDFs. Cited by WorkifyLab (31 Aug 2026) as published together in May 2026. E2E AES-256 and unrecoverable-password copy are taken from obsidian.md/sync and kepano’s X posts.
+33. **CWS small promo tile 440×280** — **VERIFIED required** 17 Oct 2026 on official [Supplying images](https://developer.chrome.com/docs/webstore/images) (last updated **11 Jun 2018** UTC): “You must provide one small, 440x280-pixel promotional image.” Kromio “required on some surfaces” / template RECOMMENDED is superseded. §21.2 / §22.9-B updated.
+34. **Play listing assets (icon / feature graphic / screenshots)** — **VERIFIED** 17 Oct 2026 on official [Add preview assets](https://support.google.com/googleplay/android-developer/answer/9866151): app icon **512×512**; feature graphic **1024×500** (must provide both); screenshots **minimum of two** across device types to publish, **up to 8** per device type; older dimension rule **320–3840 px** still listed; large-screen uploads **1,080–7,680 px**. §22.9-C updated; StoreShot/Ecranify no longer the primary source.
+35. **Product Hunt gallery 1270×760, thumbnail 240×240, tagline 60, image < 3 MB** — **STILL UNVERIFIED** as a live PH dashboard rule. Taken from PH launch guide as restated by Submitator (3 Aug 2026). Confirm on producthunt.com/launch the week of launch.
+36. **Drive appDataFolder quota** — **STILL UNVERIFIED** as an official quota sentence. Official docs state the folder exists and is deleted on uninstall (3 Sep 2026). That it **counts against user quota** is community-confirmed (r/developersIndia, 19 Apr 2026) and widely reported; the official appdata guide fetched 17 Oct 2026 does not spell out the quota sentence. Treat quota-counts-against-user as **widely reported, confirm in Drive settings before promising “free sync.”** (`drive.appdata` **scope class** is separately **VERIFIED non-sensitive** — see §9 D7 table, §28 R31, and Sources #202.)
+37. **Syncthing untrusted-device mode still beta** — **VERIFIED (docs still say beta)** 17 Oct 2026. Official [untrusted-device docs](https://docs.syncthing.net/users/untrusted.html) dated 7 Oct 2026 still mark the mode **beta / testing only**. Do not market P2P as a guaranteed E2E cloud replacement.
+38. **YouTube Data API `playlistItems.list` quota = 1 unit** — **VERIFIED** 17 Oct 2026 from official YouTube Data API docs (last updated 14 Sep 2026). Daily quota remaining for a new GCP project is account-specific; do not claim unlimited playlist imports.
+39. **Fragment keys leaking via Referer, screenshots, or chat unfurls** — known class of issues for Excalidraw-style links; S23 must measure. No OBZRAi measurement yet. **STILL UNVERIFIED** as an OBZRAi measurement.
+40. **D7-B engineering calendar (~3+ weeks)** — relative effort label only; no team velocity data. **STILL UNVERIFIED** as a calendar. D7-B is nevertheless **in scope** for Phase 2.
+41. **FOSS United Bengaluru “every last Saturday”** — chapter page (fossunited.org/c/bengaluru, seen 17 Oct 2026). October 2026 listing showed **24 Oct 2026**; confirm before travelling. **STILL UNVERIFIED** as a standing rule.
+42. **Official CWS image-size page** — **VERIFIED** 17 Oct 2026 at [developer.chrome.com/docs/webstore/images](https://developer.chrome.com/docs/webstore/images) (last updated **11 Jun 2018** UTC): icon **128×128** (artwork 96×96 + 16 px padding); small promo **440×280 required**; marquee **1400×560** optional; screenshots **1280×800** preferred or **640×400**, at least **1**, preferably **5** (maximum). Same page folded into §21.2 listing craft. SSRF note retired for this URL.
 
 ## 27. Naming and trademark risk
 
@@ -2598,7 +2640,7 @@ Existing items 2 (Screenpipe prices), 4 (ReciMe SKUs) and 9 (RoW Play billing-fe
 | R7 | Name collision (Observer AI / Obz AI) | Med | Med | OBZRAi + IP India filing; avoid “Observer” in first-line ads |
 | R8 | DPDP 18-month duties (May 2027) if accounts exist | Med | High | Local-first MVP; counsel before account launch; notices and deletion already in the product |
 | R9 | Instagram ToS enforcement | Low–Med | High | No scraper/downloader; no IG-focused ads; OS capture only |
-| R10 | Scope creep (sync + assistant + imagination in MVP) | Med | High | D1–D5 recommendations; Phase 1 freeze |
+| R10 | Scope creep (sync + assistant + imagination in MVP) | Med | High | D1–D6 recommendations; Phase 1 freeze; D7-B is Phase 2 (thin payload only), not MVP |
 | R11 | Midrange thermal/battery on OCR+ASR | Med | Med | Adaptive sampling; profile before claims; tiny Whisper by default |
 | R12 | E2E key loss | Med (when sync ships) | High | Recovery key; honest copy; device-only sensitive collections |
 | R13 | Cloud AI cost | Med | Med | BYO key first; meters; off by default |
@@ -2613,12 +2655,14 @@ Existing items 2 (Screenpipe prices), 4 (ReciMe SKUs) and 9 (RoW Play billing-fe
 | R22 | Hindi STT quality too low for FR-092 claim | Med | Med | S16 labelled set; do not advertise “perfect Hinglish transcription” |
 | R23 | Scope creep from §23 proposals into Android MVP | Med | High | PROPOSAL marker; Phase 1 freeze (R10) still wins |
 | R24 | DPDP exposure from shareable board URLs (FR-087) | Low until built | High | P2; explicit publish; expiry; fragment key; noindex; counsel before public links; S23 |
-| R25 | D7-B pulled into Phase 2 slips the extension exit | Med if B accepted | Med | Default remains A; B is a fast-follow after CWS unlisted testers; S22 spike first |
+| R25 | D7-B (now decided) slips the extension exit | Med | Med | Thin payload only; S22 + S24 first; CWS unlisted testers before public; full-res stays Phase 4 |
 | R26 | Users treat thin sync (thumbs) as a full-res backup | Med if B ships | Med | FR-106 copy; full-res stays local; Phase 4 upsell is honest |
 | R27 | Drive appData / WebDAV quota fills with thumbnails | Med | Med | Byte cap on thumbs; user-visible quota; no full-res on B |
 | R28 | Fragment-key share URL leaked (chat unfurl, Referer, screenshot) | Med when FR-087 ships | High | `Referrer-Policy: no-referrer`; optional password; short default expiry (7 days); revoke |
 | R29 | Native messaging / localhost bridge rejected or poorly justified on CWS | Low–Med if C ships | Med | Ship (c) side panel without nativeMessaging; add (b) only with a written purpose |
 | R30 | Marketing site origin confused with a hosted plaintext Hub | Med | High | Distinct origins; Hub pages noindex; copy in §21.7 |
+| R31 | Google OAuth brand verification for `drive.appdata` | Med | Med | Scope is **non-sensitive** ([Drive appdata guide](https://developers.google.com/workspace/drive/api/guides/appdata) and [Choose Google Drive API scopes](https://developers.google.com/workspace/drive/api/guides/api-specific-auth), both last updated **3 Sep 2026** UTC, retrieved 17 Oct 2026). With **only** non-sensitive scopes, OAuth **app verification is not mandatory**. **Brand verification** (lighter-weight) is needed to show the OBZRAi name and logo on the consent screen ([OAuth App Verification Help](https://support.google.com/cloud/answer/13463073), retrieved 17 Oct 2026). Do not request `drive` / `drive.readonly` (sensitive/restricted). S24 measures the **brand verification** path. |
+| R32 | Drive `appDataFolder` quota / OAuth consent friction | Med | Med | Byte cap on thumbs (FR-103); user-visible quota; WebDAV as the FOSS adapter; never promise “free unlimited sync” (quota sentence still Unverified #36) |
 
 ---
 
@@ -2637,7 +2681,7 @@ Engineering validation (keep from v1.2; still open):
 9. React Native: replace Compose on Android, or iOS/cross-platform only?
 10. Desktop framework: Tauri vs Electron vs native; which OS first (recommendation: **macOS first**).
 11. Browser: Chromium-only first vs Chromium+Firefox (recommendation: **Chromium first**).
-12. Sync backend: managed vs self-host vs user-owned storage.
+12. Sync backend — **partially closed with D7-B:** Phase 2 uses **user-owned storage** (Drive `appDataFolder` first, WebDAV next). Remaining: Phase 4 hosted relay managed vs self-host (open question 20).
 13. Sign-in: email/passkey vs third-party vs both (recommendation: **passkey + email**, no mandatory social login).
 14. E2E recovery-key UX.
 15. Imagination provider and who pays (recommendation: **BYO key first**).
@@ -2646,7 +2690,7 @@ Engineering validation (keep from v1.2; still open):
 18. Backup consumer name if IP India blocks OBZRAi.
 19. Whether Pro IAP ships in the first Play listing or only after product-market fit on FOSS.
 20. Data residency region for the sync relay if D1 proceeds (recommendation: **India region option** for Indian accounts).
-21. Confirm CWS **$5** registration at checkout (official page omits the amount).
+21. Confirm CWS **$5.00** registration at checkout (Chromium Blog 12 Mar 2020 states $5.00; register page still omits the amount).
 22. Which four `suggested_key` bindings to ship if OS/browser conflicts appear in S10 (recommendation: panel, save, skip, voice — FR-066).
 23. Notion integration: internal integration token vs public OAuth (recommendation: **token in V1**, OAuth later).
 24. Whether to ship **lifetime** Pro at all (recommendation: **P2**, after 90-day conversion data).
@@ -2656,11 +2700,11 @@ Engineering validation (keep from v1.2; still open):
 28. Hindi UI before first Play India listing, or English-only Play with Hindi in a fast follow (recommendation: **Hindi strings before India listing**, FR-076).
 29. F-Droid flavor: ML Kit vs Tesseract if ML Kit is considered non-free (ties to open question 2).
 30. Whether the standalone PWA origin is `app.obzrai` / `obzrai.app` after domain and TM clearance.
-31. **D7 (new, Basant):** keep full E2E sync in Phase 4 (A), pull minimal E2E into Phase 2 (B), and/or ship LAN/QR pairing (C). Recommendation in §9: **A default; B as Phase 2 fast-follow if phone↔browser must work when the extension ships, user-owned storage first; C as pairing bonus.**
-32. First D7-B storage adapter: Drive `appDataFolder` vs WebDAV vs both (recommendation: **WebDAV + Drive**, WebDAV for FOSS flavor).
+31. **D7 — CLOSED 17 Oct 2026.** Basant decided **Option B**: minimal opt-in E2E in Phase 2 (items + thumbnails + transcripts; Drive `appDataFolder` then WebDAV; ciphertext relay later). Full-res stays Phase 4. Option C remains a P2 bonus. See §9 D7.
+32. First D7-B storage adapter: **Drive `appDataFolder` first, WebDAV next** (decided with D7-B). FOSS flavor still ships WebDAV. Remaining: whether both adapters ship in the same Phase 2 cut or WebDAV is a fast-follow inside Phase 2.
 33. Thumbnail byte cap for FR-103 (recommendation: **≤ 200 KB JPEG**, revisit after S22).
 34. Share-link default expiry: 7 vs 31 days (recommendation: **7 days**, Bitwarden Send default; max 31).
-35. Whether FR-087 ships in Phase 2 if D7-B already has a ciphertext store, or waits for Phase 4 (recommendation: **wait for Phase 4** unless B is already in users’ hands).
+35. Whether FR-087 ships in Phase 2 or waits for Phase 4: **Phase 4 by default; Phase 2 optional once the FR-103 store ships**.
 36. Counsel review: is user-owned Drive appData (ciphertext, key on device) enough to keep OBZRAi off DPDP fiduciary duties for D7-B?
 
 Until spikes close, copy must say **“capture and transcribe when permitted,”** never “records every Reel,” “saves every page on every platform,” or “captures any movie.”
@@ -2704,9 +2748,9 @@ Until spikes close, copy must say **“capture and transcribe when permitted,”
 | PROPOSAL | §23 item; not Android MVP unless already P0 in §13. |
 | Continuity | A save on one signed-in or paired device appearing in the Hub on another (§24). |
 | Fragment-key share | Read-only link whose decryption key lives after `#` in the URL (Excalidraw pattern; FR-087/105). |
-| appDataFolder | Google Drive hidden per-app folder (`drive.appdata` scope); candidate ciphertext store for D7-B. |
+| appDataFolder | Google Drive hidden per-app folder (`drive.appdata` **non-sensitive** scope); decided first ciphertext store for D7-B (Phase 2). |
 | Local bridge | Option (b): extension or desktop serves the local store over native messaging, localhost, or WebRTC pairing. |
-| D7 | Pending decision: pull minimal E2E sync into Phase 2 vs keep full sync in Phase 4. |
+| D7 | Decision (Option B, Basant, 17 Oct 2026): pull minimal opt-in E2E (items + thumbs + transcripts) into Phase 2 via Drive `appDataFolder` then WebDAV; full-res stays Phase 4; Option C is a P2 bonus. |
 
 ---
 
@@ -2716,8 +2760,8 @@ Live research, 17 October 2026, unless a row states another date. These support 
 
 | # | Claim area | URL | Date |
 |---|---|---|---|
-| 1 | Android MediaProjection | https://developer.android.google.cn/media/grow/media-projection?authuser=0 | Live 17 Oct 2026 |
-| 2 | Android 14 MediaProjection consent | https://developer.android.com/about/versions/14/behavior-changes-14 | Live |
+| 1 | Android MediaProjection | https://developer.android.com/media/grow/media-projection | Last updated 24 Jan 2025 UTC; retrieved 17 Oct 2026 |
+| 2 | Android 14 MediaProjection consent | https://developer.android.com/about/versions/14/behavior-changes-14 | Last updated 16 Oct 2026 UTC; retrieved 17 Oct 2026 |
 | 3 | Android 14 QPR2 single-app recording | https://9to5google.com/2023/11/15/android-14-qpr2-single-app-recording/ | 15 Nov 2023 |
 | 4 | Android screen sharing 2026 notes (API 36, 14 QPR2) | https://www.forasoft.com/blog/article/screen-sharing-android-1644 | 1 Aug 2026 |
 | 5 | FGS types including mediaProjection | https://developer.android.com/develop/background-work/services/fgs/service-types | Live |
@@ -2737,7 +2781,7 @@ Live research, 17 October 2026, unless a row states another date. These support 
 | 19 | Verification first wave | https://www.androidauthority.com/android-sideloading-developer-verification-first-wave-rollout-3717921/ | 1 Oct 2026 |
 | 20 | Verification took effect | https://www.theverge.com/tech/1003920/androids-developer-verification-rules-just-took-effect-for-the-first-time | 2 Oct 2026 |
 | 21 | 24-hour sideload flow | https://arstechnica.com/gadgets/2026/03/google-details-new-24-hour-process-to-sideload-unverified-android-apps/ | 19 Mar 2026 |
-| 22 | Chrome tabs API / 2 per second | https://developer.chrome.com/docs/extensions/mv2/reference/tabs | 28 Sep 2026 |
+| 22 | Chrome tabs API / 2 per second | https://developer.chrome.com/docs/extensions/reference/api/tabs | Last updated 24 Sep 2026 UTC; retrieved 17 Oct 2026 |
 | 23 | chrome.tabCapture | https://developer.chrome.com/docs/extensions/reference/api/tabCapture | 11 Sep 2026 |
 | 24 | Offscreen documents MV3 | https://developer.chrome.com/blog/Offscreen-Documents-in-Manifest-v3 | 25 Jan 2023 |
 | 25 | Chromium quota history | https://issues.chromium.org/issues/40764505 | 4–5 May 2021 |
@@ -2762,7 +2806,7 @@ Live research, 17 October 2026, unless a row states another date. These support 
 | 44 | Meta/IPSOS India Reels | https://about.fb.com/news/2026/06/reels-is-shaping-indias-video-first-future-across-gen-z-women-bharat/ | 3 Jun 2026 |
 | 45 | YouTube Shorts 200B | https://blog.youtube/news-and-events/neal-mohan-cannes-2025/ | 18 Jun 2025 |
 | 46 | Shorts view-counting change | https://www.thekeyword.co/stats/youtube-shorts | 2025–2026 |
-| 47 | ReciMe Play listing | https://play.google.com/store/apps/details?id=com.recime.app | Updated 1 Oct 2026 |
+| 47 | ReciMe Play listing | https://play.google.com/store/apps/details?id=com.recime.app | Updated 1 Oct 2026; retrieved 17 Oct 2026 (1M+, 4.67★, 110,590 ratings) |
 | 48 | Pocket shutdown | https://blog.mozilla.org/en/mozilla/building-whats-next/ | 22 May 2025 |
 | 49 | Pocket support / export end | https://support.mozilla.org/en-US/kb/future-of-pocket | 12 Nov 2025 |
 | 50 | Meta acquires Limitless | https://techcrunch.com/2025/12/05/meta-acquires-ai-device-startup-limitless/ | 5 Dec 2025 |
@@ -2770,16 +2814,16 @@ Live research, 17 October 2026, unless a row states another date. These support 
 | 52 | Pixel Screenshots cloud | https://9to5google.com/2026/06/17/pixel-screenshots-cloud-ai/ | 17 Jun 2026 |
 | 53 | Pixel Screenshots AA | https://www.androidauthority.com/pixel-screenshots-cloud-processing-3678819/ | 18 Jun 2026 |
 | 54 | Pixel backlash | https://www.androidauthority.com/google-made-me-turn-off-pixel-screenshots-3680197/ | 24 Jun 2026 |
-| 55 | Observer AI GitHub | https://github.com/Roy3838/Observer | Live Oct 2026 |
+| 55 | Observer AI GitHub | https://github.com/Roy3838/Observer (API: https://api.github.com/repos/Roy3838/Observer) | 17 Oct 2026: 1,652 stars / 142 forks |
 | 56 | BhaiFinder pricing | https://www.stork.ai/en/bhaifinder | 30 Sep 2026 |
 | 57 | Recall.it pricing | https://www.recall.it/pricing | Live Oct 2026 |
 | 58 | Readwise pricing check | https://www.marqly.com/blog/readwise-reader-review-2026 | 6 Oct 2026 |
 | 59 | mymind pricing | https://mymind.com/pricing | Live |
 | 60 | Glasp price hike | https://blog.glasp.co/price-update-2026-05-01/ | 27 Mar 2026 |
 | 61 | Raindrop pricing | https://contextbolt.com/blog/raindrop-pricing/ | 10 Sep 2026 |
-| 62 | Screenpipe GitHub | https://github.com/screenpipe/screenpipe | 17 Oct 2026 |
+| 62 | Screenpipe GitHub | https://github.com/screenpipe/screenpipe (API: https://api.github.com/repos/screenpipe/screenpipe) | 17 Oct 2026: 21,960 stars / 2,248 forks |
 | 63 | Screenpipe license | https://screenpipe.com/blog/screenpipe-license-update | 9 Jun 2026 |
-| 64 | Screenpipe prices (aggregator) | https://www.positioniseverything.net/tools/screenpipe/pricing/ | 16 Oct 2026 (cites 1 Oct 2026) |
+| 64 | Screenpipe official pricing | https://screenpipe.com/onboarding (nav Pricing; /pricing redirects here) | 17 Oct 2026: Free $0; Basic $25/mo or $250/yr (~$21/mo billed annually); Business $50/seat/mo or $500/seat/yr (~$42/seat/mo billed annually) |
 | 65 | Instagram Terms | https://help.instagram.com/581066165581870/ | Live 17 Oct 2026 |
 | 66 | DPDP Rules text | https://cadp.in/resources/official-texts/dpdp-rules-2025/ | 15 Oct 2026 |
 | 67 | MeitY DPDP Rules listing | https://www.meity.gov.in/documents/act-and-policies/digital-personal-data-protection-rules-2025-gDOxUjMtQWa | Published 14 Nov 2025 |
@@ -2801,9 +2845,9 @@ Live research, 17 October 2026, unless a row states another date. These support 
 | 83 | Saved Reels how-to | https://www.lilachbullock.com/how-to-find-your-saved-reels-on-instagram/ | 3 Oct 2026 |
 | 84 | Pixel Screenshots help | https://support.google.com/pixelphone/answer/15312581 | Live |
 | 85 | Keep Android Open / F-Droid campaign | https://keepandroidopen.org/ | Linked from F-Droid 24 Sep 2026 |
-| 86 | CWS register (India listed; one-time fee) | https://developer.chrome.com/docs/webstore/register | Last updated 13 Feb 2024 |
-| 87 | CWS $5 fee (secondary) | https://extensionbooster.net/blog/chrome-web-store-developer-registration-fee-2026-guide/ | 22 Jun 2026 |
-| 88 | CWS $5 fee (secondary) | https://www.extensionradar.com/blog/chrome-web-store-developer-fee-2026 | 16 Feb 2026 |
+| 86 | CWS register (India listed; one-time fee; amount omitted) | https://developer.chrome.com/docs/webstore/register | Last updated 13 Feb 2024 UTC; retrieved 17 Oct 2026 |
+| 87 | CWS $5.00 fee (official Chromium Blog) | https://blog.chromium.org/2020/03/new-developer-dashboard-and.html | Thursday 12 Mar 2020; retrieved 17 Oct 2026 |
+| 88 | CWS $5 fee (secondary, superseded by row 87) | https://www.extensionradar.com/blog/chrome-web-store-developer-fee-2026 | 16 Feb 2026 |
 | 89 | CWS review updates (slots, Featured sunset) | https://developer.chrome.com/blog/cws-review-updates-2026 | 20 Aug 2026 |
 | 90 | Chrome-Stats Featured snapshot | https://chrome-stats.com/blog/2026/07/20/featured-badge-maintenance-signal | 20 Jul 2026 |
 | 91 | CWS 2-Step Verification policy | https://developer.chrome.com/docs/webstore/program-policies/two-step-verification | 1 Nov 2022 |
@@ -2825,7 +2869,7 @@ Live research, 17 October 2026, unless a row states another date. These support 
 | 107 | web.dev vitals | https://web.dev/articles/vitals | Live / seen 17 Oct 2026 |
 | 108 | Product Hunt prepare for launch | https://www.producthunt.com/launch/preparing-for-launch | Seen 17 Oct 2026 |
 | 109 | Product Hunt launch guide | https://www.producthunt.com/launch | Seen 17 Oct 2026 |
-| 110 | Product Hunt featuring guidelines | https://help.producthunt.com/en/articles/9883485-product-hunt-featuring-guidelines | Date not shown |
+| 110 | Product Hunt featuring guidelines | https://help.producthunt.com/en/articles/9883485-product-hunt-featuring-guidelines | Written by Jake Crump, 10 Mar 2026; retrieved 17 Oct 2026 |
 | 111 | Product Hunt relaunch rules (secondary, cites 7 Jul 2026 help) | https://www.agentlaun.ch/blogs/product-hunt-relaunch-rules | 5 Oct 2026 |
 | 112 | ReciMe PH launch | https://www.hunted.space/product/recime-2/launches/recime-2 | 12 Oct 2023 |
 | 113 | Show HN guidelines | https://news.ycombinator.com/showhn.html | Date not shown |
@@ -2839,8 +2883,8 @@ Live research, 17 October 2026, unless a row states another date. These support 
 | 121 | YouTube timestamp links (secondary) | https://www.sendible.com/insights/youtube-timestamp-link | 1 Oct 2026 |
 | 122 | YouTube timestamp (secondary) | https://youtubeview.app/blog/youtube-timestamp-link | 11 Oct 2026 |
 | 123 | Notion API intro (version header) | https://developers.notion.com/reference/intro | Live Oct 2026; version 2026-03-11 |
-| 124 | W3C TAG installing websites draft | https://www.w3.org/blog/2026/installing-websites-must-be-easy/ | 16 Oct 2026 |
-| 125 | Hitesh Choudhary X (self-reported YT scale) | https://x.com/Hiteshdotcom/status/2101983978194653589 | 21 Sep 2026 |
+| 124 | W3C TAG installing websites draft | https://w3ctag.github.io/install-finding/ | Draft Finding of the TAG, 16 Oct 2026; retrieved 17 Oct 2026 (www.w3.org/blog URL 404) |
+| 125 | Hitesh Choudhary X profile | https://x.com/Hiteshdotcom | 17 Oct 2026: 79,145 followers; bio still “1M & 800k” (stale vs live YT) |
 | 126 | Obtainium 35-star claim (X) | https://x.com/arferrari/status/2108913902448718258 | 10 Oct 2026 |
 | 127 | Better Launch PH 12:01 PT | https://www.betterlaunch.co/blog/how-to-launch-on-product-hunt | 3 Oct 2026 |
 | 128 | Signals PH 12:01 AM PT | https://signals.sh/blog/what-time-to-launch-on-product-hunt-pst | 23 Apr 2026 / updated 12 May 2026 |
@@ -2855,7 +2899,7 @@ Live research, 17 October 2026, unless a row states another date. These support 
 | 137 | Limitless/Meta | https://techcrunch.com/2025/12/05/meta-acquires-ai-device-startup-limitless/ | 5 Dec 2025 |
 | 138 | CWS Featured badges original | https://blog.google/products/chrome/find-great-extensions-new-chrome-web-store-badges/ | Date not shown (original announcement) |
 | 139 | Play India alternative billing | https://support.google.com/googleplay/android-developer/answer/13306652 | Live |
-| 140 | ecorpit Play fee split | https://ecorpit.com/google-play-service-fee-split-2026-app-economics/ | 19 Jul 2026 |
+| 140 | ecorpit Play fee split (secondary; official is 180–181) | https://ecorpit.com/google-play-service-fee-split-2026-app-economics/ | 19 Jul 2026 |
 | 141 | Obsidian Sync product page (AES-256 E2E, Standard $4 / Plus $8 annual) | https://obsidian.md/sync | Seen 17 Oct 2026 |
 | 142 | Obsidian pricing (aggregators verified) | https://sourcetier.com/pricing/obsidian | Observed 16 Oct 2026 |
 | 143 | kepano on Obsidian Sync E2E vs Dropbox/Drive/GitHub | https://x.com/kepano/status/2090281274569380312 | 20 Aug 2026 |
@@ -2874,10 +2918,10 @@ Live research, 17 October 2026, unless a row states another date. These support 
 | 156 | Proton Drive search-under-E2E | https://x.com/ProtonDrive/status/2110734481804099638 | 15 Oct 2026 |
 | 157 | Ente storage FAQ (10 GB free forever) | https://ente.io/help/photos/faq/storage-and-plans | Seen 17 Oct 2026 |
 | 158 | Ente paid SKUs (aggregator citing ente.com) | https://macmyths.com/apps/ente-photos/pricing/ | 15 Oct 2026 |
-| 159 | Google Drive application data folder | https://developers.google.com/workspace/drive/api/guides/appdata | Last updated 3 Sep 2026 |
+| 159 | Google Drive application data folder (`drive.appdata` **non-sensitive** scope) | https://developers.google.com/workspace/drive/api/guides/appdata | Last updated 3 Sep 2026 UTC; retrieved 17 Oct 2026 |
 | 160 | Chrome native messaging | https://developer.chrome.com/docs/extensions/develop/concepts/native-messaging | Last updated 16 Sep 2026 |
 | 161 | Play store listing best practices (title 30, short 80, full 4000) | https://support.google.com/googleplay/android-developer/answer/13393723 | Seen 17 Oct 2026 |
-| 162 | Play add preview assets (screenshots 2–8, 320–3840) | https://support.google.com/googleplay/android-developer/answer/9866151 | Seen 17 Oct 2026 |
+| 162 | Play add preview assets (icon 512; feature 1024×500; min 2 screenshots; up to 8/type) | https://support.google.com/googleplay/android-developer/answer/9866151 | Retrieved 17 Oct 2026 |
 | 163 | Play listing assets checklist (icon 512, feature 1024×500) | https://storeshot.ai/blog/play-store-listing-assets-checklist/ | 20 Sep 2026 |
 | 164 | Play feature graphic 1024×500 (checked against Play Help Oct 2026) | https://ecranify.com/guides/google-play-feature-graphic | 16 Oct 2026 |
 | 165 | Play ASO fields indexed | https://appdrift.co/blog/google-play-seo | 7 Oct 2026, updated 11 Oct 2026 |
@@ -2895,9 +2939,33 @@ Live research, 17 October 2026, unless a row states another date. These support 
 | 177 | @fossdot Delhi meetup announcement | https://x.com/fossdot/status/2109935155830022158 | 13 Oct 2026 |
 | 178 | FOSS United home (Bengaluru 24 Oct 2026 listing) | https://fossunited.org/ | Seen 17 Oct 2026 |
 | 179 | r/developersIndia on Drive appDataFolder quota | https://www.reddit.com/r/developersIndia/comments/1spzhw5/google_has_free_peruser_storage_built_in_and/ | 19 Apr 2026 |
+| 180 | Play service fees (official; 97%; remaining-markets 15/30%; 10%+5% table) | https://support.google.com/googleplay/android-developer/answer/112622 | Retrieved 17 Oct 2026 |
+| 181 | Play lower service fees + expanded billing choice (rollout dates; RoW billing forthcoming) | https://support.google.com/googleplay/android-developer/answer/16954621 | Retrieved 17 Oct 2026 |
+| 182 | Play target API level requirements (API 36 / 31 Aug 2026 / ext 1 Nov 2026) | https://support.google.com/googleplay/android-developer/answer/11926878 | Retrieved 17 Oct 2026 |
+| 183 | Android 16 behavior changes (all apps) — no MediaProjection section | https://developer.android.com/about/versions/16/behavior-changes-all | Last updated 16 Oct 2026 UTC; retrieved 17 Oct 2026 |
+| 184 | Android 16 behavior changes (targeting 16) — no MediaProjection section | https://developer.android.com/about/versions/16/behavior-changes-16 | Last updated 16 Oct 2026 UTC; retrieved 17 Oct 2026 |
+| 185 | Chromium tabs.json MAX_CAPTURE_VISIBLE_TAB_CALLS_PER_SECOND = 2 | https://raw.githubusercontent.com/chromium/chromium/main/chrome/common/extensions/api/tabs.json | Retrieved 17 Oct 2026 |
+| 186 | CWS supplying images (128×128, 440×280 required, 1400×560, 1280×800) | https://developer.chrome.com/docs/webstore/images | Last updated 11 Jun 2018 UTC; retrieved 17 Oct 2026 |
+| 187 | ReciMe official help — US yearly $39.99 | https://recime.app/help/en/articles/11630592-how-much-does-the-recime-subscription-cost | Last updated 9 Aug 2026; retrieved 17 Oct 2026 |
+| 188 | ReciMe official help — 5 free weekly imports | https://recime.app/help/en/articles/14999602-how-your-5-free-weekly-imports-work | Last updated 6 May 2026; retrieved 17 Oct 2026 |
+| 189 | ReciMe App Store US (ReciMe Plus $29.99 / $39.99 / $59.99; 4.8★ / 314,015) | https://apps.apple.com/us/app/recime-recipes-meal-planner/id1593779280 | Retrieved 17 Oct 2026 |
+| 190 | Obtainium crowdsourced config 35-star rule | https://github.com/ImranR98/apps.obtainium.imranr.dev/blob/main/APP_CRITERIA.md | Retrieved 17 Oct 2026 |
+| 191 | Obtainium GitHub stars | https://api.github.com/repos/ImranR98/Obtainium | 17 Oct 2026: 20,480 stars / 630 forks |
+| 192 | ExtensionPay 5% transaction fee | https://extensionpay.com | Retrieved 17 Oct 2026 |
+| 193 | HN guidelines (no generated / AI-edited text) | https://news.ycombinator.com/newsguidelines.html | Retrieved 17 Oct 2026 |
+| 194 | Hitesh English YouTube about | https://www.youtube.com/@HiteshCodeLab/about | 17 Oct 2026: 945 thousand subscribers; 80,736,879 views |
+| 195 | Chai aur Code YouTube about | https://www.youtube.com/@chaiaurcode/about | 17 Oct 2026: 1.04 million subscribers; 115,659,046 views |
+| 196 | Sanskar Tiwari YouTube about | https://www.youtube.com/@indianappguy/about | 17 Oct 2026: 25.2 thousand subscribers; 228 videos |
+| 197 | Suhas Sumukh YouTube about (no public sub count) | https://www.youtube.com/@suhasasumukh/about | 17 Oct 2026; joined 2 Feb 2022 |
+| 198 | Local Host India YouTube about | https://www.youtube.com/@LocalHostIndia/about | 17 Oct 2026: 46 subscribers; 3 videos |
+| 199 | Sanskar Tiwari X | https://x.com/IndianAppGuy | 17 Oct 2026: 4,535 followers |
+| 200 | Suhas Sumukh X | https://x.com/suhasasumukh | 17 Oct 2026: 12,484 followers |
+| 201 | YouTube IFrame player parameters (`start=`) | https://developers.google.com/youtube/player_parameters | Updated 15 Oct 2026; retrieved 17 Oct 2026 |
+| 202 | Choose Google Drive API scopes (`drive.appdata` listed under Non-sensitive) | https://developers.google.com/workspace/drive/api/guides/api-specific-auth | Last updated 3 Sep 2026 UTC; retrieved 17 Oct 2026 |
+| 203 | OAuth App Verification Help (non-sensitive scopes: app verification not mandatory; brand-verification for name/logo) | https://support.google.com/cloud/answer/13463073 | Retrieved 17 Oct 2026 |
 
 Implementation references retained from v1.2 (still valid starting points): Android overlay permission, FGS background-start restrictions, Room FTS4, share `ACTION_SEND`, Tesseract, ScreenCaptureKit, Windows UWP screen capture, xdg-desktop-portal.
 
 ---
 
-*End of OBZRAi PRD v2.1 (17 Oct 2026). Approval point: this document fixes product behavior, the approved overlay, live platform constraints, competition, pricing, D1–D6 recommendations, pending **D7**, the Phase 0–4 plan, the web-grade Hub/extension/marketing-site bar (§21), go-to-market (§22), proposed strength features (§23), and **cross-device continuity (§24)**. Engineering begins with Android spikes S1–S4 on the current Kotlin/Compose scaffold. Web-grade, GTM, D7-B, and standalone web-client work do not start before that gate.*
+*End of OBZRAi PRD v2.1 r2 (17 Oct 2026). Approval point: this document fixes product behavior, the approved overlay, live platform constraints, competition, pricing, D1–D6 recommendations, **D7 decided Option B**, the Phase 0–4 plan, the web-grade Hub/extension/marketing-site bar (§21), go-to-market (§22), proposed strength features (§23), and **cross-device continuity (§24)**. Engineering begins with Android spikes S1–S4 on the current Kotlin/Compose scaffold. Web-grade, GTM, D7-B, and standalone web-client work do not start before that gate.*
