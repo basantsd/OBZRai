@@ -1,120 +1,90 @@
 # Phase 0 spike results — S1–S4
 
-**Date:** 17 Oct 2026  
+**Date:** 17 Oct 2026 (closeout same day)  
 **Repo:** [basantsd/OBZRai](https://github.com/basantsd/OBZRai)  
-**Branch:** `cursor/phase0-spikes-3a5a`  
+**Branch:** `cursor/phase0-spikes-3a5a` · Draft [#4](https://github.com/basantsd/OBZRai/pull/4)  
 **PRD:** v2.1 r2 §19.1  
-**Exit rule:** No full-product UI rollout until S1–S4 pass or approved fallback recorded.
-
-Open questions **Q32** (WebDAV same cut vs fast-follow), **Q33** (200 KB thumb cap), **Q36** (DPDP legal) — **kept open**; not blocking Phase 0.
+**Owner:** Basant voice APPROVED 17 Oct 2026 — **stop holding; continue all phases.** Sharesheet interim approved for S1.
 
 ---
 
-## Summary table
+## Summary table (closeout)
 
 | Spike | Status | Fallback / notes | Evidence |
 |---|---|---|---|
-| **S1 Projection** | **PENDING** (device) / **PASS** (code + unit) | Pipeline + `MediaProjection.Callback.onStop` landed. Live Reel/Short frames + 15 QPR1+ chip/lock not exercised — worker emulator stuck offline. | `media/phase0/unit-test-summary.txt`, `media/phase0/gradle-build-test.log`, `media/phase0/emulator-status.txt` |
-| **S2 Overlay** | **PASS** (mechanics) · **`matches reference` = PENDING** | Compose 28 dp edge-clipped ring, drag/snap, host-tappable flags, 3 densities. Restricted-settings path documented. Visual match blocked on missing PNG. | `media/phase0/s2-overlay-geometry-densities.png`, geometry unit tests |
-| **S3 Clean frame** | **PASS** (approved fallback) | No Exclusion API on stock MediaProjection → **hide-and-settle (50 ms)** documented and unit-tested. | `CleanFrameCaptureTest`, code `CleanFrameCapture` |
-| **S4 Audio** | **PASS** (honesty) | Controlled live probe needs active projection. Instagram/YouTube expected block logged honestly — **≠ V1 no-go**. | `AudioPlaybackProbeTest`, honesty strings in probe |
+| **S1 Projection** | **PASS (interim)** · chip/lock **PENDING verification** | **Sharesheet fallback approved as interim** (Basant, 17 Oct 2026). Real MediaProjection pipeline remains in tree; do **not** claim chip/lock passed. | `media/phase0/*`, Sharesheet receiver in Phase 1 |
+| **S2 Overlay** | **PASS** (mechanics) · **`matches reference` = PENDING** | Compose placeholder until `assets/approved_overlay_reference.png` | `media/phase0/s2-overlay-geometry-densities.png` |
+| **S3 Clean frame** | **PASS** (approved fallback) | Hide-and-settle 50 ms | `CleanFrameCaptureTest` |
+| **S4 Audio** | **PASS** (honesty) | Third-party block ≠ V1 no-go | `AudioPlaybackProbeTest` |
 
-**Hard gates:** S1 device proof still **PENDING** (emulator guest hung). S2 mechanics **PASS**; reference match **PENDING** until asset arrives. Full-product UI rollout should wait for S1 device confirmation **or** owner-approved Sharesheet-only fallback.
+**Phase 0 exit:** Closed for continued build under Sharesheet interim + documented S2/S3/S4 outcomes. Full-product UI **authorized to proceed** (Basant).
+
+---
+
+## Assumptions locked at Phase 0 closeout (were open Qs)
+
+| ID | Assumption (safest default) | Status |
+|---|---|---|
+| **Q32** | WebDAV is **Phase 2 fast-follow after Drive `appDataFolder`** — not a same-cut Phase 2 exit blocker | **ASSUMPTION** |
+| **Q33** | Thin-sync thumbnail cap **≤ 200 KB JPEG** | **ASSUMPTION** |
+| **Q36** | Phases 1–2 stay **local-first / ciphertext / no-account**. **Counsel / DPDP review PENDING** before any account or hosted relay | **ASSUMPTION** · counsel **PENDING** |
+
+These do **not** reopen Phase 0 gates.
 
 ---
 
 ## Step A — Rename merge (done)
 
-- Fast-forwarded `cursor/scaffold-android-app-bed7` to include rename commit from PR #3.
-- PR #3 closed/merged; PR #1 title updated to **Scaffold OBZRAi Android base**.
-- No `.github/workflows` present or added.
+- Fast-forwarded `cursor/scaffold-android-app-bed7` with PR #3 rename.
+- PR #3 superseded/merged; PR #1 = OBZRAi scaffold.
+- No `.github/workflows`.
 
 ---
 
-## S1 — Projection
+## S1 — Projection (closeout)
 
 ### Implemented
-- `DefaultMediaProjectionGateway`: one-shot consent, VirtualDisplay + ImageReader, sample PNG frames under `filesDir/phase0/s1_frames/`.
-- `ObservationCaptureService`: FGS `mediaProjection` type; attach after `startForeground`.
-- `MediaProjection.Callback.onStop` → stop reason `projection_callback_on_stop` (chip / lock / revoke path).
-- Consent launcher in `MainActivity`; session SM requests consent when needed.
+- Real MediaProjection + ImageReader pipeline + `Callback.onStop`.
+- **Sharesheet interim** (`ACTION_SEND` image/text/URL) — owner-approved path while chip/lock stays unverified on device.
 
 ### Pass criteria vs status
 | Criterion | Status |
 |---|---|
-| Authorized session + repeated full-res frames | Code ready; **device PENDING** |
-| Portrait bounds preserved | Code uses real display metrics; **device PENDING** |
-| No new prompt per frame | Implemented (one-shot token) |
-| Chip + lock stop on 15 QPR1+ | Callback wired; **device PENDING** |
-
-### Evidence
-- Unit: session consent / start / stop — PASS  
-- `./gradlew :app:assembleDebug :app:testDebugUnitTest` — BUILD SUCCESSFUL  
-- Emulator API 35: stuck `offline` — see `media/phase0/emulator-status.txt`
+| Authorized session + repeated full-res frames | Code ready; live device **PENDING** |
+| Portrait bounds / no per-frame prompt | Implemented in code |
+| Chip + lock stop on 15 QPR1+ | Callback wired; **PENDING verification — do not claim passed** |
+| Interim continuity | **Sharesheet approved** (Basant 17 Oct 2026) |
 
 ---
 
 ## S2 — Overlay
 
-### Implemented
-- `OverlayService` + `DefaultOverlayController`: `TYPE_APPLICATION_OVERLAY`, `FLAG_NOT_FOCUSABLE | FLAG_NOT_TOUCH_MODAL | FLAG_LAYOUT_NO_LIMITS`.
-- Geometry: **28 dp** ring, **11 dp** glyph, **~40%** edge clip, drag + edge snap (`OverlayGeometry`).
-- Densities validated in unit tests at **1.0 / 2.0 / 3.0**.
-- Android 15+ sideload: `ACTION_MANAGE_OVERLAY_PERMISSION`; restricted-settings education noted in controller + this doc.
-
-### `matches reference` = **PENDING**
-Compose `ObserverRing` placeholder until owner asset arrives.
-
-### Ask Basant — approved overlay asset
-Please add **`assets/approved_overlay_reference.png`** (and optional density variants) to the repo:
+Mechanics **PASS**. **`matches reference` = PENDING** until owner PNG:
 
 | Item | Spec |
 |---|---|
-| **Path** | `assets/approved_overlay_reference.png` (repo root or `app/src/main/assets/`) |
-| **Format** | PNG, transparent background |
-| **Content** | Owner-approved **blue hollow ring** only (PRD §5.1 / §11.1) — not a replacement logo |
-| **Logical size** | **28×28 dp** reference |
-| **Pixel sizes** | Prefer `@1x` **28×28**, `@2x` **56×56**, `@3x` **84×84** (or one **84×84** / **112×112** master) |
-| **Optional glyph pack** | Separate 10–12 dp state glyphs (idle / listening / capturing / recording / saved / skipped / settings) — or confirm Compose glyph stand-in is OK until then |
-| **Color** | Match muted blue ring palette (scaffold uses `#4A7AB5`) |
+| Path | `assets/approved_overlay_reference.png` |
+| Format | PNG, transparent |
+| Size | 28×28 dp; prefer 28 / 56 / 84 px (@1x/@2x/@3x) |
+| Content | Approved blue hollow ring only |
 
-Until these land, S2 **mechanics PASS**; visual **reference match stays PENDING**.
-
-### Restricted-settings path (15+ sideload)
-1. Install APK (GitHub / Obtainium / sideload).  
-2. If “Display over other apps” greyed: App info → **Allow restricted settings**.  
-3. Settings → Apps → Special app access → Display over other apps → OBZRAi → Allow.  
-4. Return to app → Start Observing.
+Restricted-settings path (15+ sideload) documented in prior section.
 
 ---
 
-## S3 — Clean frame
+## S3 / S4
 
-### Result: **PASS** with documented fallback
-- Stock MediaProjection **cannot** exclude overlay windows → strategy `HIDE_AND_SETTLE` (`CleanFrameCapture.SETTLE_MS = 50`).
-- Unit tests: hide → capture → restore; no toggle when already hidden.
-- OEM Exclusion API: not available — documented limit.
+Unchanged: S3 hide-and-settle **PASS**; S4 honesty **PASS**.
 
 ---
 
-## S4 — Audio
-
-### Result: **PASS** (honesty); third-party fail ≠ V1 no-go
-- `AudioPlaybackProbe` + `RECORD_AUDIO` permission.
-- Honesty log always includes Instagram / YouTube / Netflix expected blocks.
-- Live PCM probe runs when projection active; silent stream ≠ success.
-- Controlled-app PASS still needs a permissive playback app on a healthy device/emulator.
-
----
-
-## Local verify (worker)
+## Local verify
 
 ```bash
 ./gradlew :app:assembleDebug :app:testDebugUnitTest
-# 9 unit tests, 0 failures
 ```
 
-No `.github/workflows` added.
+No `.github/workflows`.
 
 ---
 
@@ -122,19 +92,20 @@ No `.github/workflows` added.
 
 | Path | What |
 |---|---|
-| `gradle-build-test.log` | assembleDebug + unit test run |
+| `gradle-build-test.log` | assembleDebug + unit tests |
 | `unit-test-summary.txt` | 9 PASS |
 | `unit-test-results/*.xml` | JUnit XML |
-| `s2-overlay-geometry-densities.png` | 28 dp ring at 1×/2×/3× |
+| `s2-overlay-geometry-densities.png` | 28 dp @ 1×/2×/3× |
 | `emulator-status.txt` | API 35 emulator hung offline |
+| `phase0-closeout.txt` | Closeout stamp |
 
 ---
 
-## Go / no-go recommendation
+## Go / no-go (updated)
 
-| Gate | Recommendation |
+| Gate | Decision |
 |---|---|
-| S2 mechanics | **GO** (placeholder visual) |
-| S3 | **GO** with hide-and-settle |
-| S4 | **GO** for V1 visual path; audio best-effort |
-| S1 | **HOLD** full UI rollout until device/emulator confirms frames + chip/lock **or** Basant approves Sharesheet-only fallback |
+| S1 | **GO via Sharesheet interim**; chip/lock **PENDING** |
+| S2 mechanics | **GO**; reference match **PENDING** |
+| S3 / S4 | **GO** |
+| Full UI / Phase 1+ | **AUTHORIZED** (Basant voice, 17 Oct 2026) |
