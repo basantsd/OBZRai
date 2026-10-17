@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OBZRAi Hub</title>
+  <link rel="stylesheet" href="sidepanel.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">OBZRAi</div>
+    <div id="continuity" class="chip">local_only</div>
+  </header>
+  <p class="promise">Watch anything. Remember what matters.</p>
+  <div class="actions">
+    <button id="btn-save" type="button">Save active tab</button>
+    <button id="btn-refresh" type="button" class="secondary">Refresh</button>
+  </div>
+  <label class="sync-row">
+    <input id="sync-optin" type="checkbox" />
+    Opt-in thin sync (off by default · mock Drive appData)
+  </label>
+  <button id="btn-sync" type="button" class="secondary">Sync now</button>
+  <p id="sync-msg" class="muted"></p>
+  <input id="search" type="search" placeholder="Search titles, text, tags…" />
+  <ul id="list"></ul>
+  <p class="muted empty-hint" id="empty">Nothing saved yet. Save this page.</p>
+  <script type="module" src="sidepanel.js"></script>
+</body>
+</html>

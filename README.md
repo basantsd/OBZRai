@@ -100,3 +100,10 @@ Package id: `com.obzrai.observer` · App name: **OBZRAi** (formerly AI Observer)
 - On-device by default; no account/cloud required
 
 See the project PRD for full behavior once Researchy / spike work lands.
+
+
+## Browser extension (Phase 2 draft)
+
+Chromium MV3 side-panel Hub lives in `extension/`. Load unpacked in Chrome. Thin sync uses a **mock** Drive `appDataFolder` adapter (no Google account created). See `docs/phase2-extension-sync.md`.
+
+Shared matcher fixtures: `shared/observer-core/` (S9).

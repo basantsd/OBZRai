@@ -32,6 +32,7 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val micOptIn by viewModel.micOptIn.collectAsStateWithLifecycle()
+    val syncOptIn by viewModel.syncOptIn.collectAsStateWithLifecycle()
     val status by viewModel.statusMessage.collectAsStateWithLifecycle()
     var passphrase by remember { mutableStateOf("") }
 
@@ -64,6 +65,17 @@ fun SettingsScreen(
             checked = micOptIn,
             onCheckedChange = viewModel::setMicOptIn,
         )
+        RowSwitch(
+            label = "Opt-in thin sync (off by default · mock Drive appData)",
+            checked = syncOptIn,
+            onCheckedChange = viewModel::setSyncOptIn,
+        )
+        OutlinedButton(
+            onClick = viewModel::syncNow,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Thin sync now (ciphertext mock)")
+        }
 
         OutlinedTextField(
             value = passphrase,
