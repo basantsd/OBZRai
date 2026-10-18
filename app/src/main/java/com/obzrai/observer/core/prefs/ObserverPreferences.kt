@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -39,12 +40,26 @@ class ObserverPreferences @Inject constructor(
     val lastExportPath: Flow<String?> =
         context.dataStore.data.map { it[Keys.LAST_EXPORT] }
 
+    val syncOptIn: Flow<Boolean> =
+        context.dataStore.data.map { it[Keys.SYNC_OPT_IN] ?: false }
+
+    val lastThinSyncAt: Flow<Long?> =
+        context.dataStore.data.map { it[Keys.LAST_THIN_SYNC] }
+
     suspend fun setOnboardingComplete(done: Boolean) {
         context.dataStore.edit { it[Keys.ONBOARDING] = done }
     }
 
     suspend fun setLastExportPath(path: String) {
         context.dataStore.edit { it[Keys.LAST_EXPORT] = path }
+    }
+
+    suspend fun setSyncOptIn(value: Boolean) {
+        context.dataStore.edit { it[Keys.SYNC_OPT_IN] = value }
+    }
+
+    suspend fun setLastThinSyncAt(epochMs: Long) {
+        context.dataStore.edit { it[Keys.LAST_THIN_SYNC] = epochMs }
     }
 
     suspend fun setOverlayPosition(x: Int, y: Int) {
@@ -69,6 +84,8 @@ class ObserverPreferences @Inject constructor(
         val MATCH_SENSITIVITY = stringPreferencesKey("match_sensitivity")
         val MIC_OPT_IN = booleanPreferencesKey("mic_opt_in")
         val LAST_EXPORT = stringPreferencesKey("last_export_path")
+        val SYNC_OPT_IN = booleanPreferencesKey("sync_opt_in")
+        val LAST_THIN_SYNC = longPreferencesKey("last_thin_sync_at")
         // reserved for future density scale
         @Suppress("unused")
         val UNUSED = floatPreferencesKey("unused")

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.obzrai.observer.core.prefs.ObserverPreferences
 import com.obzrai.observer.core.storage.LibraryRepository
 import com.obzrai.observer.feature.export.EncryptedArchive
+import com.obzrai.observer.feature.sync.ThinSyncEngine
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,9 +22,17 @@ class SettingsViewModel @Inject constructor(
     private val preferences: ObserverPreferences,
     private val encryptedArchive: EncryptedArchive,
     private val libraryRepository: LibraryRepository,
+    private val thinSyncEngine: ThinSyncEngine,
 ) : ViewModel() {
     val micOptIn: StateFlow<Boolean> =
         preferences.micOptIn.stateIn(
+            viewModelScope,
+            SharingStarted.WhileSubscribed(5_000),
+            false,
+        )
+
+    val syncOptIn: StateFlow<Boolean> =
+        preferences.syncOptIn.stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(5_000),
             false,
@@ -34,6 +43,17 @@ class SettingsViewModel @Inject constructor(
 
     fun setMicOptIn(value: Boolean) {
         viewModelScope.launch { preferences.setMicOptIn(value) }
+    }
+
+    fun setSyncOptIn(value: Boolean) {
+        viewModelScope.launch { thinSyncEngine.setOptIn(value) }
+    }
+
+    fun syncNow() {
+        viewModelScope.launch {
+            val result = thinSyncEngine.syncNow()
+            _statusMessage.value = result.message
+        }
     }
 
     fun exportLibrary(passphrase: String) {
