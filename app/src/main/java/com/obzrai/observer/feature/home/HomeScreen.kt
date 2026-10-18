@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -33,6 +35,7 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(horizontal = 20.dp, vertical = 16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
@@ -40,7 +43,7 @@ fun HomeScreen(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            ObserverRing(size = 40.dp)
+            ObserverRing(size = 40.dp, showGlyph = true)
             Column {
                 Text(
                     text = stringResource(R.string.app_name),
@@ -64,8 +67,8 @@ fun HomeScreen(
             color = MaterialTheme.colorScheme.primary,
         )
         Text(
-            text = "Capture runs only in an authorized MediaProjection session. " +
-                "You can stop anytime. No AccessibilityService in this MVP.",
+            text = "Phase 0 spikes: MediaProjection (S1), overlay (S2), clean frame (S3), audio (S4). " +
+                "No AccessibilityService. Fresh OS consent each session.",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f),
         )
@@ -94,6 +97,51 @@ fun HomeScreen(
             Counter("Saved", state.savedCount)
             Counter("Today", state.todayCount)
             Counter("Topics", state.topicCount)
+        }
+
+        Text(
+            text = "Phase 0 spike panel",
+            style = MaterialTheme.typography.titleMedium,
+        )
+        Text(
+            text = "S1 frames: ${state.frameCount}" +
+                (state.lastFrameInfo?.let {
+                    " · last ${it.width}×${it.height}" +
+                        (it.path?.let { p -> " · $p" } ?: "")
+                } ?: ""),
+            style = MaterialTheme.typography.bodySmall,
+        )
+        Text(
+            text = "S1 stop reason: ${state.lastStopReason ?: "—"}",
+            style = MaterialTheme.typography.bodySmall,
+        )
+        Text(
+            text = "S2 overlay: ${if (state.overlayShowing) "showing" else "hidden"} · ${state.densityReport}",
+            style = MaterialTheme.typography.bodySmall,
+        )
+        Text(
+            text = "S2 visual match vs approved PNG: PENDING (asset missing)",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.tertiary,
+        )
+        OutlinedButton(
+            onClick = viewModel::runS3CleanFrame,
+            modifier = Modifier.fillMaxWidth(),
+            enabled = state.sessionState == SessionState.ACTIVE,
+        ) {
+            Text("Run S3 clean-frame capture")
+        }
+        state.s3Result?.let {
+            Text(text = "S3: $it", style = MaterialTheme.typography.bodySmall)
+        }
+        OutlinedButton(
+            onClick = viewModel::runS4AudioProbes,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text("Run S4 audio honesty probe")
+        }
+        state.s4Results.forEach { line ->
+            Text(text = line, style = MaterialTheme.typography.bodySmall)
         }
 
         Text(

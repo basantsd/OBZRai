@@ -11,6 +11,9 @@
     <!-- Notifications (Android 13+); OS capture indicator remains mandatory. -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
+    <!-- S4 AudioPlaybackCapture of permitted USAGE_MEDIA/GAME streams. -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <!-- No AccessibilityService in default MVP (PRD locked decision). -->
 
     <application

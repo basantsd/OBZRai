@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.obzrai.observer.R
 import com.obzrai.observer.core.ui.ObserverRing
 import com.obzrai.observer.feature.home.HomeScreen
+import com.obzrai.observer.feature.home.HomeViewModel
 import com.obzrai.observer.feature.library.LibraryScreen
 import androidx.compose.ui.unit.dp
 
@@ -36,7 +37,9 @@ private object Routes {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ObserverApp() {
+fun ObserverApp(
+    homeViewModel: HomeViewModel? = null,
+) {
     val navController = rememberNavController()
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
@@ -101,7 +104,13 @@ fun ObserverApp() {
             startDestination = Routes.HOME,
             modifier = Modifier.padding(innerPadding),
         ) {
-            composable(Routes.HOME) { HomeScreen() }
+            composable(Routes.HOME) {
+                if (homeViewModel != null) {
+                    HomeScreen(viewModel = homeViewModel)
+                } else {
+                    HomeScreen()
+                }
+            }
             composable(Routes.LIBRARY) { LibraryScreen() }
         }
     }

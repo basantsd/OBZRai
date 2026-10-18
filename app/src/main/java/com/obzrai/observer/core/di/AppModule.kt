@@ -5,10 +5,10 @@ import androidx.room.Room
 import com.obzrai.observer.core.storage.ObserverDatabase
 import com.obzrai.observer.core.storage.dao.InterestTopicDao
 import com.obzrai.observer.core.storage.dao.SavedItemDao
+import com.obzrai.observer.feature.capture.DefaultMediaProjectionGateway
 import com.obzrai.observer.feature.capture.MediaProjectionGateway
-import com.obzrai.observer.feature.capture.StubMediaProjectionGateway
+import com.obzrai.observer.feature.overlay.DefaultOverlayController
 import com.obzrai.observer.feature.overlay.OverlayController
-import com.obzrai.observer.feature.overlay.StubOverlayController
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -45,12 +45,12 @@ abstract class BindingsModule {
     @Binds
     @Singleton
     abstract fun bindMediaProjectionGateway(
-        impl: StubMediaProjectionGateway,
+        impl: DefaultMediaProjectionGateway,
     ): MediaProjectionGateway
 
     @Binds
     @Singleton
     abstract fun bindOverlayController(
-        impl: StubOverlayController,
+        impl: DefaultOverlayController,
     ): OverlayController
 }
