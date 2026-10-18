@@ -10,39 +10,57 @@ import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.WindowManager
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.SavedStateRegistry
 import androidx.savedstate.SavedStateRegistryController
 import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import com.obzrai.observer.core.prefs.ObserverPreferences
 import com.obzrai.observer.core.ui.ObserverRing
 import com.obzrai.observer.core.ui.theme.AIObserverTheme
+import com.obzrai.observer.feature.capture.ManualCaptureController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.math.abs
 
 /**
- * Floating edge-clipped ring overlay (spike S2).
- *
- * - TYPE_APPLICATION_OVERLAY
- * - FLAG_NOT_FOCUSABLE | FLAG_NOT_TOUCH_MODAL → host remains tappable
- * - Drag + edge snap with partial off-screen clip
- * - Compose placeholder until `assets/approved_overlay_reference.png` arrives
+ * Floating edge-clipped ring overlay (S2 + FR-003/005).
+ * Tap → Save / Skip / Settings. Drag → edge snap. Position persisted.
  */
 @AndroidEntryPoint
 class OverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner {
     @Inject
     lateinit var overlayController: OverlayController
+
+    @Inject
+    lateinit var preferences: ObserverPreferences
+
+    @Inject
+    lateinit var manualCaptureController: ManualCaptureController
 
     private val lifecycleRegistry = LifecycleRegistry(this)
     private val savedStateRegistryController = SavedStateRegistryController.create(this)
@@ -62,6 +80,7 @@ class OverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner {
     private var touchStartRawX = 0f
     private var touchStartRawY = 0f
     private var moved = false
+    private var menuOpen by mutableStateOf(false)
 
     override fun onCreate() {
         super.onCreate()
@@ -94,9 +113,6 @@ class OverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner {
         val metrics = DisplayMetrics()
         @Suppress("DEPRECATION")
         wm.defaultDisplay.getRealMetrics(metrics)
-        val report = OverlayGeometry.densityReport(metrics)
-        Log.i(TAG, "Attaching overlay dens=${report.densityBucket} ringPx=${report.ringPx}")
-
         val size = OverlayGeometry.windowSizePx(metrics)
         val clip = OverlayGeometry.edgeClipOffsetPx(metrics)
         val params =
@@ -113,6 +129,17 @@ class OverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner {
                 x = -clip
                 y = (metrics.heightPixels * 0.35f).toInt()
             }
+        layoutParams = params
+
+        lifecycleScope.launch {
+            val sx = preferences.overlayX.first()
+            val sy = preferences.overlayY.first()
+            if (sx != null && sy != null) {
+                params.x = sx
+                params.y = sy
+                overlayView?.let { wm.updateViewLayout(it, params) }
+            }
+        }
 
         val view =
             ComposeView(this).apply {
@@ -120,7 +147,19 @@ class OverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner {
                 setViewTreeSavedStateRegistryOwner(this@OverlayService)
                 setContent {
                     AIObserverTheme {
-                        OverlayRingContent()
+                        OverlayContent(
+                            menuOpen = menuOpen,
+                            onAction = { action ->
+                                menuOpen = false
+                                when (action) {
+                                    OverlayQuickAction.SAVE -> manualCaptureController.saveManual()
+                                    OverlayQuickAction.SKIP -> manualCaptureController.skip()
+                                    OverlayQuickAction.SETTINGS ->
+                                        manualCaptureController.openSettingsViaOverlayHide()
+                                }
+                                resizeWindow(menu = false, metrics = metrics)
+                            },
+                        )
                     }
                 }
                 setOnTouchListener { _, event ->
@@ -132,7 +171,20 @@ class OverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner {
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
         wm.addView(view, params)
         overlayView = view
-        layoutParams = params
+    }
+
+    private fun resizeWindow(menu: Boolean, metrics: DisplayMetrics) {
+        val params = layoutParams ?: return
+        val wm = windowManager ?: return
+        val base = OverlayGeometry.windowSizePx(metrics)
+        if (menu) {
+            params.width = (base * 3.2f).toInt()
+            params.height = (base * 2.2f).toInt()
+        } else {
+            params.width = base
+            params.height = base
+        }
+        overlayView?.let { wm.updateViewLayout(it, params) }
     }
 
     private fun handleTouch(
@@ -171,7 +223,39 @@ class OverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner {
                         )
                     params.y = params.y.coerceIn(0, metrics.heightPixels - params.height)
                     wm.updateViewLayout(overlayView, params)
-                    Log.i(TAG, "Snapped overlay to x=${params.x} y=${params.y}")
+                    lifecycleScope.launch {
+                        preferences.setOverlayPosition(params.x, params.y)
+                    }
+                } else {
+                    menuOpen = !menuOpen
+                    resizeWindow(menu = menuOpen, metrics = metrics)
+                    overlayView?.setContent {
+                        AIObserverTheme {
+                            OverlayContent(
+                                menuOpen = menuOpen,
+                                onAction = { action ->
+                                    menuOpen = false
+                                    when (action) {
+                                        OverlayQuickAction.SAVE ->
+                                            manualCaptureController.saveManual()
+                                        OverlayQuickAction.SKIP ->
+                                            manualCaptureController.skip()
+                                        OverlayQuickAction.SETTINGS ->
+                                            manualCaptureController.openSettingsViaOverlayHide()
+                                    }
+                                    resizeWindow(menu = false, metrics = metrics)
+                                    overlayView?.setContent {
+                                        AIObserverTheme {
+                                            OverlayContent(
+                                                menuOpen = false,
+                                                onAction = {},
+                                            )
+                                        }
+                                    }
+                                },
+                            )
+                        }
+                    }
                 }
                 return true
             }
@@ -188,6 +272,7 @@ class OverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner {
         }
         overlayView = null
         layoutParams = null
+        menuOpen = false
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
         (overlayController as? DefaultOverlayController)?.markHiddenFromService()
@@ -201,16 +286,45 @@ class OverlayService : Service(), LifecycleOwner, SavedStateRegistryOwner {
 }
 
 @Composable
-private fun OverlayRingContent() {
+private fun OverlayContent(
+    menuOpen: Boolean,
+    onAction: (OverlayQuickAction) -> Unit,
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center,
     ) {
-        ObserverRing(
-            size = OverlayGeometry.RING_DP.dp,
-            strokeWidth = OverlayGeometry.STROKE_DP.dp,
-            showGlyph = true,
-            glyphSize = OverlayGeometry.GLYPH_DP.dp,
-        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            ObserverRing(
+                size = OverlayGeometry.RING_DP.dp,
+                strokeWidth = OverlayGeometry.STROKE_DP.dp,
+                showGlyph = true,
+                glyphSize = OverlayGeometry.GLYPH_DP.dp,
+            )
+            if (menuOpen) {
+                Surface(tonalElevation = 2.dp) {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 4.dp),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        CompactAction("Save") { onAction(OverlayQuickAction.SAVE) }
+                        CompactAction("Skip") { onAction(OverlayQuickAction.SKIP) }
+                        CompactAction("Settings") { onAction(OverlayQuickAction.SETTINGS) }
+                    }
+                }
+            }
+        }
     }
+}
+
+@Composable
+private fun CompactAction(label: String, onClick: () -> Unit) {
+    Text(
+        text = label,
+        fontSize = 11.sp,
+        modifier =
+            Modifier
+                .clickable(onClick = onClick)
+                .padding(4.dp),
+    )
 }

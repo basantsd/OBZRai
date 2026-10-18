@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.obzrai.observer.core.storage.dao.InterestTopicDao
+import com.obzrai.observer.core.storage.dao.MediaAssetDao
 import com.obzrai.observer.core.storage.dao.SavedItemDao
 import com.obzrai.observer.core.storage.entity.InterestTopicEntity
 import com.obzrai.observer.core.storage.entity.MediaAssetEntity
@@ -17,7 +18,7 @@ import com.obzrai.observer.core.storage.entity.SavedItemEntity
         MediaAssetEntity::class,
         ObservationSessionEntity::class,
     ],
-    version = 1,
+    version = 2,
     exportSchema = false,
 )
 @TypeConverters(StorageConverters::class)
@@ -25,4 +26,6 @@ abstract class ObserverDatabase : RoomDatabase() {
     abstract fun savedItemDao(): SavedItemDao
 
     abstract fun interestTopicDao(): InterestTopicDao
+
+    abstract fun mediaAssetDao(): MediaAssetDao
 }
