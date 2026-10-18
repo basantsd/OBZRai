@@ -1,9 +1,19 @@
 # OBZRAi — Execution Plan v2.1 r2
 
-**Status:** Planning only — **still awaiting Basant approval before Phase 0 build.** No MVP / extension implementation this turn.  
+**Status:** **AUTHORIZED** — Basant voice APPROVED 17 Oct 2026: stop holding; continue **all phases**. Phase 0 closed under Sharesheet interim.  
 **Source of truth:** [`docs/prd/OBZRAi_PRD_v2.1.md`](../prd/OBZRAi_PRD_v2.1.md) — **PRD v2.1 r2** (canonical; supersedes v2.1 / v2.1 r1 check-in and v1.0).  
-**Date:** 17 October 2026 (plan revision for r2)  
-**Owner locks:** D7 = **Option B DECIDED**; D1–D6 = PRD §9 recommendations; Phase order **0 → 1 → 2**; no GitHub Actions; §26 Unverified does **not** block build.
+**Date:** 17 October 2026 (plan revision for r2; execution start same day)  
+**Owner locks:** D7 = **Option B DECIDED**; D1–D6 = PRD §9 recommendations; Phase order **0 → 1 → 2**; no GitHub Actions; §26 Unverified does **not** block build; **merged to `main` authorized by Basant (18 Oct 2026)**.
+
+### Assumptions locked at Phase 0 closeout (Basant-approved defaults)
+
+| ID | Assumption | Notes |
+|---|---|---|
+| **Q32** | WebDAV = **Phase 2 fast-follow after Drive `appDataFolder`** | Not a same-cut Phase 2 exit blocker |
+| **Q33** | Thin-sync thumbs **≤ 200 KB JPEG** | Documented cap for FR-103 |
+| **Q36** | Phases 1–2 = **local-first / ciphertext / no-account** | **Counsel / DPDP review PENDING** before account or hosted relay |
+| **S1** | **Sharesheet interim approved**; chip/lock **PENDING verification** | Do not claim chip/lock passed |
+| **S2 visual** | Compose placeholder; **`matches reference` PENDING** | Until `assets/approved_overlay_reference.png` |
 
 ---
 
@@ -23,7 +33,7 @@ Prior plan: first check-in against PRD v2.1 (pre-r2). This revision aligns to **
 | **Risks** | Generic D7/quota notes | Explicit **R31** (brand verification; app verification not mandatory for non-sensitive-only) and **R32** (quota / consent friction; never promise free unlimited sync) |
 | **Doc / claim fixes** | N/A | Plan notes r2 claim/price/source tidy-ups (Screenpipe monthly/annual, KR fee unknown, UNVERIFIED tags) — **no product-scope change** beyond D7 markers |
 | **Rename baseline** | “Still AI Observer on PR #1” | Rename draft **[#3](https://github.com/basantsd/OBZRai/pull/3)** exists (R1–R5); still no MVP |
-| **Phase 0** | Unchanged | **Still not authorized** until Basant approves this plan |
+| **Phase 0** | Unchanged | **AUTHORIZED** — Sharesheet interim; continue all phases (Basant 17 Oct 2026) |
 
 **Unchanged from prior plan:** Phase 0 S1–S4 gates; Phase 1 slices 1a–1e / 40–55 eng-days / FR-097; no `.github/workflows`; §26 non-blocking; no MVP/extension build until approval.
 

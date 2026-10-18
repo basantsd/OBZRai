@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OBZRAi</string>
+    <string name="product_promise">जो भी देखो। जो ज़रूरी हो, याद रखो.</string>
+    <string name="nav_home">होम</string>
+    <string name="nav_library">लाइब्रेरी</string>
+    <string name="nav_today">आज</string>
+    <string name="observe_start">ऑब्ज़र्व शुरू करें</string>
+    <string name="observe_stop">ऑब्ज़र्व बंद करें</string>
+    <string name="observe_active">सक्रिय</string>
+    <string name="observe_paused">रुका हुआ</string>
+    <string name="observe_stopped">बंद</string>
+    <string name="observe_needs_permission">अनुमति चाहिए</string>
+    <string name="library_empty">अभी कुछ सेव नहीं। सेशन शुरू करें या OBZRAi में शेयर करें.</string>
+    <string name="today_empty">आज कुछ सेव नहीं। ऑब्ज़र्व शुरू करें या क्लिप शेयर करें.</string>
+    <string name="settings">सेटिंग्स</string>
+    <string name="trust_center">ट्रस्ट सेंटर</string>
+    <string name="capture_notification_title">OBZRAi ऑब्ज़र्व कर रहा है</string>
+    <string name="capture_notification_text">इस अधिकृत सेशन के लिए स्क्रीन कैप्चर सक्रिय है.</string>
+    <string name="overlay_content_description">OBZRAi फ्लोटिंग रिंग</string>
+    <string name="continuity_local_only">केवल इस डिवाइस पर</string>
+    <string name="onboarding_skip">छोड़ें</string>
+    <string name="onboarding_next">आगे</string>
+    <string name="onboarding_done">शुरू करें</string>
+    <string name="export_library">एन्क्रिप्टेड एक्सपोर्ट</string>
+    <string name="import_library">एन्क्रिप्टेड इंपोर्ट</string>
+    <string name="delete_all">सभी लोकल डेटा हटाएँ</string>
+    <string name="ptt_hold">आइडिया बोलने के लिए दबाए रखें</string>
+    <string name="sharesheet_hint">टिप: इमेज या लिंक OBZRAi में शेयर करें (शेयरशीट अंतरिम).</string>
+</resources>

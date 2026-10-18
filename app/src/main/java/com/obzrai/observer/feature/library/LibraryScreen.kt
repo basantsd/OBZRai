@@ -14,9 +14,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -29,39 +26,35 @@ fun LibraryScreen(
     viewModel: LibraryViewModel = hiltViewModel(),
 ) {
     val items by viewModel.items.collectAsStateWithLifecycle()
-    var query by rememberSaveable { mutableStateOf("") }
-
-    val filtered = if (query.isBlank()) {
-        items
-    } else {
-        items.filter { item ->
-            item.title.contains(query, ignoreCase = true) ||
-                (item.sourceApp?.contains(query, ignoreCase = true) == true) ||
-                (item.sourceUrl?.contains(query, ignoreCase = true) == true)
-        }
-    }
+    val query by viewModel.query.collectAsStateWithLifecycle()
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 20.dp, vertical = 16.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(horizontal = 20.dp, vertical = 16.dp),
     ) {
         Text(
             text = stringResource(R.string.nav_library),
             style = MaterialTheme.typography.titleLarge,
         )
+        Text(
+            text = stringResource(R.string.continuity_local_only),
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.tertiary,
+        )
         Spacer(modifier = Modifier.height(12.dp))
         OutlinedTextField(
             value = query,
-            onValueChange = { query = it },
+            onValueChange = viewModel::onQueryChange,
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
-            placeholder = { Text("Search titles, sources…") },
+            placeholder = { Text("OCR, tags, title, voice idea…") },
             label = { Text("Search") },
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-        if (filtered.isEmpty()) {
+        if (items.isEmpty()) {
             Text(
                 text = stringResource(R.string.library_empty),
                 style = MaterialTheme.typography.bodyMedium,
@@ -69,21 +62,30 @@ fun LibraryScreen(
             )
         } else {
             LazyColumn(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                items(filtered, key = { it.id }) { item ->
+                items(items, key = { it.id }) { item ->
                     Column {
                         Text(
                             text = item.title.ifBlank { "Untitled" },
                             style = MaterialTheme.typography.titleMedium,
                         )
                         Text(
-                            text = buildString {
-                                append(item.sourceApp ?: "Source unknown")
-                                append(" · ")
-                                append(item.transcriptState.name.lowercase())
-                            },
+                            text =
+                                buildString {
+                                    append(item.sourceApp ?: "Source unknown")
+                                    if (item.captureBlocked) append(" · capture_blocked")
+                                    if (item.tagsCsv.isNotBlank()) append(" · ${item.tagsCsv}")
+                                    append(" · ${item.continuityStatus}")
+                                },
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f),
                         )
+                        if (item.ocrText.isNotBlank()) {
+                            Text(
+                                text = item.ocrText.take(120),
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.55f),
+                            )
+                        }
                     }
                 }
             }

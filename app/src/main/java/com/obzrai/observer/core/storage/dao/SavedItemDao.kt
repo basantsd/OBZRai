@@ -26,8 +26,36 @@ interface SavedItemDao {
     )
     fun observeCountSince(dayStartEpochMs: Long): Flow<Int>
 
+    @Query(
+        """
+        SELECT * FROM saved_items
+        WHERE createdAtEpochMs >= :dayStartEpochMs AND createdAtEpochMs < :dayEndEpochMs
+        ORDER BY createdAtEpochMs DESC
+        """,
+    )
+    fun observeForDay(dayStartEpochMs: Long, dayEndEpochMs: Long): Flow<List<SavedItemEntity>>
+
+    @Query(
+        """
+        SELECT * FROM saved_items
+        WHERE title LIKE '%' || :q || '%'
+           OR IFNULL(sourceApp, '') LIKE '%' || :q || '%'
+           OR IFNULL(sourceUrl, '') LIKE '%' || :q || '%'
+           OR ocrText LIKE '%' || :q || '%'
+           OR tagsCsv LIKE '%' || :q || '%'
+           OR voiceIdeaText LIKE '%' || :q || '%'
+           OR userNotes LIKE '%' || :q || '%'
+           OR topicIdsCsv LIKE '%' || :q || '%'
+        ORDER BY createdAtEpochMs DESC
+        """,
+    )
+    fun search(q: String): Flow<List<SavedItemEntity>>
+
     @Query("SELECT * FROM saved_items WHERE id = :id")
     suspend fun getById(id: String): SavedItemEntity?
+
+    @Query("SELECT * FROM saved_items ORDER BY createdAtEpochMs DESC")
+    suspend fun getAllOnce(): List<SavedItemEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(item: SavedItemEntity)

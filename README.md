@@ -15,8 +15,8 @@ This repository currently contains the **greenfield base scaffold** (Kotlin / Co
 | DI | Hilt |
 | Persistence | Room (FTS later) |
 | Settings | DataStore (wired later) |
-| Capture | MediaProjection foreground service **stubs** |
-| Overlay | WindowManager overlay **stubs** + Compose ring placeholder |
+| Capture | MediaProjection FGS + ImageReader pipeline (Phase 0 S1) |
+| Overlay | WindowManager edge-clipped ring + Compose placeholder (Phase 0 S2) |
 | Min / target SDK | **29** / 35 |
 
 **Not in MVP:** AccessibilityService, cloud sync, accounts, billing.
@@ -35,13 +35,25 @@ app/src/main/java/com.obzrai.observer/
     library/        # Searchable library shell
     navigation/     # Home · Library bottom nav
     session/        # Session state machine
-    capture/        # MediaProjection gateway + FGS stubs
-    overlay/        # Overlay controller stubs
+    capture/        # MediaProjection gateway + FGS + clean-frame (S1/S3)
+    overlay/        # Edge-clipped WindowManager ring (S2)
+    audio/          # AudioPlaybackCapture honesty probe (S4)
 ```
+
+## Phase 0 (S1–S4)
+
+Feasibility spikes are implemented on branch `cursor/phase0-spikes-3a5a`. Results: `docs/phase0-spike-results.md`.
+
+- **S1** MediaProjection session + frame samples + `Callback.onStop`
+- **S2** 28 dp edge-clipped overlay, drag/snap, host tappable; reference PNG still missing
+- **S3** Hide-and-settle clean frame (Exclusion API unavailable)
+- **S4** AudioPlaybackCapture probe with honest third-party logging
+
+**No** `.github/workflows` — local/`./gradlew` only.
 
 ## Asset gap
 
-PRD references `assets/approved_overlay_reference.png` (owner-approved blue hollow ring). That file was **not** in the uploaded package. The app uses a **Compose ring placeholder** (`ObserverRing`) until the approved PNG is added.
+PRD references `assets/approved_overlay_reference.png` (owner-approved blue hollow ring). That file was **not** in the uploaded package. The app uses a **Compose ring placeholder** (`ObserverRing`) until the approved PNG is added. S2 `matches reference` stays **PENDING** until Basant supplies 28 dp PNG (+ optional @2x/@3x).
 
 ## Requirements
 
@@ -78,7 +90,7 @@ Package id: `com.obzrai.observer` · App name: **OBZRAi** (formerly AI Observer)
 - Observe start/stop driving an in-memory **session state machine**
 - Room models for saved items, topics, media assets, sessions
 - Hilt wiring for DB, capture gateway, overlay controller
-- Placeholder MediaProjection FGS + overlay services (no real capture yet)
+- Phase 0 spike harness: projection, overlay, clean-frame, audio honesty probe
 
 ## Product constraints (locked)
 
@@ -88,3 +100,10 @@ Package id: `com.obzrai.observer` · App name: **OBZRAi** (formerly AI Observer)
 - On-device by default; no account/cloud required
 
 See the project PRD for full behavior once Researchy / spike work lands.
+
+
+## Browser extension (Phase 2 draft)
+
+Chromium MV3 side-panel Hub lives in `extension/`. Load unpacked in Chrome. Thin sync uses a **mock** Drive `appDataFolder` adapter (no Google account created). See `docs/phase2-extension-sync.md`.
+
+Shared matcher fixtures: `shared/observer-core/` (S9).
